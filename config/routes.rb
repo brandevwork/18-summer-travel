@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'families/index'
+  devise_for :families, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    registration: 'signup'
+  },
+  controllers: {
+    sessions: 'families/sessions',
+    registrations: 'families/registrations'
+  }
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get '/families', to: 'families#index'
 end

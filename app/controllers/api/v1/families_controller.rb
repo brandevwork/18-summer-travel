@@ -1,7 +1,6 @@
-class FamiliesController < ApplicationController
-  skip_before_action: authenticity_token
+class  Api::V1::FamiliesController < ApplicationController
   before_action :authenticate_family!
   def index
-    render json: family, status: :ok
+    render json: families, status: :ok
   end
 end

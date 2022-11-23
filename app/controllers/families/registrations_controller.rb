@@ -1,6 +1,7 @@
-class Api::V1::Families::RegistrationsController < Devise::RegistrationsController
+class Families::RegistrationsController < Devise::RegistrationsController
   skip_before_action :verify_authenticity_token
   respond_to :json
+
   private
 
   def respond_with(resource, _opts = {})

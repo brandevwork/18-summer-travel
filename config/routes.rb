@@ -6,10 +6,11 @@ Rails.application.routes.draw do
       resources :family_members
     end
   end
+
   get 'families/index'
   devise_for :families,
-  controllers: {
-    sessions: 'families/sessions',
-    registrations: 'families/registrations'
-  }
+    controllers: {
+      sessions: 'families/sessions',
+      registrations: 'families/registrations'
+    }
 end

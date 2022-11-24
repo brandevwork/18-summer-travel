@@ -1,5 +1,6 @@
 class  Api::V1::FamilyMembersController < ApplicationController
   before_action :authenticate_family!
+
   def index
     families = current_family.family_members
     render json: families, status: 200

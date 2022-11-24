@@ -9,7 +9,7 @@ class Families::RegistrationsController < Devise::RegistrationsController
       render json: {
         status: {code: 200, message: 'Signed up sucessfully.'},
         data: FamilySerializer.new(resource).serializable_hash[:data][:attributes]
-      }
+      }, status: :ok
     else
       render json: {
         status: {message: "Family Account couldn't be created successfully. #{resource.errors.full_messages.to_sentence}"}

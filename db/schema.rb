@@ -47,8 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_080126) do
   end
 
   create_table "surveys", force: :cascade do |t|
-    t.string "status"
-    t.string "survey_type"
+    t.integer "survey_type"
+    t.integer "status"
     t.bigint "family_member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

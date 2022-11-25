@@ -4,7 +4,7 @@ class Families::RegistrationsController < Devise::RegistrationsController
 
   swagger_controller :registrations, "Family Registration"
   swagger_api :create do
-    summary "Creates a new Family member"
+    summary "Creates a new Family"
     param :form, :email, :string, :required, "Email"
     param :form, :password, :string, :required, "Password"
     param :form, :number_of_family_member, :integer, :required, "Number of Family Member"

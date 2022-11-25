@@ -17,7 +17,7 @@ gem 'fast_jsonapi'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'byebug', '~> 11.1', '>= 11.1.3'
-
+gem 'swagger-docs'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

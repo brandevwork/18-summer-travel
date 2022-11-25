@@ -2,6 +2,22 @@ class Families::SessionsController < Devise::SessionsController
   skip_before_action :verify_authenticity_token
   respond_to :json
 
+  swagger_controller :sessions, "Family Login"
+  swagger_api :create do
+    summary "Login a Family"
+    param :form, :email, :string, :required, "Email"
+    param :form, :password, :string, :required, "Password"
+    response :not_acceptable
+    response :unprocessable_entity
+  end
+
+  swagger_api :destroy do
+    summary "Logout a family"
+    param :path, :id, :integer, :required, "User Id"
+    response :unauthorized
+    response :not_found
+  end
+
   private
 
   def respond_with(resource, _opts = {})

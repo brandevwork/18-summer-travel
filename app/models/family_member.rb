@@ -1,6 +1,9 @@
 class FamilyMember < ApplicationRecord
-  belongs_to :family
   before_save :set_age
+
+  belongs_to :family
+  has_one :survey
+
   validates :name, :date_of_birth, :family_id, presence: true
   validate :check_date_of_birth
 

@@ -1,5 +1,6 @@
 class FamilyMember < ApplicationRecord
   before_save :set_age
+  after_save :create_member_survey
 
   belongs_to :family
   has_one :survey, dependent: :destroy
@@ -17,5 +18,9 @@ class FamilyMember < ApplicationRecord
     if date_of_birth.present? && date_of_birth.year > Time.zone.now.year
         errors.add(:date_of_birth, 'Date of birth must be less than today.')
     end
+  end
+
+  def create_member_survey
+    self.create_survey
   end
 end

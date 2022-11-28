@@ -7,6 +7,7 @@ class Family < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_many :family_members, dependent: :destroy
+  accepts_nested_attributes_for :family_members
 
   def jwt_payload
     super

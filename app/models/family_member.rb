@@ -5,7 +5,7 @@ class FamilyMember < ApplicationRecord
   belongs_to :family
   has_one :survey, dependent: :destroy
 
-  validates :name, :date_of_birth, :family_id, presence: true
+  validates :name, :date_of_birth, presence: true
   validate :check_date_of_birth
 
   private

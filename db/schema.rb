@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_080126) do
     t.string "name"
     t.integer "age"
     t.date "date_of_birth", null: false
+    t.boolean "status", default: true
     t.bigint "family_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

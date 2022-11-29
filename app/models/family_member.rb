@@ -1,6 +1,6 @@
 class FamilyMember < ApplicationRecord
   before_save :set_age
-  after_save :create_member_survey
+  after_commit :create_member_survey, on: :create
 
   belongs_to :family
   has_one :survey, dependent: :destroy

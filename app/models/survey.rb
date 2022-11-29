@@ -1,5 +1,5 @@
 class Survey < ApplicationRecord
-  enum status: [:not_started, :started, :completed]
+  enum status: {not_started: 0, started: 1, completed: 2}
   enum survey_type: [:adult, :kids]
   belongs_to :family_member
   after_create :set_survey_type

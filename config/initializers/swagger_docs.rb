@@ -1,19 +1,19 @@
+Swagger::Docs::Config.base_api_controller = ActionController::API
 Swagger::Docs::Config.register_apis({
   "1.0": {
-    # the extension used for the API
-api_extension_type: :json,
-    # the output location where your .json files are written to
-api_file_path: "public/api/v1/",
-    # the URL base path to your API
-base_path: "http://localhost:3000",
-    # if you want to delete all .json files at each generation
-clean_directory: false,
-    # Ability to setup base controller for each api version. Api::V1::SomeController for example.
-# :parent_controller =>Api::V1::Famil,
-    # add custom attributes to api-docs
-attributes: {
-info: {
-        "title": "18 Family Summer Tool"
+    # location where our api doc files will be generated, as of now we will keep public
+    api_file_path: "public/",
+    # base path url of our application
+    # do not forget to change this when not running in development mode
+    base_path: 'http://192.168.10.37:3000',
+    # setting this option true tells swagger to clean all files generated in api_file_path directory before any files are generated
+    clean_directory: true,
+    # As we are using Rails-API, our ApplicationController inherits ActionController::API instead of ActionController::Base
+    # Hence, we need to add ActionController::API instead of default ActionController::Base
+    # :base_api_controller => ActionController::API,
+    base_api_controller: ActionController::API,
+    attributes: {
+      info: {
       }
     }
   }

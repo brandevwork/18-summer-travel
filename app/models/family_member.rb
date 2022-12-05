@@ -22,8 +22,7 @@ class FamilyMember < ApplicationRecord
   end
 
   def set_member_status
-    member_value = (age < 14) ? 1 : 0
-    update(member_type: member_value)
+    update(survey_type: (family_member.age > 14)? 0 : 1)
   end
 
 end

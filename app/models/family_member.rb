@@ -1,9 +1,10 @@
 class FamilyMember < ApplicationRecord
+  enum survey_status: [:not_started, :started, :completed]
+  enum member_type: [:adult, :kids]
   before_save :set_age
-  after_commit :create_member_survey, on: :create
+  after_commit :set_member_status, on: :create
 
   belongs_to :family
-  has_one :survey, dependent: :destroy
 
   validates :name, :date_of_birth, presence: true
   validate :check_date_of_birth
@@ -20,7 +21,9 @@ class FamilyMember < ApplicationRecord
     end
   end
 
-  def create_member_survey
-    self.create_survey
+  def set_member_status
+    member_value = (age < 14) ? 1 : 0
+    update(member_type: member_value)
   end
+
 end

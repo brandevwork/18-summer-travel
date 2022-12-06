@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 function AfterKid(props)	{
 	return (
 		<div>
-  		<p>I will ask</p>
+  		<p>{`Wow So you are  ${props.familyMemberState.family_member}`}</p>
   		<Button title="Next" buttonClickHandler={() => props.nextClickHandler('before_age')}/>
   	</div>
 	)

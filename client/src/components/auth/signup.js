@@ -24,6 +24,7 @@ let isInitial = true;
 function SignUp(props)  {
 
   const [renderState, setRenderState] = useState('welcome');
+  const [familyMemberState, setFamilyMemberState] = useState({});
   
   const firstnameRef = useRef();
   const lastnameRef = useRef();
@@ -80,7 +81,7 @@ function SignUp(props)  {
       if (!authState.error && authState.email !== '' && authState.password !== '') {
         sendData(`${process.env.REACT_APP_SERVER_URL}users`, {
         method: 'POST',
-        body: JSON.stringify({"user":{
+        body: JSON.stringify({"family":{
         	"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
         	"email":emailRef.current.value, "password":passwordRef.current.value, "password_confirmation":passwordRef.current.value,
         	"street":streetRef.current.value, "city":cityRef.current.value, "state":stateRef.current.value,
@@ -97,8 +98,13 @@ function SignUp(props)  {
     }
   }, [authState])
 
-  const nextClickHandler = ($$state) => {
+  const nextClickHandler = ($$state, data = null) => {
   	setRenderState($$state)
+  	if (data) {
+  		for (const keys in data) {
+  			setFamilyMemberState(prevState => {return {...prevState, [keys]: data[keys]}})
+			}
+  	}
   }
 
   return (
@@ -115,9 +121,9 @@ function SignUp(props)  {
     	{renderState === 'ask_user_firstname' && <AskUserFirstName firstnameRef={firstnameRef} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'ask_family' && <AskFamily firstnameRef={firstnameRef} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'pick_kid' && <PickKid nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'after_kid' && <AfterKid nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'after_kid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'pick_age' && <PickAge nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'pick_age' && <PickAge nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'confirm_age' && <ConfirmAge nextClickHandler={nextClickHandler}/>}
     	{renderState === 'save_before_signup' && <SaveBeforeSignup nextClickHandler={nextClickHandler}/>}
     	{renderState === 'signup_section' && <SignUpSection 

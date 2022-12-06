@@ -7,17 +7,24 @@ function PickAge(props)	{
 	let totalMembers = props.familyMemberState.family_member
 
 	const renderNameAndYear = () => {
-		<div>
-			 <Input ref={props.cityRef} input={{"type":"text", "placeholder":"Name",
-          "className":"form-control rounded input-lg text-center no-border"}}/>
-        <Input ref={props.cityRef} input={{"type":"text", "placeholder":"Year",
-          "className":"form-control rounded input-lg text-center no-border"}}/>
-		</div>
+		let content = [];
+		for(let i = 0; i < totalMembers; i++) {
+			content.push(
+				<div style={{"display":"flex"}}>
+			    <Input  input={{"type":"text", "placeholder":"Name",
+			      "className":"form-control rounded input-lg text-center no-border"}}/>
+			    <Input  input={{"type":"text", "placeholder":"Year",
+			      "className":"form-control rounded input-lg text-center no-border"}}/>
+			  </div> 
+			)
+		}
+		return content   
 	}
+
 	return (
 		<div>
   		<p>Age</p>
-  		
+  		{renderNameAndYear ()}
   		<Button title="Next" buttonClickHandler={() => props.nextClickHandler('confirm_age')}/>
   	</div>
 	)

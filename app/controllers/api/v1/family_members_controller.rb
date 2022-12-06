@@ -1,5 +1,7 @@
 class  Api::V1::FamilyMembersController < ApplicationController
+  include Api::V1
   before_action :authenticate_family!
+  before_action :get_family_member, only: [:show]
   swagger_controller :family_members, "Family Members"
 
   swagger_api :index do
@@ -20,10 +22,18 @@ class  Api::V1::FamilyMembersController < ApplicationController
 
   def index
     families = current_family.family_members
-    render json: families, status: 200
+    render json: {data: {family: families}, status: :ok, success: true}
   end
 
-  def new; end
+  def show
+    if @family_member
+      survey = Survey.includes(:questions).first
+      questions = survey.questions
+      render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
+    else
+      render json: {error: "Family Member not found"}
+    end
+  end
 
   def create
     family_member = current_family.family_members.create(family_member_params)
@@ -38,5 +48,9 @@ class  Api::V1::FamilyMembersController < ApplicationController
 
   def family_member_params
     params.require(:family_member).permit(:name, :age, :date_of_birth, :family_id)
+  end
+
+  def get_family_member
+    @family_member = FamilyMember.find(params[:id])
   end
 end

@@ -15,7 +15,7 @@ class FamilyMember < ApplicationRecord
 
   def check_date_of_birth
     if date_of_birth.present? && date_of_birth.year > Time.zone.now.year
-        errors.add(:date_of_birth, 'Date of birth must be less than today.')
+      errors.add(:date_of_birth, 'Date of birth must be less than today.')
     end
   end
 

@@ -37,7 +37,7 @@ class  Api::V1::FamilyMembersController < ApplicationController
   def show
     if @family_member
       survey = Survey.includes(:questions).first
-      questions = survey.questions
+      questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
       render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
     else
       render json: {error: "Family Member not found"}

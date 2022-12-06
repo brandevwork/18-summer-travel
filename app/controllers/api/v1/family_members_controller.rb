@@ -20,6 +20,15 @@ class  Api::V1::FamilyMembersController < ApplicationController
     response :not_acceptable
   end
 
+  swagger_api :show do
+    summary "Fetches a single family member and its survey"
+    param :path, :id, :integer, :required, "FamilyMember Id"
+    response :ok, "Success", :Survey
+    response :unauthorized
+    response :not_acceptable
+    response :not_found
+  end
+
   def index
     families = current_family.family_members
     render json: {data: {family: families}, status: :ok, success: true}

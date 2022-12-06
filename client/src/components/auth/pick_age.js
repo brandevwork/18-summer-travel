@@ -7,7 +7,7 @@ function PickAge(props)	{
 	const nameRef =  useRef([])
 	const yearRef =  useRef([])
 
-	let memberData=[]
+	let memberData={}
 	let totalMembers = props.familyMemberState.family_member
 	const renderNameAndYear = () => {
 		let content = [];
@@ -25,9 +25,17 @@ function PickAge(props)	{
 	}
 
 	const nextHandler = (e) => {
-		console.log(nameRef.current)
-		console.log(yearRef.current)
-		// props.nextClickHandler('confirm_age',{"family_members":memberData})
+		let error = false
+		for(let i = 0; i < totalMembers; i++) {
+			if(nameRef.current[i].value == '')
+				error = true
+			if(yearRef.current[i].value == '')
+				error = true
+			let obj ={"name":nameRef.current[i].value, "date_of_birth": yearRef.current[i].value}
+			memberData[i] = obj
+		}
+		if(!error) 
+			props.nextClickHandler('confirm_age',{"family_members":memberData})
 	}
 
 	return (

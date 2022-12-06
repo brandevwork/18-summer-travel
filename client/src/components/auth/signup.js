@@ -85,7 +85,7 @@ function SignUp(props)  {
         	"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
         	"email":emailRef.current.value, "password":passwordRef.current.value, "password_confirmation":passwordRef.current.value,
         	"street":streetRef.current.value, "city":cityRef.current.value, "state":stateRef.current.value,
-        	"country":countryRef.current.value, "zip":zipRef.current.value
+        	"country":countryRef.current.value, "zip":zipRef.current.value, "number_of_family_members": familyMemberState.family_member,"family_members":familyMemberState.family_members
        	}}),
         headers: {
           'Content-Type': 'application/json',

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :families
       resources :family_members
       resources :responses
+      delete 'settings/reset_survey', to: 'settings#reset_family_survey'
     end
   end
 

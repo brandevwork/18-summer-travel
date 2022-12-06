@@ -1,4 +1,4 @@
-import React,{ useState, useRef, useReducer, useEffect, useContext } from 'react';
+import React,{ useState, useRef, useMemo, useReducer, useEffect, useContext } from 'react';
 import Input from '../UI/Input';
 import { NavLink, useNavigate } from "react-router-dom";
 import useData from "../../hooks/useData";
@@ -119,11 +119,11 @@ function SignUp(props)  {
     	{renderState === 'welcome' && <Welcome nextClickHandler={nextClickHandler}/>}
     	{renderState === 'ask_user' && <AskUser nextClickHandler={nextClickHandler}/>}
     	{renderState === 'ask_user_firstname' && <AskUserFirstName firstnameRef={firstnameRef} nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'ask_family' && <AskFamily firstnameRef={firstnameRef} nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'ask_family' && <AskFamily familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'pick_kid' && <PickKid nextClickHandler={nextClickHandler}/>}
     	{renderState === 'after_kid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'pick_age' && <PickAge nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
+    	{renderState === 'pick_age' && <PickAge firstnameRef={firstnameRef} nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'confirm_age' && <ConfirmAge nextClickHandler={nextClickHandler}/>}
     	{renderState === 'save_before_signup' && <SaveBeforeSignup nextClickHandler={nextClickHandler}/>}
     	{renderState === 'signup_section' && <SignUpSection 

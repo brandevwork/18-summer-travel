@@ -3,7 +3,7 @@ class FamilyMember < ApplicationRecord
   before_save :set_age
 
   belongs_to :family
-  has_one :response
+  has_one :response, dependent: :destroy
 
   validates :name, :date_of_birth, presence: true
   validate :check_date_of_birth

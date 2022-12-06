@@ -3,7 +3,6 @@ import Button from '../UI/Button';
 
 
 function PickKid(props)	{
-
 	const [familyMember, setFamilyMemeber] = useState(0)
 	
 	const selectMemberHandler = (e) => {

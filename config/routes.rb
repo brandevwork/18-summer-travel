@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :families
       resources :family_members
+      resources :responses
     end
   end
 

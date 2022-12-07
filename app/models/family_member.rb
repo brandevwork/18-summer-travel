@@ -1,5 +1,5 @@
 class FamilyMember < ApplicationRecord
-  enum survey_status: [:not_started, :started, :completed]
+  enum survey_status: [:pending, :in_progress, :completed]
   before_save :set_age
 
   belongs_to :family

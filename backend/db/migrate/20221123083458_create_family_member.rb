@@ -6,6 +6,7 @@ class CreateFamilyMember < ActiveRecord::Migration[7.0]
       t.date :date_of_birth,          null: false
       t.boolean :status, default: true
       t.references :family
+      t.integer :survey_status, default: 0
       t.timestamps
     end
   end

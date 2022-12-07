@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_080126) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_02_133235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "choices", force: :cascade do |t|
+    t.string "choice_text"
+    t.bigint "question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_choices_on_question_id"
+  end
 
   create_table "families", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,18 +50,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_080126) do
     t.date "date_of_birth", null: false
     t.boolean "status", default: true
     t.bigint "family_id"
+    t.integer "survey_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family_id"], name: "index_family_members_on_family_id"
   end
 
-  create_table "surveys", force: :cascade do |t|
-    t.integer "survey_type"
-    t.integer "status", default: 0
-    t.bigint "family_member_id"
+  create_table "questions", force: :cascade do |t|
+    t.string "question_text"
+    t.bigint "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["family_member_id"], name: "index_surveys_on_family_member_id"
+    t.index ["survey_id"], name: "index_questions_on_survey_id"
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.string "survey_name"
+    t.integer "survey_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "choices", "questions"
 end

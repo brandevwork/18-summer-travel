@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Swagger::Docs::Methods
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

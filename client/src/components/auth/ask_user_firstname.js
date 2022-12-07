@@ -5,7 +5,8 @@ import Button from '../UI/Button';
 function AskUserFirstName(props)	{
 
 	const nextHandler = (e) => {
-		props.nextClickHandler('ask_family', {"first_name": props.firstnameRef.current.value})
+		if (props.firstnameRef.current.value !== '')
+			props.nextClickHandler('ask_family', {"first_name": props.firstnameRef.current.value})
 	}
 
 	return (

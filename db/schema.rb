@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_113002) do
     t.boolean "status", default: true
     t.bigint "family_id"
     t.integer "survey_status", default: 0
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family_id"], name: "index_family_members_on_family_id"

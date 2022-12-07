@@ -17,7 +17,6 @@ class Api::V1::SettingsController < ApplicationController
     response :not_acceptable, "The request you made is not acceptable"
   end
 
-
   def family
     render json: current_family, serializer: FamiliesController::FamilySerializer, meta: {status: :ok, code: 200}
   end

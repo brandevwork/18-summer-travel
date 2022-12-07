@@ -1,7 +1,5 @@
-class Api::V1::SettingsController < ApplicationController
+class Api::V1::SettingsController < BaseController
   include Api::V1
-
-  skip_before_action :verify_authenticity_token
 
   swagger_controller :settings, "Settings"
 
@@ -16,6 +14,7 @@ class Api::V1::SettingsController < ApplicationController
     response :unauthorized
     response :not_acceptable, "The request you made is not acceptable"
   end
+
 
   def family
     render json: current_family, serializer: FamiliesController::FamilySerializer, meta: {status: :ok, code: 200}

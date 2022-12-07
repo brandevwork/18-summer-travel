@@ -1,7 +1,6 @@
-class  Api::V1::FamilyMembersController < ApplicationController
+class  Api::V1::FamilyMembersController < BaseController
   include Api::V1
 
-  before_action :authenticate_family!
   before_action :get_family_member, only: [:show]
   swagger_controller :family_members, "Family Members"
 

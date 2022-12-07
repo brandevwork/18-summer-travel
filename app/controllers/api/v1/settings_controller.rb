@@ -1,6 +1,10 @@
 class Api::V1::SettingsController < ApplicationController
+  include Api::V1
   skip_before_action :verify_authenticity_token
 
+  def family
+    render json: current_family, serializer: FamiliesController::FamilySerializer, meta: {status: :ok, code: 200}
+  end
   def reset_family_survey
     familymembers = current_family.family_members
     if familymembers.present?

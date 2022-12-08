@@ -1,5 +1,5 @@
 class  Api::V1::FamilyMembersController < BaseController
-  include Api::V1
+  include Api::V1::QuestionsController
 
   before_action :get_family_member, only: %i[show update]
   swagger_controller :family_members, "Family Members"
@@ -38,7 +38,7 @@ class  Api::V1::FamilyMembersController < BaseController
     if @family_member
       survey = Survey.includes(:questions).first
       questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
-      render json: questions, each_serializer: QuestionsController::QuestionsSerializer, meta: {status: :ok, code: 200}
+      render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
     else
       render json: {error: "Family Member not found"}
     end

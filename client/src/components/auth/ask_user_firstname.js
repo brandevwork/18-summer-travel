@@ -7,6 +7,8 @@ function AskUserFirstName(props)	{
 	const nextHandler = (e) => {
 		if (props.firstnameRef.current.value !== '')
 			props.nextClickHandler('ask_family', {"first_name": props.firstnameRef.current.value})
+		else
+			props.firstnameRef.current.style.border = "1px solid red";
 	}
 
 	return (

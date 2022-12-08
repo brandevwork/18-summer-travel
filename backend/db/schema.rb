@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_084319) do
   create_table "family_members", force: :cascade do |t|
     t.string "name"
     t.integer "age"
-    t.date "date_of_birth", null: false
+    t.string "birth_year", null: false
     t.boolean "status", default: true
     t.bigint "family_id"
     t.integer "survey_status", default: 0

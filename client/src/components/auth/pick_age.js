@@ -67,6 +67,7 @@ function PickAge(props)	{
 
 	return (
 		<div>
+  		<Button title="Back" buttonClickHandler={() => props.nextClickHandler('before_age')}/>
   		<p>Age</p>
   		<div style={{"display":"flex"}}>
   		<Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [props.familyMemberState.first_name], "placeholder":"Name",

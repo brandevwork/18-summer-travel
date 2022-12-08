@@ -32,6 +32,7 @@ function ConfirmAge(props)	{
 	}
 	return (
 		<div>
+  		<Button title="Back" buttonClickHandler={() => props.nextClickHandler('pick_age')}/>
   		<p>Are these Dates are correct</p>
   		{renderNameAndYear ()}
   		<Button title="Next" buttonClickHandler={() => props.nextClickHandler('save_before_signup')}/>

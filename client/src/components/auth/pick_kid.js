@@ -16,6 +16,7 @@ function PickKid(props)	{
 
 	return (
 		<div>
+  	<Button title="Back" buttonClickHandler={() => props.nextClickHandler('ask_family')}/>
   	<p>How Many people Kids/Adults are you travelling with</p>
   		<select onChange={selectMemberHandler}>
   			<option>Pick One</option>

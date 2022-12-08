@@ -2,11 +2,20 @@ import React from 'react';
 import Modal from "../UI/Modal";
 import { NavLink, useNavigate } from "react-router-dom";
 import Input from '../UI/Input';
+import Button from '../UI/Button';
 
 function SignUpSection(props)  {
 
   return (
     <section id="content" className="bg-info dker wrapper-md animated fadeInDown" style={{"height":"150vh"}}>
+      <Button title="Back" buttonClickHandler={() => props.nextClickHandler('save_before_signup')}/>
+      {props.authState.error && 
+        <ul className="text-danger list-group">
+          {props.authState.errorMessage.map((eachMessage, index) => (
+            <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+            ))}
+        </ul>
+      }
       {props.authLoading && <Modal>Please Wait ...</Modal>}
       <div className="container aside-xl">
         <section className="m-b-lg">

@@ -58,7 +58,7 @@ function PickAge(props)	{
 					yearErrRef.current[i].innerHTML = retObj.msg
 				}
 			}
-			let obj ={"name":nameRef.current[i].value, "date_of_birth": yearRef.current[i].value}
+			let obj ={"name":nameRef.current[i].value, "date_of_birth": "01-01-"+yearRef.current[i].value}
 			memberData[i] = obj
 		}
 		if(!error) 

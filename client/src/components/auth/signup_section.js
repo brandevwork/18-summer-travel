@@ -26,6 +26,8 @@ function SignUpSection(props)  {
             "className":"form-control rounded input-lg text-center no-border"}}/>
           <Input ref={props.lastnameRef} input={{"type":"text", "placeholder":"Last Name",
             "className":"form-control rounded input-lg text-center no-border"}}/>
+          <Input ref={props.addressRef} input={{"type":"text", "placeholder":"Address",
+            "className":"form-control rounded input-lg text-center no-border"}}/>
           <Input ref={props.streetRef} input={{"type":"text", "placeholder":"Street",
             "className":"form-control rounded input-lg text-center no-border"}}/>
           <Input ref={props.cityRef} input={{"type":"text", "placeholder":"City",

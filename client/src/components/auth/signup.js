@@ -30,6 +30,7 @@ function SignUp(props)  {
   const lastnameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const addressRef = useRef();
   const streetRef = useRef();
   const cityRef = useRef();
   const stateRef = useRef();
@@ -38,7 +39,7 @@ function SignUp(props)  {
 
   const ctxAuth = useContext(AuthContext);
   
-  const initialAuthState = {name: "", email: "", password:"", street:"", city:"", state:"", country:"", zip:"", error: false, errorMessage: [""]};
+  const initialAuthState = {name: "", email: "", password:"", address:"", street:"", city:"", state:"", country:"", zip:"", error: false, errorMessage: [""]};
   const [authState, dispatch] = useReducer(signupReducer, initialAuthState);
 
   const {fetchDataHandler: sendData, loading: authLoading} = useData();
@@ -52,7 +53,8 @@ function SignUp(props)  {
     await dispatch({type:"SUBMIT", firstname: firstnameRef.current.value, lastname: lastnameRef.current.value, 
     	email: emailRef.current.value, 
     	password: passwordRef.current.value, 
-    	street: streetRef.current.value, 
+    	address: addressRef.current.value, 
+      street: streetRef.current.value, 
     	city: cityRef.current.value, state: stateRef.current.value, 
     	country: countryRef.current.value, zip: zipRef.current.value});
   }
@@ -79,13 +81,13 @@ function SignUp(props)  {
     }
     if (!isInitial) {
       if (!authState.error && authState.email !== '' && authState.password !== '') {
-        sendData(`${process.env.REACT_APP_SERVER_URL}users`, {
+        sendData(`${process.env.REACT_APP_SERVER_URL}families`, {
         method: 'POST',
         body: JSON.stringify({"family":{
         	"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
         	"email":emailRef.current.value, "password":passwordRef.current.value, "password_confirmation":passwordRef.current.value,
-        	"street":streetRef.current.value, "city":cityRef.current.value, "state":stateRef.current.value,
-        	"country":countryRef.current.value, "zip":zipRef.current.value, "number_of_family_members": familyMemberState.family_member,"family_members_attributes":familyMemberState.family_members
+        	"address":addressRef.current.value,"street":streetRef.current.value, "city":cityRef.current.value, "state":stateRef.current.value,
+        	"country":countryRef.current.value, "zip":zipRef.current.value, "number_of_family_member": parseInt(familyMemberState.family_member),"family_members_attributes":familyMemberState.family_members
        	}}),
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +113,7 @@ function SignUp(props)  {
   	<div>
     	{renderState === 'welcome' && <Welcome nextClickHandler={nextClickHandler}/>}
     	{renderState === 'ask_user' && <AskUser nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'ask_user_firstname' && <AskUserFirstName firstnameRef={firstnameRef} nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'ask_user_firstname' && <AskUserFirstName familyMemberState={familyMemberState}  nextClickHandler={nextClickHandler}/>}
     	{renderState === 'ask_family' && <AskFamily familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'pick_kid' && <PickKid nextClickHandler={nextClickHandler}/>}
     	{renderState === 'after_kid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
@@ -124,7 +126,8 @@ function SignUp(props)  {
     		lastnameRef={lastnameRef}
     		emailRef={emailRef}
     		passwordRef={passwordRef}
-    		streetRef={streetRef}
+    		addressRef={addressRef}
+        streetRef={streetRef}
     		cityRef={cityRef}
     		stateRef={stateRef}
     		countryRef={countryRef}

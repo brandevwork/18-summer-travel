@@ -10,6 +10,7 @@ const signupReducer = (state, action) => {
         email: action.email,
         password: action.password,
         street: action.street,
+        address: action.address,
         city: action.city,
         state: action.state,
         country: action.country,
@@ -34,6 +35,9 @@ const signupReducer = (state, action) => {
     if (action.password.trim().length < 6) {
       errors.push("Password length cannot be less than 6 chracters");
     }
+    if (action.address.trim() === "") {
+      errors.push("Address cannot be empty");
+    }
     if (action.street.trim() === "") {
       errors.push("Street cannot be empty");
     }
@@ -55,6 +59,7 @@ const signupReducer = (state, action) => {
         lastname: action.lastname,
         email: action.email,
         password: action.password,
+        address: action.address,
         street: action.street,
         city: action.city,
         state: action.state,
@@ -70,6 +75,7 @@ const signupReducer = (state, action) => {
         lastname: action.lastname,
         email: action.email,
         password: action.password,
+        address: action.address,
         street: action.street,
         city: action.city,
         state: action.state,
@@ -86,6 +92,7 @@ const signupReducer = (state, action) => {
       lastname: "",
       email: "",
       password: "",
+      address: "",
       street: "",
       city: "",
       state: "",

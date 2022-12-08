@@ -1,7 +1,7 @@
-class  Api::V1::FamilyMembersController < ApplicationController
-  include Api::V1
-  before_action :authenticate_family!
-  before_action :get_family_member, only: [:show]
+class  Api::V1::FamilyMembersController < BaseController
+  include Api::V1::QuestionsController
+
+  before_action :get_family_member, only: %i[show update]
   swagger_controller :family_members, "Family Members"
 
   swagger_api :index do
@@ -53,6 +53,15 @@ class  Api::V1::FamilyMembersController < ApplicationController
     end
   end
 
+  def update
+    if @family_member
+      @family_member.update(is_active: !@family_member.is_active)
+      render json: { status: :ok, success: true }
+    else
+      render json: {error: "Family Member not found"}
+    end
+  end
+
   private
 
   def family_member_params
@@ -60,6 +69,6 @@ class  Api::V1::FamilyMembersController < ApplicationController
   end
 
   def get_family_member
-    @family_member = FamilyMember.find(params[:id])
+    @family_member = FamilyMember.find_by(id: params[:id])
   end
 end

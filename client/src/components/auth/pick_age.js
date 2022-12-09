@@ -1,4 +1,4 @@
-import React,{ useRef } from 'react';
+import React,{ useRef, useEffect } from 'react';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 
@@ -18,6 +18,7 @@ function yearValidation(year) {
 }
 
 function PickAge(props)	{
+
 	const nameRef =  useRef([])
 	const yearRef =  useRef([])
 	const yearErrRef = useRef([])
@@ -64,6 +65,14 @@ function PickAge(props)	{
 		if(!error) 
 			props.nextClickHandler('confirm_age',{"family_members":memberData})
 	}
+
+	useEffect (() => {
+		if(typeof props.familyMemberState.family_members !== 'undefined')
+			for(let i = 0; i < props.familyMemberState.family_member; i++) {
+				nameRef.current[i].value = props.familyMemberState.family_members[i].name
+				yearRef.current[i].value = props.familyMemberState.family_members[i].date_of_birth
+			}
+	},[props.familyMemberState])
 
 	return (
 		<div>

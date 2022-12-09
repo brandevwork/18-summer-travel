@@ -37,7 +37,7 @@ function Login(props) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
   	else{
-  		await ctxAuth.login({"name": data.data.firstname+" "+data.data.last_name, "email": data.data.email});
+  		await ctxAuth.login({"name": data.data.firstname+" "+data.data.last_name, "email": data.data.email, "notification": data.status.message});
     	navigateHandler('/');
   	}
   }

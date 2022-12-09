@@ -67,8 +67,8 @@ function SignUp(props)  {
     if (!data.data) {
       dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
     }
-    else{
-      await ctxAuth.signup({"name": data.data.firstname+" "+data.data.last_name, "email": data.data.email});
+    if(data.status.code == "200"){
+      await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
       // navigateHandler('/');
       nextClickHandler("setup")
     }

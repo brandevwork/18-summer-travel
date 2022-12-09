@@ -67,10 +67,19 @@ function SignUp(props)  {
     if (!data.data) {
       dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
     }
+    if(data.status.code == "400") {
+      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+    }
     if(data.status.code == "200"){
-      await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
+      // await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
       // navigateHandler('/');
-      nextClickHandler("setup")
+      await localStorage.setItem("email", emailRef.current.value);
+      await localStorage.setItem("name", firstnameRef.current.value+""+lastnameRef.current.value);
+      nextClickHandler("setup",{
+        "family":{"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
+          "email":emailRef.current.value,"notification":data.status.message}
+      })
+
     } else {
       dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message});
       return;
@@ -139,7 +148,7 @@ function SignUp(props)  {
         nextClickHandler={nextClickHandler}
         authState = {authState}
   		/>}
-    	{renderState === 'setup' && <Setup nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'setup' && <Setup familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     </div>
   )
 }

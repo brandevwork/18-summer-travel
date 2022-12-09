@@ -36,8 +36,11 @@ function Login(props) {
   	if (!data.data) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
-  	else{
-  		await ctxAuth.login({"name": data.data.firstname+" "+data.data.last_name, "email": data.data.email, "notification": data.status.message});
+  	if (data.status.code == "400") {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  	}
+  	if(data.status.code == "200"){
+  		await ctxAuth.login({"name": data.first_name+" "+data.last_name, "email": data.email, "notification": data.status.message});
     	navigateHandler('/');
   	}
   }
@@ -51,9 +54,9 @@ function Login(props) {
     if(!isInitial) {
       if (!authState.error && authState.email !== '' && authState.password !== '') {
       	// https://546e799e-fed6-4bf3-8232-c0d30e244571.mock.pstmn.io/user/get
-      	sendData(`${process.env.REACT_APP_SERVER_URL}users/sign_in`, {
+      	sendData(`${process.env.REACT_APP_SERVER_URL}families/sign_in`, {
 	      method: 'POST',
-			  body: JSON.stringify({"user":{"email":emailRef.current.value, "password":passwordRef.current.value}}),
+			  body: JSON.stringify({"family":{"email":emailRef.current.value, "password":passwordRef.current.value}}),
 			  headers: {
 			    'Content-Type': 'application/json',
 			    'x-mock-match-request-body': true,

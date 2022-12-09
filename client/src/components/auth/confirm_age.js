@@ -24,7 +24,7 @@ function ConfirmAge(props)	{
 			content.push(
 				<div style={{"display":"flex"}}>
 			    <p ref={el => nameRef.current[i+1] = el} >{totalMembersData[i].name}</p>
-			    <p ref={el => yearRef.current[i+1] = el} >{getAge(totalMembersData[i].date_of_birth)}</p>
+			    <p ref={el => yearRef.current[i+1] = el} >{getAge(totalMembersData[i].birth_year)}</p>
 			  </div> 
 			)
 		}

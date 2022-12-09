@@ -70,7 +70,7 @@ function PickAge(props)	{
 		if(typeof props.familyMemberState.family_members !== 'undefined')
 			for(let i = 0; i < props.familyMemberState.family_member; i++) {
 				nameRef.current[i].value = props.familyMemberState.family_members[i].name
-				yearRef.current[i].value = props.familyMemberState.family_members[i].date_of_birth
+				yearRef.current[i].value = props.familyMemberState.family_members[i].birth_year
 			}
 	},[props.familyMemberState])
 

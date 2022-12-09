@@ -71,6 +71,9 @@ function SignUp(props)  {
       await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
       // navigateHandler('/');
       nextClickHandler("setup")
+    } else {
+      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message});
+      return;
     }
   }
   

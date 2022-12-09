@@ -50,8 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_113002) do
     t.date "date_of_birth", null: false
     t.boolean "status", default: true
     t.bigint "family_id"
-    t.integer "survey_status", default: 0
-    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family_id"], name: "index_family_members_on_family_id"
@@ -66,6 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_113002) do
   end
 
   create_table "response_choices", force: :cascade do |t|
+    t.integer "score"
     t.bigint "response_id", null: false
     t.bigint "choice_id", null: false
     t.datetime "created_at", null: false
@@ -82,10 +81,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_113002) do
   end
 
   create_table "surveys", force: :cascade do |t|
-    t.string "survey_name"
     t.integer "survey_type"
+    t.integer "status", default: 0
+    t.bigint "family_member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["family_member_id"], name: "index_surveys_on_family_member_id"
   end
 
   add_foreign_key "choices", "questions"

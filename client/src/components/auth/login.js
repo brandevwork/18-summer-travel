@@ -40,7 +40,7 @@ function Login(props) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status.code == "200"){
-  		await ctxAuth.login({"name": data.first_name+" "+data.last_name, "email": data.email, "notification": data.status.message});
+  		await ctxAuth.login({"name": data.data.first_name+" "+data.data.last_name, "email": data.data.email, "id": data.data.id, "notification": data.status.message});
     	navigateHandler('/');
   	}
   }
@@ -53,7 +53,6 @@ function Login(props) {
     }
     if(!isInitial) {
       if (!authState.error && authState.email !== '' && authState.password !== '') {
-      	// https://546e799e-fed6-4bf3-8232-c0d30e244571.mock.pstmn.io/user/get
       	sendData(`${process.env.REACT_APP_SERVER_URL}families/sign_in`, {
 	      method: 'POST',
 			  body: JSON.stringify({"family":{"email":emailRef.current.value, "password":passwordRef.current.value}}),

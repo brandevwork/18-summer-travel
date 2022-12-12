@@ -11,7 +11,7 @@ function Setup(props)	{
 	const navigate = useNavigate();
 	const navigateHandler = (e) => {
 		// navigate(e);
-    ctxAuth.signup({"name": props.familyMemberState.family.first_name+" "+props.familyMemberState.family.last_name, "email": props.familyMemberState.family.email, "notification":props.familyMemberState.family.notification});
+    ctxAuth.signup({"name": props.familyMemberState.family.first_name+" "+props.familyMemberState.family.last_name, "email": props.familyMemberState.family.email, "id": props.familyMemberState.family.id, "notification":props.familyMemberState.family.notification});
 
 	}
 	return (

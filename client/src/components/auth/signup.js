@@ -73,10 +73,11 @@ function SignUp(props)  {
     if(data.status.code == "200"){
       // await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
       // navigateHandler('/');
+      await localStorage.setItem("id", data.data.id);
       await localStorage.setItem("email", emailRef.current.value);
       await localStorage.setItem("name", firstnameRef.current.value+""+lastnameRef.current.value);
       nextClickHandler("setup",{
-        "family":{"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
+        "family":{id: data.data.id,"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
           "email":emailRef.current.value,"notification":data.status.message}
       })
 

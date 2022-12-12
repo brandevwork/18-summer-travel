@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const AuthContext = React.createContext({
+	id:"",
 	email:"",
 	name:"",
 	notification:"",
@@ -12,7 +13,7 @@ export default AuthContext;
 
 export const AuthContextProvider = (props) => {
 
-	const [authDataState, setauthDataState] = useState({email:"", name:"",notification:""});
+	const [authDataState, setauthDataState] = useState({id:"", email:"", name:"",notification:""});
 	
 	useEffect(() => {
     const localEmail = localStorage.getItem("email");
@@ -28,6 +29,7 @@ export const AuthContextProvider = (props) => {
 	    name: authDataState.name,
 	    login: (obj) => {
 	      setauthDataState(obj);
+	      localStorage.setItem("id", obj.id);
 	      localStorage.setItem("email", obj.email);
 				localStorage.setItem("name", obj.name);
 	    },
@@ -38,6 +40,7 @@ export const AuthContextProvider = (props) => {
 	    },
 	    signup: (obj) => {
 	      setauthDataState(obj);
+	      localStorage.setItem("id", obj.id);
 	      localStorage.setItem("email", obj.email);
 				localStorage.setItem("name", obj.name);
 	    }

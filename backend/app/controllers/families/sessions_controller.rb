@@ -1,5 +1,6 @@
 class Families::SessionsController < Devise::SessionsController
   skip_before_action :verify_authenticity_token
+  before_action :check_user_credentials, only: [:create]
   respond_to :json
 
   swagger_controller :sessions, "Family Login"
@@ -40,6 +41,18 @@ class Families::SessionsController < Devise::SessionsController
         status: 401,
         message: "Couldn't find an active session."
       }, status: :unauthorized
+    end
+  end
+
+  def check_user_credentials
+    family = Family.find_by(email: params["family"]["email"])
+    unless family.present? && family.valid_password?(params["family"]["password"])
+      response = {
+        message: "Invalid Email or password",
+        code: 400,
+        success: false
+      }
+      render json: response
     end
   end
 end

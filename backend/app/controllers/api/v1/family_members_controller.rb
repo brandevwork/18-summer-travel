@@ -15,7 +15,7 @@ class  Api::V1::FamilyMembersController < BaseController
   swagger_api :create do
     summary "Creates a new Family member"
     param :form, :name, :string, :required, "Name"
-    param :form, :date_of_birth, :date, :required, "Date of Birth"
+    param :form, :birth_year, :date, :required, "Date of Birth"
     param :form, :email, :string, :required, "Email address"
     response :not_acceptable
   end
@@ -65,7 +65,7 @@ class  Api::V1::FamilyMembersController < BaseController
   private
 
   def family_member_params
-    params.require(:family_member).permit(:name, :age, :date_of_birth, :family_id)
+    params.require(:family_member).permit(:name, :age, :birth_year, :family_id)
   end
 
   def get_family_member

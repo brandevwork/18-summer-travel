@@ -27,7 +27,9 @@ class Families::RegistrationsController < Devise::RegistrationsController
       }, status: :ok
     else
       render json: {
-        status: {message: "Family Account couldn't be created successfully. #{resource.errors.full_messages.to_sentence}"}
+        message: "Family Account couldn't be created successfully. #{resource.errors.full_messages.to_sentence}",
+        code: 400,
+        success: false
       }, status: :unprocessable_entity
     end
   end

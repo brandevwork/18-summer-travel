@@ -258,6 +258,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activestorage
   bootsnap
   byebug (~> 11.1, >= 11.1.3)
   capybara

@@ -1,5 +1,5 @@
 class Response < ApplicationRecord
-  after_commit :update_family_member_status, on: :create
+  after_create :update_family_member_status
   belongs_to :family_member
   has_many :response_choices, dependent: :destroy
   has_many :choices, through: :response_choices

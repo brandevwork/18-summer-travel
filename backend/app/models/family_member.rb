@@ -11,11 +11,11 @@ class FamilyMember < ApplicationRecord
   private
 
   def set_age
-    self.age = Time.zone.now.year - birth_year.to_i
+    self.age = Date.today.year - birth_year.to_i
   end
 
   def check_year_of_birth
-    if birth_year.present? && birth_year.to_i > Time.zone.now.year
+    if birth_year.present? && birth_year.to_i > Date.today.year
       errors.add(:birth_year, 'Birth year must be less than current year.')
     end
   end

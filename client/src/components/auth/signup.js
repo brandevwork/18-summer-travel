@@ -73,6 +73,7 @@ function SignUp(props)  {
     if(data.status.code == "200"){
       // await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
       // navigateHandler('/');
+      await localStorage.setItem("jti", data.data.jti);
       await localStorage.setItem("id", data.data.id);
       await localStorage.setItem("email", emailRef.current.value);
       await localStorage.setItem("name", firstnameRef.current.value+""+lastnameRef.current.value);

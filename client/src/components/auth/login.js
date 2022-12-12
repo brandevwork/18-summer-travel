@@ -40,7 +40,7 @@ function Login(props) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status.code == "200"){
-  		await ctxAuth.login({"name": data.data.first_name+" "+data.data.last_name, "email": data.data.email, "id": data.data.id, "notification": data.status.message});
+  		await ctxAuth.login({"name": data.data.first_name+" "+data.data.last_name, "email": data.data.email, "id": data.data.id,"jti": data.data.jti, "notification": data.status.message});
     	navigateHandler('/');
   	}
   }

@@ -13,7 +13,7 @@ class  Api::V1::ResponsesController < BaseController
   private
 
   def response_params
-    params.require(:response).permit(:family_member_id, response_choices_attributes: [:choice_id])
+    params.require(:response).permit(:family_member_id)
   end
 
 end

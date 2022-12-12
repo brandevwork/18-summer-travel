@@ -21,8 +21,6 @@ function Home(props)	{
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   
   const getAuthData = async(data) => {
-  	console.log(data)
-  	console.log("data")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -34,7 +32,7 @@ function Home(props)	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status.code == "200"){
-  		// await ctxAuth.login({"name": data.data.first_name+" "+data.data.last_name, "email": data.data.email, "id": data.data.id, "notification": data.status.message});
+  		await ctxHome.getAllFamilyMembers(data.data,data.status.message);
     	// navigateHandler('/');
   	}
   }

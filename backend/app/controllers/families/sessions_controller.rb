@@ -23,8 +23,8 @@ class Families::SessionsController < Devise::SessionsController
 
   def respond_with(resource, _opts = {})
     render json: {
-      status: {code: 200, message: 'Logged in sucessfully.',
-      data: current_family }
+      status: {code: 200, message: 'Logged in sucessfully.'},
+      data: current_family
     }, status: :ok
   end
 

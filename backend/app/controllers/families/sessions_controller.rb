@@ -14,7 +14,7 @@ class Families::SessionsController < Devise::SessionsController
 
   swagger_api :destroy do
     summary "Logout a family"
-    param :path, :id, :integer, :required, "User Id"
+    param :header, 'Authorization', :string, :required, "Authorization"
     response :unauthorized
     response :not_found
   end

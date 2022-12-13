@@ -5,14 +5,19 @@ class Families::RegistrationsController < Devise::RegistrationsController
   swagger_controller :registrations, "Family Registration"
   swagger_api :create do
     summary "Creates a new Family"
-    param :form, :email, :string, :required, "Email"
-    param :form, :password, :string, :required, "Password"
-    param :form, :number_of_family_member, :integer, :required, "Number of Family Member"
-    param :form, :postal_code, :integer, :required, 'Postal Code'
-    param :form, :address, :string, :required, "Address"
-    param :form, :city, :string, :required, "City"
-    param :form, :state, :string, :required, "State"
-    param :form, :country, :string, :required, "Country"
+    param :form, 'family[email]', :string, :required, "Email"
+    param :form, 'family[first_name]', :string, :required, "Family Name"
+    param :form, 'family[password]', :string, :required, "Password"
+    param :form, 'family[number_of_family_member]', :integer, :required, "Number of Family Member"
+    param :form, 'family[postal_code]', :integer, :required, 'Postal Code'
+    param :form, 'family[address]', :string, :required, "Address"
+    param :form, 'family[city]', :string, :required, "City"
+    param :form, 'family[state]', :string, :required, "State"
+    param :form, 'family[country]', :string, :required, "Country"
+    param :form, 'family[family_members_attributes][1][name]', :string, :required, "First Family Member Name"
+    param :form, 'family[family_members_attributes][1][birth_year]', :string, :required, "First Family Member Birth Year"
+    param :form, 'family[family_members_attributes][2][name]', :string, :required, "First Family Member Name"
+    param :form, 'family[family_members_attributes][2][birth_year]', :string, :required, "First Family Member Birth Year"
     response :not_acceptable
     response :unprocessable_entity
   end
@@ -33,4 +38,5 @@ class Families::RegistrationsController < Devise::RegistrationsController
       }, status: :unprocessable_entity
     end
   end
+
 end

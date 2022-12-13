@@ -6,8 +6,8 @@ class Families::SessionsController < Devise::SessionsController
   swagger_controller :sessions, "Family Login"
   swagger_api :create do
     summary "Login a Family"
-    param :form, :email, :string, :required, "Email"
-    param :form, :password, :string, :required, "Password"
+    param :form, 'family[email]', :string, :required, "Email"
+    param :form, 'family[password]', :string, :required, "Password"
     response :not_acceptable
     response :unprocessable_entity
   end

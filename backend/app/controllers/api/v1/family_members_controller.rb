@@ -36,12 +36,13 @@ class  Api::V1::FamilyMembersController < BaseController
   end
 
   def show
-    if @family_member
+    if @family_member and @family_member.is_active?
       survey = Survey.includes(:questions).first
       questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
       render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
     else
-      render json: {error: "Family Member not found"}
+      error_message =  (@family_member and !@family_member.is_active?) ? 'Family Member status is not active' : 'Family Member not found'
+      render json: {error: error_message}
     end
   end
 

@@ -11,9 +11,16 @@ Rails.application.routes.draw do
   end
 
   get 'families/index'
-  devise_for :families,
+  devise_for :families, skip: [:sessions],
     controllers: {
-      sessions: 'families/sessions',
       registrations: 'families/registrations'
     }
+
+  namespace :families do
+    devise_scope :family do
+      post '/sign_in', to: 'sessions#create'
+      delete '/sign_out', to: 'sessions#destroy'
+    end
+  end
+
 end

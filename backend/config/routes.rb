@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get 'families/index'
   devise_for :families, skip: [:sessions],
     controllers: {
-      sessions: 'families/sessions',
       registrations: 'families/registrations'
     }
 

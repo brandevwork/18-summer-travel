@@ -8,7 +8,8 @@
       "Visit a winery",
       "Take cooking classes",
       "Experience the city night life"
-    ]
+    ],
+    "category_id": 1
   },
   {
     "question": "What about these things?",
@@ -17,7 +18,8 @@
       "Go to a water park",
       "Visit a zoo or aquarium",
       "Go walking and exploring"
-    ]
+    ],
+    "category_id": 1
   },
   {
     "question": "Which of these things do you like to do?",
@@ -27,7 +29,8 @@
       "Learning about local culture and history",
       "Have a tour guide show us around",
       "Experience local festivals, events and parades"
-    ]
+    ],
+    "category_id": 1
   },
   {
     "question": "What type environment do you like to visit when you go on vacation",
@@ -39,45 +42,50 @@
       "Tourist Destinations (Big Ben, Eiffel Tower, etc.)",
       "Road Trips",
       "Be in nature"
-    ]
+    ],
+    "category_id": 2
   },
   {
-  "question": "What type of sporting activities do you like to do, if any?",
-  "choices": [
-    "Golfing",
-    "Hiking",
-    "Biking",
-    "Water Sports (Swimming, Snorkeling)",
-    "Mountain Skiing"
-  ]
+    "question": "What type of sporting activities do you like to do, if any?",
+    "choices": [
+      "Golfing",
+      "Hiking",
+      "Biking",
+      "Water Sports (Swimming, Snorkeling)",
+      "Mountain Skiing"
+    ],
+    "category_id": 3
   },
   {
     "question": "Which of these cities or areas in Europe do you want to visit?",
     "choices": [
       "Vienna, Austria",
       "Paris, France",
+      "South of France (here,here)",
       "Berlin, Germany",
       "Hamburg, Germany",
       "Munich, Germany",
       "Athens, Greece",
       "Reykjavik, Iceland",
       "Florence, Italy",
+      "Rome, Italy",
       "Venice, Italy",
       "Amsterdam, Netherlands",
       "Barcelona, Spain",
       "The Alps, Switzerland",
-      "Multi-City River Cruise",
       "Multi-City River Cruise"
-    ]
+    ],
+    "category_id": 4
   },
   {
-  "question": "How about these cities in the United Kingdom, the UK and Ireland",
-  "choices": [
-    "London, England",
-    "Dublin, Ireland",
-    "Irish Countryside, Ireland",
-    "Edinburgh, Scotland"
-  ]
+    "question": "How about these cities in the United Kingdom, the UK and Ireland",
+    "choices": [
+      "London, England",
+      "Dublin, Ireland",
+      "Irish Countryside, Ireland",
+      "Edinburgh, Scotland"
+    ],
+    "category_id": 5
   },
   {
     "question": "What about visiting Africa?",
@@ -85,7 +93,8 @@
       "Cairo, Egypt, (The Pyramids)",
       "Marrakesh, Morocco",
       "Cape Town, South Africa"
-    ]
+    ],
+    "category_id": 6
   },
   {
     "question": "What places in South America interest you?",
@@ -93,19 +102,22 @@
       "Rio de Janeiro, Brazil",
       "Galapagos Islands, Ecuador",
       "Machu Picchu, Peru (Inca Ruins)"
-    ]
+    ],
+    "category_id": 7
   },
   {
     "question": "How about Central America",
     "choices": [
       "Costa Rica, (Rain Forest)"
-    ]
+    ],
+    "category_id": 8
   },
   {
     "question": "Interested in visiting Oceania? This is the area including Australia and New Zealand",
     "choices": [
       "Sydney, Australia"
-    ]
+    ],
+    "category_id": 9
   },
   {
     "question": "Which of these cities in the United States do you wish to visit for vacations",
@@ -125,14 +137,16 @@
       "National Parks",
       "Alaska",
       "Alaska Cruise"
-    ]
+    ],
+    "category_id": 10
   },
   {
     "question": "Are you interested in these cities",
     "choices": [
       "Cabo",
       "Cancun"
-    ]
+    ],
+    "category_id": 11
   },
   {
     "question": "Are you interested in Caribbean destinations? Including perhaps a Caribbean Cruise?",
@@ -140,7 +154,8 @@
       "Barbados",
       "Caribbean",
       "Caribbean Cruise (on Cruise Ship)"
-    ]
+    ],
+    "category_id": 12
   },
   {
     "question": "would you like to visit Canada",
@@ -148,12 +163,14 @@
       "Montreal (Eastern Canada)",
       "Toronto, (Eastern Canada)",
       "Vancouver, (Western Canada)"
-    ]
+    ],
+    "category_id": 13
   },
   {
     "question": "Interesting in visiting Bermuda",
     "choices": [
       "Hamilton, Bermuda"
-    ]
+    ],
+    "category_id": 14
   }
 ]

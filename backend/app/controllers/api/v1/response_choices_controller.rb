@@ -9,11 +9,11 @@ class  Api::V1::ResponseChoicesController < BaseController
           ResponseChoice.find_or_create_by(family_member_id: params["family_member_id"], choice_id: choice_id, question_id: params["question_id"])
         end
       end
-      render json: { status: 200 , success: true }
+      render json: { status: 200, success: true }
     else
-      return render json: { message: "Family Member and Question id is missing" , status: 400 , success: false } unless (params["question_id"].present? || params["family_member_id"].present?) 
+      return render json: { message: "Family Member and Question id is missing" , status: 400, success: false } unless (params["question_id"].present? || params["family_member_id"].present?) 
       error_message = params["family_member_id"].present? ? 'question_id is missing' : 'family_member_id is missing'
-      render json: { message: error_message , status: 400 , success: false }
+      render json: { message: error_message , status: 400, success: false }
     end
   end
 

@@ -15,20 +15,20 @@ class Api::V1::SettingsController < BaseController
     response :not_acceptable, "The request you made is not acceptable"
   end
 
-
   def family
-    render json: current_family, serializer: FamiliesController::FamilySerializer, meta: {status: :ok, code: 200}
+    render json: current_family, serializer: FamiliesController::FamilySerializer, meta: { status: :ok, code: 200, success: true }
   end
 
   def reset_family_survey
     familymembers = current_family.family_members
     if familymembers.present?
       familymembers.each do |familymember|
-        familymember.response.destroy if familymember.response.present?
+        familymember.response_choices.destroy_all if familymember.response_choices.present?
+        familymember.update(survey_status: 0)
       end
       render json: { message: "Survey has been reset successfully", status: :ok, success: true }
     else
-      render json: { message: "Unable to reset survey", status: 204}
+      render json: { message: "Unable to reset survey", status: 204, success: false }
     end
   end
 

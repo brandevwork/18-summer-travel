@@ -11,7 +11,6 @@ class  Api::V1::FamilyMembersController < BaseController
     response :not_acceptable, "The request you made is not acceptable"
   end
 
-
   swagger_api :show do
     summary "Fetches a single family member and its survey"
     param :path, :id, :integer, :required, "FamilyMember Id"
@@ -36,12 +35,16 @@ class  Api::V1::FamilyMembersController < BaseController
   end
 
   def show
-    if @family_member.is_active?
-      survey = Survey.includes(:questions).first
-      questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
+    if @family_member.is_active? && !@family_member.completed?
+      questions = Survey.first.questions
+      questions = (@family_member.age < 14) ? questions.limit(4) : questions
+      if @family_member.response_choices.present?
+        questions = questions.offset(@family_member.response_choices.last.question_id)
+        questions = questions.limit(4 - @family_member.response_choices.select(:question_id).distinct.count) if @family_member.age < 14
+      end
       render json: questions, each_serializer: QuestionsSerializer, meta: { status: :ok, code: 200, success: true }
     else
-      render json: { error: 'Family Member status is not active', success: false }
+      render json: { error: (@family_member.completed?) ? 'Family Member survey is already completed' : 'Family Member status is not active', success: false }
     end
   end
 

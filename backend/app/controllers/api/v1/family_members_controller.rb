@@ -36,23 +36,18 @@ class  Api::V1::FamilyMembersController < BaseController
   end
 
   def show
-    if @family_member and @family_member.is_active?
+    if @family_member.is_active?
       survey = Survey.includes(:questions).first
       questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
       render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
     else
-      error_message =  (@family_member and !@family_member.is_active?) ? 'Family Member status is not active' : 'Family Member not found'
-      render json: {error: error_message}
+      render json: { error: 'Family Member status is not active' }
     end
   end
 
   def update
-    if @family_member
-      @family_member.update(is_active: !@family_member.is_active)
-      render json: { status: :ok, success: true }
-    else
-      render json: {error: "Family Member not found"}
-    end
+    @family_member.update(is_active: !@family_member.is_active)
+    render json: { status: :ok, success: true }
   end
 
   private
@@ -63,5 +58,7 @@ class  Api::V1::FamilyMembersController < BaseController
 
   def get_family_member
     @family_member = FamilyMember.find_by(id: params[:id])
+    return render json: {error: "Family Member not found"} if @family_member.nil?
+    render json: { error: "You are unauthorized", status: 401 } unless @family_member.family_id.eql?(current_family.id)
   end
 end

@@ -6,7 +6,7 @@ class  Api::V1::ResponseChoicesController < BaseController
         ResponseChoice.find_or_create_by(family_member_id: params["family_member_id"], question_id: params["question_id"])
       else
         params["choice_ids"].each do |choice_id|
-          ResponseChoice.find_or_create_by(family_member_id: params["family_member_id"], choice_id: choice_id, question_id: params["question_id"])
+          ResponseChoice.find_or_create_by(family_member_id: params["family_member_id"], choice_id: choice_id, question_id: params["question_id"], score: 1)
         end
       end
       render json: { status: 200, success: true }

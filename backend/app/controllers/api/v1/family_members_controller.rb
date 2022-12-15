@@ -32,16 +32,16 @@ class  Api::V1::FamilyMembersController < BaseController
 
   def index
     families = current_family.family_members
-    render json: {data: {family: families}, status: :ok, success: true}
+    render json: { data: { family: families }, status: :ok, success: true }
   end
 
   def show
     if @family_member.is_active?
       survey = Survey.includes(:questions).first
       questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
-      render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
+      render json: questions, each_serializer: QuestionsSerializer, meta: { status: :ok, code: 200, success: true }
     else
-      render json: { error: 'Family Member status is not active' }
+      render json: { error: 'Family Member status is not active', success: false }
     end
   end
 
@@ -58,7 +58,7 @@ class  Api::V1::FamilyMembersController < BaseController
 
   def get_family_member
     @family_member = FamilyMember.find_by(id: params[:id])
-    return render json: {error: "Family Member not found"} if @family_member.nil?
-    render json: { error: "You are unauthorized", status: 401 } unless @family_member.family_id.eql?(current_family.id)
+    return render json: { error: "Family Member not found", status: 404, success: false } if @family_member.nil?
+    render json: { error: "You are unauthorized", status: 401, success: false } unless @family_member.family_id.eql?(current_family.id)
   end
 end

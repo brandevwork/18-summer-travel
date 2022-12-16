@@ -38,9 +38,10 @@ class  Api::V1::FamilyMembersController < BaseController
     if @family_member.is_active? && !@family_member.completed?
       questions = Survey.first.questions
       questions = @family_member.age < 14 ? questions.limit(4) : questions
-      if @family_member.response_choices.present?
-        questions = questions.offset(@family_member.response_choices.last.question_id)
-        questions = questions.limit(4 - @family_member.response_choices.select(:question_id).distinct.count) if @family_member.age < 14
+      response_choices = @family_member.response_choices
+      if response_choices.present?
+        questions = Question.where.not(id: response_choices.pluck(:question_id))
+        questions = questions.limit(4 - response_choices.select(:question_id).distinct.count) if @family_member.age < 14
       end
       render json: questions, each_serializer: QuestionsSerializer, meta: { status: :ok, code: 200, success: true }
     else

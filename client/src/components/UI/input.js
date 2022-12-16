@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Input = React.forwardRef((props, ref) => {
+const Input = React.forwardRef(({input}, ref) => {
 	return (
 		<div className="form-group">
-			<input ref={ref} {...props.input}/>
+			<input ref={ref} {...input}/>
 		</div>
 	)
 })

@@ -2,16 +2,16 @@ import React, { Fragment } from 'react';
 import Header from '../layout/header';
 import SideBar from '../layout/sidebar';
 import Footer from '../layout/footer';
-import classes from './Card.module.css';
-import Modal from './Modal';
+import classes from './card.module.css';
+import Modal from './modal';
 
-function Card(props)	{
+function Card({className, children})	{
 	return (
 		<div >
 			<Header  />
 			<SideBar/>
-			<div className={`${classes.card} ${props.className}`}>
-				{props.children}
+			<div className={`${classes.card} ${className}`}>
+				{children}
 			</div>
 			<Footer/>
 		</div>

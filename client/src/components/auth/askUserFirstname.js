@@ -1,14 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import Input from '../UI/Input';
-import Button from '../UI/Button';
+import Input from '../UI/input';
+import Button from '../UI/button';
 
-function AskUserFirstName(props)	{
-	let first_name = props.familyMemberState.first_name
+function AskUserFirstName({familyMemberState: {first_name}, nextClickHandler})	{
 	const firstnameRef = useRef()
 
 	const nextHandler = (e) => {
 		if (firstnameRef.current.value !== '')
-			props.nextClickHandler('ask_family', {"first_name": firstnameRef.current.value})
+			nextClickHandler('askFamily', {"first_name": firstnameRef.current.value})
 		else
 			firstnameRef.current.style.border = "1px solid red";
 	}	
@@ -20,7 +19,7 @@ function AskUserFirstName(props)	{
 
 	return (
 		<div>
-  		<Button title="Back" buttonClickHandler={() => props.nextClickHandler('ask_user')}/>
+  		<Button title="Back" buttonClickHandler={() => nextClickHandler('askUser')}/>
 			<p>Can I ask Your Name</p>
   		<Input ref={firstnameRef} input={{"type":"text", "placeholder":"First Name", 
   		"className":"form-control rounded input-lg text-center no-border"}}/>

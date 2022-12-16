@@ -1,17 +1,14 @@
 import React, { useContext } from 'react';
-import Button from '../UI/Button';
+import Button from '../UI/button';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
+import AuthContext from "../../store/authContext";
 
-
-
-
-function Setup(props)	{
+function Setup({familyMemberState: {family :{first_name, last_name, email, id, jti, notification}}})	{
 	const ctxAuth = useContext(AuthContext);
 	const navigate = useNavigate();
 	const navigateHandler = (e) => {
 		// navigate(e);
-    ctxAuth.signup({"name": props.familyMemberState.family.first_name+" "+props.familyMemberState.family.last_name, "email": props.familyMemberState.family.email, "id": props.familyMemberState.family.id, "jti": props.familyMemberState.family.jti, "notification":props.familyMemberState.family.notification});
+    ctxAuth.signup({"name": first_name+" "+last_name, "email": email, "id": id, "jti": jti, "notification":notification});
 
 	}
 	return (

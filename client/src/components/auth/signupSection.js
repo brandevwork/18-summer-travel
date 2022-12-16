@@ -1,43 +1,45 @@
 import React from 'react';
-import Modal from "../UI/Modal";
+import Modal from "../UI/modal";
 import { NavLink, useNavigate } from "react-router-dom";
-import Input from '../UI/Input';
-import Button from '../UI/Button';
+import Input from '../UI/input';
+import Button from '../UI/button';
 
-function SignUpSection(props)  {
+function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firstnameRef, lastnameRef, addressRef, streetRef,
+  cityRef, stateRef, countryRef, passwordRef, zipRef, submitHandler
+}) {
 
   return (
     <section id="content" className="bg-info dker wrapper-md animated fadeInDown" style={{"height":"150vh"}}>
-      <Button title="Back" buttonClickHandler={() => props.nextClickHandler('save_before_signup')}/>
-      {props.authState.error && 
+      <Button title="Back" buttonClickHandler={() => nextClickHandler('saveBeforeSignup')}/>
+      {authState.error && 
         <ul className="text-danger list-group">
-          {props.authState.errorMessage.map((eachMessage, index) => (
+          {authState.errorMessage.map((eachMessage, index) => (
             <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
             ))}
         </ul>
       }
-      {props.authLoading && <Modal>Please Wait ...</Modal>}
+      {authLoading && <Modal>Please Wait ...</Modal>}
       <div className="container aside-xl">
         <section className="m-b-lg">
-          <form onSubmit={props.submitHandler}>
-          <Input ref={props.emailRef} input={{"type":"email", "placeholder":"Email",
+          <form onSubmit={submitHandler}>
+          <Input ref={emailRef} input={{"type":"email", "placeholder":"Email",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.firstnameRef} input={{"type":"text", "placeholder":"First Name",
+          <Input ref={firstnameRef} input={{"type":"text", "placeholder":"First Name",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.lastnameRef} input={{"type":"text", "placeholder":"Last Name",
+          <Input ref={lastnameRef} input={{"type":"text", "placeholder":"Last Name",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.addressRef} input={{"type":"text", "placeholder":"Address",
+          <Input ref={addressRef} input={{"type":"text", "placeholder":"Address",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.streetRef} input={{"type":"text", "placeholder":"Street",
+          <Input ref={streetRef} input={{"type":"text", "placeholder":"Street",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.cityRef} input={{"type":"text", "placeholder":"City",
+          <Input ref={cityRef} input={{"type":"text", "placeholder":"City",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.stateRef} input={{"type":"text", "placeholder":"State",
+          <Input ref={stateRef} input={{"type":"text", "placeholder":"State",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.countryRef} input={{"type":"text", "placeholder":"Country",
+          <Input ref={countryRef} input={{"type":"text", "placeholder":"Country",
             "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.passwordRef} input={{"type":"password", "placeholder":"Password", "className":"form-control rounded input-lg text-center no-border"}}/>
-          <Input ref={props.zipRef} input={{"type":"text", "placeholder":"Zip",
+          <Input ref={passwordRef} input={{"type":"password", "placeholder":"Password", "className":"form-control rounded input-lg text-center no-border"}}/>
+          <Input ref={zipRef} input={{"type":"text", "placeholder":"Zip",
             "className":"form-control rounded input-lg text-center no-border"}}/>          
             <button type="submit" className="btn btn-lg btn-warning lt b-white b-2x
               btn-block btn-rounded">

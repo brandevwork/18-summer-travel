@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SideBar(props)  {
+function SideBar(props) {
 
   return (
     <div>

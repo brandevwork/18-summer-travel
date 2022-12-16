@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Button from '../UI/Button';
+import Button from '../UI/button';
 
 function getAge(dateString) {
     var today = new Date();
@@ -12,12 +12,12 @@ function getAge(dateString) {
     return age;
 }
 
-function ConfirmAge(props)	{
+function ConfirmAge({familyMemberState: {family_member, family_members}, nextClickHandler})	{
 	const nameRef =  useRef([])
 	const yearRef =  useRef([])
 
-	let totalMembers = props.familyMemberState.family_member
-	let totalMembersData = props.familyMemberState.family_members
+	let totalMembers = family_member
+	let totalMembersData = family_members
 	const renderNameAndYear = () => {
 		let content = [];
 		for(let i = 0; i < totalMembers; i++) {
@@ -32,10 +32,10 @@ function ConfirmAge(props)	{
 	}
 	return (
 		<div>
-  		<Button title="Back" buttonClickHandler={() => props.nextClickHandler('pick_age')}/>
+  		<Button title="Back" buttonClickHandler={() => nextClickHandler('pickAge')}/>
   		<p>Are these Dates are correct</p>
   		{renderNameAndYear ()}
-  		<Button title="Next" buttonClickHandler={() => props.nextClickHandler('save_before_signup')}/>
+  		<Button title="Next" buttonClickHandler={() => nextClickHandler('saveBeforeSignup')}/>
   	</div>
 	)
 }

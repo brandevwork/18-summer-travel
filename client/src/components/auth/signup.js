@@ -1,22 +1,22 @@
 import React,{ useState, useRef, useMemo, useReducer, useEffect, useContext } from 'react';
-import Input from '../UI/Input';
+import Input from '../UI/input';
 import { NavLink, useNavigate } from "react-router-dom";
 import useData from "../../hooks/useData";
-import AuthContext from "../../store/auth-context";
-import Modal from "../UI/Modal";
+import AuthContext from "../../store/authContext";
+import Modal from "../UI/modal";
 import signupReducer from "../../reducer/signupReducer";
 import Welcome from './welcome'
-import AskUser from './ask_user'
-import AskUserFirstName from './ask_user_firstname'
-import AskFamily from './ask_family'
-import AfterKid from './after_kid'
-import BeforeAge from './before_age'
-import ConfirmAge from './confirm_age'
-import PickAge from './pick_age'
-import PickKid from './pick_kid'
-import SaveBeforeSignup from './save_before_signup'
+import AskUser from './askUser'
+import AskUserFirstName from './askUserFirstname'
+import AskFamily from './askFamily'
+import AfterKid from './afterKid'
+import BeforeAge from './beforeAge'
+import ConfirmAge from './confirmAge'
+import PickAge from './pickAge'
+import PickKid from './pickKid'
+import SaveBeforeSignup from './saveBeforeSignup'
 import Setup from './setup'
-import SignUpSection from './signup_section'
+import SignUpSection from './signupSection'
 
 let isInitial = true;
 
@@ -126,16 +126,16 @@ function SignUp(props)  {
   return (
   	<div>
     	{renderState === 'welcome' && <Welcome nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'ask_user' && <AskUser nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'ask_user_firstname' && <AskUserFirstName familyMemberState={familyMemberState}  nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'ask_family' && <AskFamily familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'pick_kid' && <PickKid nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'after_kid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
+    	{renderState === 'askUser' && <AskUser nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'askUserFirstname' && <AskUserFirstName familyMemberState={familyMemberState}  nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'askFamily' && <AskFamily familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'pickKid' && <PickKid nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'afterKid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'pick_age' && <PickAge firstnameRef={firstnameRef} nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
-    	{renderState === 'confirm_age' && <ConfirmAge familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'save_before_signup' && <SaveBeforeSignup nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'signup_section' && <SignUpSection 
+    	{renderState === 'pickAge' && <PickAge firstnameRef={firstnameRef} nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
+    	{renderState === 'confirmAge' && <ConfirmAge familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'saveBeforeSignup' && <SaveBeforeSignup nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'signupSection' && <SignUpSection 
     		firstnameRef={firstnameRef} 
     		lastnameRef={lastnameRef}
     		emailRef={emailRef}

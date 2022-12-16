@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useReducer, useContext } from 'react';
-import Input from '../UI/Input';
+import Input from '../UI/input';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import useData from "../../hooks/useData";
-import AuthContext from "../../store/auth-context";
-import Modal from "../UI/Modal";
+import AuthContext from "../../store/authContext";
+import Modal from "../UI/modal";
 import loginReducer from "../../reducer/loginReducer";
 
 let isInitial = true;
 
-function Login(props) {
+function Login() {
 	const ctxAuth = useContext(AuthContext);
 	const emailRef = useRef();
 	const passwordRef = useRef();

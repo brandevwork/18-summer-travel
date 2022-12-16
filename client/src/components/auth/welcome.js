@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../UI/Button';
+import Button from '../UI/button';
 
-function Welcome(props)	{
+function Welcome({nextClickHandler})	{
 
 	return (
 		<div>
@@ -9,7 +9,7 @@ function Welcome(props)	{
   		<p>I am Keekee</p>
   		<p>lorem ipsum lorem ipsum lorem ipsum
   		lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-  		<Button title="Next" buttonClickHandler={() => props.nextClickHandler('ask_user')}/>
+  		<Button title="Next" buttonClickHandler={() => nextClickHandler('askUser')}/>
   	</div>
 	)
 }

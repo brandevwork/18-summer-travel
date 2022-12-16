@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Button from '../UI/Button';
+import Button from '../UI/button';
 
 
-function PickKid(props)	{
+function PickKid({nextClickHandler}) {
 	const [familyMember, setFamilyMemeber] = useState(0)
 	
 	const selectMemberHandler = (e) => {
@@ -11,12 +11,12 @@ function PickKid(props)	{
 
 	const nextHandler = (e) => {
 		if(familyMember !== 0)
-			props.nextClickHandler('after_kid',{"family_member": familyMember})
+			nextClickHandler('afterKid',{"family_member": familyMember})
 	}
 
 	return (
 		<div>
-  	<Button title="Back" buttonClickHandler={() => props.nextClickHandler('ask_family')}/>
+  	<Button title="Back" buttonClickHandler={() => nextClickHandler('askFamily')}/>
   	<p>How Many people Kids/Adults are you travelling with</p>
   		<select onChange={selectMemberHandler}>
   			<option>Pick One</option>
@@ -25,10 +25,6 @@ function PickKid(props)	{
   			<option value="4">4</option>
   			<option value="5">5</option>
   			<option value="6">6</option>
-  			<option value="7">7</option>
-  			<option value="8">8</option>
-  			<option value="9">9</option>
-  			<option value="10">10</option>
   		</select>
   		<Button title="Next" buttonClickHandler={nextHandler}/>
   	</div>

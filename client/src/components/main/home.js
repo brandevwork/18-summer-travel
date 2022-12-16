@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useReducer, useContext } from 'react';
-import Input from '../UI/Input';
+import Input from '../UI/input';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import useData from "../../hooks/useData";
-import AuthContext from "../../store/auth-context";
-import HomeContext from "../../store/home-context";
-import Modal from "../UI/Modal";
+import AuthContext from "../../store/authContext";
+import HomeContext from "../../store/homeContext";
+import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 
-function Home(props)	{
+function Home()	{
 
 	let isInitial = true;
 
@@ -61,15 +61,13 @@ function Home(props)	{
 
 	return (
 		<div>
-			<h1>Home</h1>	
+			<h1>Home</h1>
 			<h3>Here is the status of each person survery results</h3>
-				<NavLink to="/profile">Go to Profile</NavLink>
-				<NavLink to="/profile">Go to Profile</NavLink>
-				<NavLink to="/profile">Go to Profile</NavLink>
-				<NavLink to="/profile">Go to Profile</NavLink>
-				<NavLink to="/profile">Go to Profile</NavLink>
-				<NavLink to="/profile">Go to Profile</NavLink>
-				<NavLink to="/profile">Go to Profile</NavLink>
+			{ctxHome.family_members &&
+				ctxHome.family_members.map(member =>
+					<NavLink to="/survery">{member.name}</NavLink>
+				)
+			}	
 		</div>
 	)
 }

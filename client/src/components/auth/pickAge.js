@@ -1,30 +1,29 @@
 import React,{ useRef, useEffect } from 'react';
-import Button from '../UI/Button';
-import Input from '../UI/Input';
+import Button from '../UI/button';
+import Input from '../UI/input';
 
 function yearValidation(year) {
-
   var text = /^[0-9]+$/;
     if (year != 0) {
-        if ((year != "") && (!text.test(year))) 
-            return {"msg": "Please Enter Numeric Values Only", "res":false}
-        if (year.length != 4)
-            return {"msg": "Year is not proper. Please check", "res":false}
-        var current_year=new Date().getFullYear();
-        if((year < 1920) || (year > current_year))
-            return {"msg": "Year should be in range 1920 to current year", "res":false}
-        return {"res":true,"msg":""};
+      if ((year != "") && (!text.test(year))) 
+          return {"msg": "Please Enter Numeric Values Only", "res":false}
+      if (year.length != 4)
+          return {"msg": "Year is not proper. Please check", "res":false}
+      var current_year=new Date().getFullYear();
+      if((year < 1920) || (year > current_year))
+          return {"msg": "Year should be in range 1920 to current year", "res":false}
+      return {"res":true,"msg":""};
     }
 }
 
-function PickAge(props)	{
+function PickAge({familyMemberState, nextClickHandler})	{
 
 	const nameRef =  useRef([])
 	const yearRef =  useRef([])
 	const yearErrRef = useRef([])
 
 	let memberData={}
-	let totalMembers = props.familyMemberState.family_member
+	let totalMembers = familyMemberState.family_member
 	const renderNameAndYear = () => {
 		let content = [];
 		for(let i = 0; i < totalMembers-1; i++) {
@@ -63,23 +62,23 @@ function PickAge(props)	{
 			memberData[i] = obj
 		}
 		if(!error) 
-			props.nextClickHandler('confirm_age',{"family_members":memberData})
+			nextClickHandler('confirmAge',{"family_members":memberData})
 	}
 
 	useEffect (() => {
-		if(typeof props.familyMemberState.family_members !== 'undefined')
-			for(let i = 0; i < props.familyMemberState.family_member; i++) {
-				nameRef.current[i].value = props.familyMemberState.family_members[i].name
-				yearRef.current[i].value = props.familyMemberState.family_members[i].birth_year
+		if(typeof familyMemberState.family_members !== 'undefined')
+			for(let i = 0; i < familyMemberState.family_member; i++) {
+				nameRef.current[i].value = familyMemberState.family_members[i].name
+				yearRef.current[i].value = familyMemberState.family_members[i].birth_year
 			}
-	},[props.familyMemberState])
+	},[familyMemberState])
 
 	return (
 		<div>
-  		<Button title="Back" buttonClickHandler={() => props.nextClickHandler('before_age')}/>
+  		<Button title="Back" buttonClickHandler={() => nextClickHandler('before_age')}/>
   		<p>Age</p>
   		<div style={{"display":"flex"}}>
-  		<Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [props.familyMemberState.first_name], "placeholder":"Name",
+  		<Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
 			      "className":"form-control rounded input-lg text-center no-border"}}/>
 	    <Input ref={el => yearRef.current[0] = el}  input={{"type":"text", "placeholder":"Year",
 	      "className":"form-control rounded input-lg text-center no-border"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[0] = el}></span>

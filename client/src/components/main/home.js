@@ -49,7 +49,8 @@ function Home(props)	{
 			  headers : { 
 	        'Content-Type': 'application/json',
 	        'Accept': 'application/json',
-	        'jti': `${ctxUser.jti}`
+	        'jti': `${ctxUser.jti}`,
+	        'token': `${ctxUser.token}`
 	      }
 			},
 		  getAuthData);
@@ -62,14 +63,13 @@ function Home(props)	{
 		<div>
 			<h1>Home</h1>	
 			<h3>Here is the status of each person survery results</h3>
-
-			<NavLink to="/profile">Go to Profile</NavLink>
-			<NavLink to="/profile">Go to Profile</NavLink>
-			<NavLink to="/profile">Go to Profile</NavLink>
-			<NavLink to="/profile">Go to Profile</NavLink>
-			<NavLink to="/profile">Go to Profile</NavLink>
-			<NavLink to="/profile">Go to Profile</NavLink>
-			<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
+				<NavLink to="/profile">Go to Profile</NavLink>
 		</div>
 	)
 }

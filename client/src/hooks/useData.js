@@ -7,6 +7,8 @@ function useData()	{
     try {
       let response="";
       response = config !== "" ? await fetch(url,config) : await fetch(url);
+      console.log(response)
+      console.log("response")
       await delay(1000);
       const data = await response.json();
       setLoading(false);

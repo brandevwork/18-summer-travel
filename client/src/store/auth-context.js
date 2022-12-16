@@ -5,6 +5,8 @@ const AuthContext = React.createContext({
 	email:"",
 	name:"",
 	notification:"",
+	jti:"",
+	token:"",
 	login: (obj) => {},
 	logout: () => {},
 	signup: (obj) => {}
@@ -13,15 +15,16 @@ export default AuthContext;
 
 export const AuthContextProvider = (props) => {
 
-	const [authDataState, setauthDataState] = useState({id:"", email:"", name:"", jti:"",notification:""});
+	const [authDataState, setauthDataState] = useState({id:"", email:"", name:"", jti:"",token:"", notification:""});
 	
 	useEffect(() => {
     const localEmail = localStorage.getItem("email");
     const localId = localStorage.getItem("id");
     const localJti = localStorage.getItem("jti");
+    const localToken = localStorage.getItem("token");
     if (localEmail) {
       setauthDataState(prevState => {
-      	return {...prevState, "email": localEmail, "id": localId, "jti": localJti}
+      	return {...prevState, "email": localEmail, "id": localId, "jti": localJti, "token": localToken}
       });
     }
   }, []);
@@ -31,18 +34,21 @@ export const AuthContextProvider = (props) => {
 	    name: authDataState.name,
 	    id: authDataState.id,
 	    jti: authDataState.jti,
+	    token: authDataState.token,
 	    login: (obj) => {
 	      setauthDataState(obj);
 	      localStorage.setItem("id", obj.id);
 	      localStorage.setItem("email", obj.email);
 				localStorage.setItem("name", obj.name);
 				localStorage.setItem("jti", obj.jti);
+				localStorage.setItem("token", obj.token);
 	    },
 	    logout: () => {
 	      setauthDataState({email:"", name:"",notification:"Logged Out"});
 	      localStorage.removeItem("email");
 	      localStorage.removeItem("name");
 	      localStorage.removeItem("jti");
+	      localStorage.removeItem("token");
 	      localStorage.removeItem("id");
 	    },
 	    signup: (obj) => {
@@ -51,6 +57,7 @@ export const AuthContextProvider = (props) => {
 	      localStorage.setItem("email", obj.email);
 				localStorage.setItem("name", obj.name);
 				localStorage.setItem("jti", obj.jti);
+				localStorage.setItem("token", obj.token);
 
 	    }
 	}

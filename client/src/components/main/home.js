@@ -21,8 +21,6 @@ function Home()	{
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   
   const getAuthData = async(data) => {
-  	console.log(data)
-  	console.log("data")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -58,15 +56,15 @@ function Home()	{
       }
     }
   }, [homeState, sendData])
-
+	console.log(ctxHome)
 	return (
 		<div>
 			<h1>Home</h1>
 			<h3>Here is the status of each person survery results</h3>
-			{ctxHome.family &&
+			{ctxHome.family.length > 0 &&
 				ctxHome.family.map(member =>
 					<>
-						<NavLink to="/survery">{member.name}</NavLink><br/>
+						<NavLink to={`/survery/${member.id}`}>{member.name}</NavLink><br/>
 					</>
 				)
 			}	

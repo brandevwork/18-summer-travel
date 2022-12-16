@@ -37,7 +37,7 @@ class  Api::V1::FamilyMembersController < BaseController
   def show
     if @family_member.is_active? && !@family_member.completed?
       questions = Survey.first.questions
-      questions = (@family_member.age < 14) ? questions.limit(4) : questions
+      questions = @family_member.age < 14 ? questions.limit(4) : questions
       if @family_member.response_choices.present?
         questions = questions.offset(@family_member.response_choices.last.question_id)
         questions = questions.limit(4 - @family_member.response_choices.select(:question_id).distinct.count) if @family_member.age < 14

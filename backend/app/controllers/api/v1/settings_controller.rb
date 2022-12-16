@@ -16,7 +16,7 @@ class Api::V1::SettingsController < BaseController
   end
 
   def family
-    render json: current_family, serializer: FamiliesController::FamilySerializer, meta: { status: :ok, code: 200, success: true }
+    render json: current_family, serializer: FamiliesController::FamilySerializer, meta: { status: :ok, success: true }
   end
 
   def reset_family_survey
@@ -28,7 +28,7 @@ class Api::V1::SettingsController < BaseController
       end
       render json: { message: "Survey has been reset successfully", status: :ok, success: true }
     else
-      render json: { message: "Unable to reset survey", status: 204, success: false }
+      render json: { message: "Unable to reset survey", status: 400, success: false }
     end
   end
 

@@ -7,11 +7,13 @@ class ResponseChoice < ApplicationRecord
   private
 
   def family_member_status
-    family_member.update(survey_status: 1) if family_member.response_choices.count < 2
+    response_choices = family_member.response_choices
+    question_count = Question.all.size
+    family_member.update(survey_status: 1) if response_choices.count < 2
     if family_member.age < 14
-      family_member.update(survey_status: 2) if family_member.response_choices.select(:question_id).distinct.count == Question.count - 12
+      family_member.update(survey_status: 2) if response_choices.select(:question_id).distinct.count == question_count - 12
     else
-      family_member.update(survey_status: 2) if family_member.response_choices.select(:question_id).distinct.count == Question.count
+      family_member.update(survey_status: 2) if response_choices.select(:question_id).distinct.count == question_count
     end
   end
 end

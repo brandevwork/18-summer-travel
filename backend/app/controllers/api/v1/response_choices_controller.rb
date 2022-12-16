@@ -16,11 +16,10 @@ class  Api::V1::ResponseChoicesController < BaseController
 
   def create
     if params["family_member_id"].present? and params["question_id"].present?
-      if params["choice_ids"].nil?
+      if params["choice_ids"].empty?
         ResponseChoice.find_or_create_by(family_member_id: params["family_member_id"], question_id: params["question_id"])
       else
         params["choice_ids"].each do |key, val|
-          byebug
           ResponseChoice.find_or_create_by(family_member_id: params["family_member_id"], choice_id: val, question_id: params["question_id"])
         end
       end

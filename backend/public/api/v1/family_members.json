@@ -1,0 +1,114 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "family_members",
+  "apis": [
+    {
+      "path": "/api/v1/family_members",
+      "operations": [
+        {
+          "summary": "Fetches all family members of a family",
+          "notes": "These are the family members against a family",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "The request you made is not acceptable"
+            }
+          ],
+          "nickname": "Api::V1::FamilyMembers#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/family_members/{id}",
+      "operations": [
+        {
+          "summary": "Fetches a single family member and its survey",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": "Survey",
+              "message": "Success"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "FamilyMember Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::FamilyMembers#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/family_members/{id}",
+      "operations": [
+        {
+          "summary": "Updates the is_active status of given id family member",
+          "responseMessages": [
+            {
+              "code": 200,
+              "responseModel": "Survey",
+              "message": "Success"
+            },
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 404,
+              "responseModel": null,
+              "message": "Not Found"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "Not Acceptable"
+            }
+          ],
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "FamilyMember Id",
+              "required": true
+            }
+          ],
+          "nickname": "Api::V1::FamilyMembers#update",
+          "method": "patch"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

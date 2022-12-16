@@ -21,6 +21,8 @@ function Home()	{
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   
   const getAuthData = async(data) => {
+  	console.log(data)
+  	console.log("data")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -28,11 +30,11 @@ function Home()	{
   	if (!data.data) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
-  	if (data.status.code == "400") {
+  	if (data.status == "400") {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
-  	if(data.status.code == "200"){
-  		await ctxHome.getAllFamilyMembers(data.data,data.status.message);
+  	if(data.status == "ok"){
+  		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
     	// navigateHandler('/');
   	}
   }
@@ -44,14 +46,12 @@ function Home()	{
     }
     if(!isInitial) {
       if (ctxUser.id !== '') {
-      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${ctxUser.id}`, {
+      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
 	      method: 'GET',
-			  headers : { 
-	        'Content-Type': 'application/json',
-	        'Accept': 'application/json',
-	        'jti': `${ctxUser.jti}`,
-	        'token': `${ctxUser.token}`
-	      }
+			  headers: {
+			    "Content-Type": "application/json",
+			    Authorization: localStorage.getItem("token"),
+			  },
 			},
 		  getAuthData);
       	// navigateHandler('/main');
@@ -63,9 +63,11 @@ function Home()	{
 		<div>
 			<h1>Home</h1>
 			<h3>Here is the status of each person survery results</h3>
-			{ctxHome.family_members &&
-				ctxHome.family_members.map(member =>
-					<NavLink to="/survery">{member.name}</NavLink>
+			{ctxHome.family &&
+				ctxHome.family.map(member =>
+					<>
+						<NavLink to="/survery">{member.name}</NavLink><br/>
+					</>
 				)
 			}	
 		</div>

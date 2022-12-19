@@ -1,5 +1,5 @@
 class ResponseChoice < ApplicationRecord
-  belongs_to :choices, optional: true
+  belongs_to :choice, optional: true
   belongs_to :family_member
 
   after_create :family_member_status

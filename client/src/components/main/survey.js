@@ -1,16 +1,18 @@
 import React, { useRef, useEffect, useReducer, useContext } from 'react';
 import Input from '../UI/input';
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation, useParams } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
 import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 
-function Home()	{
-
+function Survey()	{
 	let isInitial = true;
 
+	const { id } = useParams();
+	console.log(id)
+	console.log("id")
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
@@ -21,6 +23,8 @@ function Home()	{
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   
   const getAuthData = async(data) => {
+  	console.log(data)
+  	console.log("data")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -31,8 +35,8 @@ function Home()	{
   	if (data.status == "400") {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
-  	if(data.status == "ok"){
-  		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
+  	if(data.length > 0){
+  		await ctxHome.getSurveyByMember(data);
     	// navigateHandler('/');
   	}
   }
@@ -44,7 +48,7 @@ function Home()	{
     }
     if(!isInitial) {
       if (ctxUser.id !== '') {
-      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
 			  headers: {
 			    "Content-Type": "application/json",
@@ -56,15 +60,14 @@ function Home()	{
       }
     }
   }, [homeState, sendData])
-	console.log(ctxHome)
+
 	return (
 		<div>
-			<h1>Home</h1>
-			<h3>Here is the status of each person survery results</h3>
-			{ctxHome.family.length > 0 &&
-				ctxHome.family.map(member =>
+			<h1>Survey</h1>
+			{ctxHome.survey.length > 0 &&
+				ctxHome.survey.map(sur =>
 					<>
-						<NavLink to={`/survery/${member.id}`}>{member.name}</NavLink><br/>
+						<p>{sur.question_text}</p><br/>
 					</>
 				)
 			}	
@@ -72,4 +75,4 @@ function Home()	{
 	)
 }
 
-export default Home;
+export default Survey;

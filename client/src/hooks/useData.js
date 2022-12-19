@@ -10,7 +10,7 @@ function useData()	{
       await delay(1000);
       const data = await response.json();
       setLoading(false);
-      applyData(data);
+      applyData(data,response.headers);
     } catch (error) {
       setLoading(false);
       applyData({"error":error.message});

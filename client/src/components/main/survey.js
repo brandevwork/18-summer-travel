@@ -15,7 +15,8 @@ function Survey()	{
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
-	const [questionPointer, setQuestionPointer] = useState(0);
+
+	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 0, "choice_ids":{}});
 
 	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
@@ -23,8 +24,6 @@ function Survey()	{
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   
   const getAuthData = async(data) => {
-  	console.log(data)
-  	console.log("data")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -40,6 +39,28 @@ function Survey()	{
     	// navigateHandler('/');
   	}
   }
+
+  const questionSaved = async(data) => {
+  	if (data.error) {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+  		return;
+  	}
+  	if (!data.data) {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  	}
+  	if (data.status == "400") {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  	}
+  	if(data.status == "200"){
+  		// await ctxHome.saveSurvey(questionData);
+    	// navigateHandler('/');
+  	}
+  }
+
+  useEffect(()=>{
+  	if(questionData.choice_ids.length > 0)
+  		ctxHome.saveSurvey(questionData);
+  },[questionData])
 
 	useEffect(() => {
     if (isInitial) {
@@ -61,23 +82,27 @@ function Survey()	{
     }
   }, [homeState, sendData])
 
-  const submitHandler = (question_id) => {
-  	setQuestionPointer(question_id)
+  const submitHandler = async(family_id, question_id, choices) => {
+  	console.log(question_id)
+  	console.log(choices)
+  	console.log("question_id")
+  	await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
+  	// await ctxHome.saveSurvey(questionData);
 		// sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
 	  //   method: 'POST',
-	  //   body: JSON.stringify({"family_member_id": id, "question_id": question_id, "choice_ids": ["1","2"]}),
+	  //   body: JSON.stringify({"family_member_id": family_id, "question_id": question_id, "choice_ids": choices}),
 		//   headers: {
 		//     "Content-Type": "application/json",
 		//     Authorization: localStorage.getItem("token"),
 		//   },
-		// }, getAuthData);
+		// }, questionSaved);
   }
 
 	return (
 		<div>
 			<h1>Survey</h1>
 			{ctxHome.survey.length > 0 &&
-				ctxHome.survey.slice(questionPointer,questionPointer+1).map(question =>
+				ctxHome.survey.slice(questionData.question_id,questionData.question_id+1).map(question =>
 					<Question question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 				)
 			}	

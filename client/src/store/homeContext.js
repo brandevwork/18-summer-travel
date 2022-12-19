@@ -6,6 +6,7 @@ const HomeContext = React.createContext({
 	notification:"",
 	getAllFamilyMembers: (obj) => {},
 	getSurveyByMember: (obj) => {},
+	saveSurvey: (obj) => {},
 });
 export default HomeContext;
 
@@ -26,6 +27,20 @@ export const HomeContextProvider = (props) => {
 	    getSurveyByMember: (obj) => {
 	    	setFamilyDataState(prevState => {
 	      	return {...prevState, survey: obj}
+	      });
+	    },
+	    saveSurvey: (obj) => {
+	    	let sur = familyDataState.survey
+	    	let objIndex = sur.findIndex((objArr => objArr.id == obj.question_id));
+	    	sur[objIndex].choices.map(function(sur_ch,i){
+	    		if(obj.choice_ids.includes(sur_ch.id.toString())) {
+	    			sur_ch.answer = true
+	    		}
+	    		return sur_ch
+	    	})
+	    	
+	    	setFamilyDataState(prevState => {
+	      	return {...prevState, survey: sur}
 	      });
 	    }
    

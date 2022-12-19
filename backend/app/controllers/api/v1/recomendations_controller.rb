@@ -23,9 +23,9 @@ class  Api::V1::RecomendationsController < BaseController
         record = Choice.find_by(id: choice_id)
         choices << record
       end
-      render json: { data: choices, message: "I am going to show you recomendations", status: 204}
+      render json: { data: choices, success: true, status: 200}
     else
-      render json: { message: "Survey is not completed by the whole famliy", status: 204}
+      render json: { message: "Survey is not completed by the whole famliy", success: false, status: 204}
     end
   end
 end

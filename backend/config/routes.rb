@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :response_choices, only: [:create]
       get 'settings/family', to: 'settings#family'
       delete 'settings/reset_survey', to: 'settings#reset_family_survey'
+      get 'recomendation/', to: 'recomendations#recomendation'
     end
   end
 

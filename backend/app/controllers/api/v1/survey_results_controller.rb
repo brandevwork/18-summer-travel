@@ -2,7 +2,6 @@ class  Api::V1::SurveyResultsController < BaseController
   include Api::V1::FamilyMemberController
 
   def result
-    categories = Category.all
     family_members = current_family.family_members.where("age > ?", 4)
     if family_members.completed.length == family_members.count
       render json: family_members, each_serializer: FamilyMemberSerializer, meta: { status: :ok, code: 200, success: true }

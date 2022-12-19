@@ -7,7 +7,7 @@ class  Api::V1::SurveyResultsController < BaseController
     if family_members.completed.length == family_members.count
       render json: family_members, each_serializer: FamilyMemberSerializer, meta: { status: :ok, code: 200, success: true }
     else
-      render json: { message: "Survey is not completed by the whole famliy", status: 204}
+      render json: { message: "Survey is not completed by the whole famliy", status: 204, success: false}
     end
   end
   

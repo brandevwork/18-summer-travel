@@ -2,9 +2,7 @@ import React from 'react';
 
 const Button = ({buttonClickHandler, title}) => {
 	return (
-		<div className="form-group">
-			<button onClick={buttonClickHandler}>{title}</button>
-		</div>
+			<button className="btn btn-primary" onClick={buttonClickHandler}>{title}</button>
 	)
 }
 

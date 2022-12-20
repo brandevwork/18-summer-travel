@@ -1,0 +1,208 @@
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-Bold.eot');
+    src: url('NeutraText-Bold.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-Bold.woff2') format('woff2'),
+        url('NeutraText-Bold.woff') format('woff'),
+        url('NeutraText-Bold.ttf') format('truetype'),
+        url('NeutraText-Bold.svg#NeutraText-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Alt';
+    src: url('NeutraText-BoldAlt.eot');
+    src: url('NeutraText-BoldAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-BoldAlt.woff2') format('woff2'),
+        url('NeutraText-BoldAlt.woff') format('woff'),
+        url('NeutraText-BoldAlt.ttf') format('truetype'),
+        url('NeutraText-BoldAlt.svg#NeutraText-BoldAlt') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-BoldItalic.eot');
+    src: url('NeutraText-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-BoldItalic.woff2') format('woff2'),
+        url('NeutraText-BoldItalic.woff') format('woff'),
+        url('NeutraText-BoldItalic.ttf') format('truetype'),
+        url('NeutraText-BoldItalic.svg#NeutraText-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-Demi.eot');
+    src: url('NeutraText-Demi.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-Demi.woff2') format('woff2'),
+        url('NeutraText-Demi.woff') format('woff'),
+        url('NeutraText-Demi.ttf') format('truetype'),
+        url('NeutraText-Demi.svg#NeutraText-Demi') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Light Alt';
+    src: url('NeutraText-DemiItalicAlt.eot');
+    src: url('NeutraText-DemiItalicAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-DemiItalicAlt.woff2') format('woff2'),
+        url('NeutraText-DemiItalicAlt.woff') format('woff'),
+        url('NeutraText-DemiItalicAlt.ttf') format('truetype'),
+        url('NeutraText-DemiItalicAlt.svg#NeutraText-DemiItalicAlt') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-DemiItalic.eot');
+    src: url('NeutraText-DemiItalic.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-DemiItalic.woff2') format('woff2'),
+        url('NeutraText-DemiItalic.woff') format('woff'),
+        url('NeutraText-DemiItalic.ttf') format('truetype'),
+        url('NeutraText-DemiItalic.svg#NeutraText-DemiItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Alt';
+    src: url('NeutraText-BookAlt.eot');
+    src: url('NeutraText-BookAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-BookAlt.woff2') format('woff2'),
+        url('NeutraText-BookAlt.woff') format('woff'),
+        url('NeutraText-BookAlt.ttf') format('truetype'),
+        url('NeutraText-BookAlt.svg#NeutraText-BookAlt') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-BookItalic.eot');
+    src: url('NeutraText-BookItalic.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-BookItalic.woff2') format('woff2'),
+        url('NeutraText-BookItalic.woff') format('woff'),
+        url('NeutraText-BookItalic.ttf') format('truetype'),
+        url('NeutraText-BookItalic.svg#NeutraText-BookItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Light Alt';
+    src: url('NeutraText-DemiAlt.eot');
+    src: url('NeutraText-DemiAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-DemiAlt.woff2') format('woff2'),
+        url('NeutraText-DemiAlt.woff') format('woff'),
+        url('NeutraText-DemiAlt.ttf') format('truetype'),
+        url('NeutraText-DemiAlt.svg#NeutraText-DemiAlt') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-Light.eot');
+    src: url('NeutraText-Light.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-Light.woff2') format('woff2'),
+        url('NeutraText-Light.woff') format('woff'),
+        url('NeutraText-Light.ttf') format('truetype'),
+        url('NeutraText-Light.svg#NeutraText-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Alt';
+    src: url('NeutraText-BoldItalicAlt.eot');
+    src: url('NeutraText-BoldItalicAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-BoldItalicAlt.woff2') format('woff2'),
+        url('NeutraText-BoldItalicAlt.woff') format('woff'),
+        url('NeutraText-BoldItalicAlt.ttf') format('truetype'),
+        url('NeutraText-BoldItalicAlt.svg#NeutraText-BoldItalicAlt') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Alt';
+    src: url('NeutraText-BookItalicAlt.eot');
+    src: url('NeutraText-BookItalicAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-BookItalicAlt.woff2') format('woff2'),
+        url('NeutraText-BookItalicAlt.woff') format('woff'),
+        url('NeutraText-BookItalicAlt.ttf') format('truetype'),
+        url('NeutraText-BookItalicAlt.svg#NeutraText-BookItalicAlt') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-Book.eot');
+    src: url('NeutraText-Book.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-Book.woff2') format('woff2'),
+        url('NeutraText-Book.woff') format('woff'),
+        url('NeutraText-Book.ttf') format('truetype'),
+        url('NeutraText-Book.svg#NeutraText-Book') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Light Alt';
+    src: url('NeutraText-LightItalicAlt.eot');
+    src: url('NeutraText-LightItalicAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-LightItalicAlt.woff2') format('woff2'),
+        url('NeutraText-LightItalicAlt.woff') format('woff'),
+        url('NeutraText-LightItalicAlt.ttf') format('truetype'),
+        url('NeutraText-LightItalicAlt.svg#NeutraText-LightItalicAlt') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text';
+    src: url('NeutraText-LightItalic.eot');
+    src: url('NeutraText-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-LightItalic.woff2') format('woff2'),
+        url('NeutraText-LightItalic.woff') format('woff'),
+        url('NeutraText-LightItalic.ttf') format('truetype'),
+        url('NeutraText-LightItalic.svg#NeutraText-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neutra Text Light Alt';
+    src: url('NeutraText-LightAlt.eot');
+    src: url('NeutraText-LightAlt.eot?#iefix') format('embedded-opentype'),
+        url('NeutraText-LightAlt.woff2') format('woff2'),
+        url('NeutraText-LightAlt.woff') format('woff'),
+        url('NeutraText-LightAlt.ttf') format('truetype'),
+        url('NeutraText-LightAlt.svg#NeutraText-LightAlt') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

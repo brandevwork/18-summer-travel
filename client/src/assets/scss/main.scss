@@ -140,7 +140,7 @@ a {
 
 h2 {
   color: $black;
-  font-size: "clamp(1.625rem, 1.1806rem + 0.9259vw, 1.875rem)";
+  font-size: #{"clamp(1.625rem, 1.1806rem + 0.9259vw, 1.875rem)"};
   line-height: 40px;
 }
 
@@ -159,15 +159,15 @@ h3 {
 }
 
 .font-30 {
-  font-size: "clamp(1.625rem, 1.1806rem + 0.9259vw, 1.875rem)";
+  font-size: #{"clamp(1.625rem, 1.1806rem + 0.9259vw, 1.875rem)"};
 }
 
 .font-23 {
-  font-size: "clamp(1.125rem, 0.5694rem + 1.1574vw, 1.4375rem)";
+  font-size: #{"clamp(1.125rem, 0.5694rem + 1.1574vw, 1.4375rem)"};
 }
 
 .font-24 {
-  font-size: "clamp(1.25rem, 0.8056rem + 0.9259vw, 1.5rem)";
+  font-size: #{"clamp(1.25rem, 0.8056rem + 0.9259vw, 1.5rem)"};
 }
 
 .font-17 {
@@ -207,7 +207,7 @@ h3 {
 .main-wrapper {
   background: url("../images/map-bg.png") no-repeat center top;
   background-size: cover;
-  max-width: 100%;
+  max-width: 1133px;
   margin: 0 auto;
   height: 100%;
   &-finished {
@@ -238,7 +238,7 @@ h3 {
   background: rgba(251, 233, 181, 0.8);
   border-radius: 0 10px 10px 0px;
   position: relative;
-  font-size: "clamp(2.5rem, 1.7431rem + 3.7844vw, 4.5625rem)";
+  font-size: #{"clamp(2.5rem, 1.7431rem + 3.7844vw, 4.5625rem)"};
   min-height: 115px;
   float: left;
   padding-right: 40px;
@@ -266,7 +266,7 @@ h3 {
     }
     span {
 
-      font-size: "clamp(1.125rem, 0.9874rem + 0.6881vw, 1.5rem)";
+      font-size: #{"clamp(1.125rem, 0.9874rem + 0.6881vw, 1.5rem)"};
       line-height: normal;
       position: absolute;
       -webkit-transform: rotate(10deg);
@@ -775,7 +775,7 @@ input {
 }
 
 .country {
-  font-size: "clamp(1.25rem, 0.8056rem + 0.9259vw, 1.5rem)";
+  font-size: #{"clamp(1.25rem, 0.8056rem + 0.9259vw, 1.5rem)"};
   color: white;
   padding: 0 15px;
   height: 42px;
@@ -951,7 +951,7 @@ input {
         padding-inline: 30px;
         .top-section {
           h2 {
-            font-size: "clamp(2.125rem, 0.7917rem + 2.7778vw, 2.875rem)";
+            font-size: #{"clamp(2.125rem, 0.7917rem + 2.7778vw, 2.875rem)"};
             color: $red;
             font-family: 'Elroy';
           }

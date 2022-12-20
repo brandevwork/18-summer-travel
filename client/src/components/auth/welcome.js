@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../UI/button';
+import Back from '../UI/back';
 
 function Welcome({nextClickHandler})	{
 
@@ -7,12 +8,7 @@ function Welcome({nextClickHandler})	{
 		<div className="main-wrapper">
 	    <div className="welcome-screens">
 	      <div className="back-page p-4">
-	        <a href="./index.html">
-	          <div className="d-flex align-items-center">
-	            <div><img src={require('../../assets/images/back-arrow.svg').default} className="img-fluid me-1" alt="" /></div>
-	            <div className="back-text">Back</div>
-	          </div>
-	        </a>
+	        <Back title="Back" />
 	      </div>
 	  
 	      <div className="d-flex">
@@ -29,7 +25,7 @@ function Welcome({nextClickHandler})	{
 	              Together we will figure out the best destinations for your family vacations based on what you like to do and the ages of your children.
 	            </h2>
 	            <div className="mt-4">
-	            	<Button title="Next" buttonClickHandler={() => nextClickHandler('askUser')}/>
+	            	<Button classes="btn btn-primary" title="Next" buttonClickHandler={() => nextClickHandler('askUser')}/>
 	            </div>
 	          </div>
 	          <div>

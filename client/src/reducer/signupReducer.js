@@ -9,7 +9,7 @@ const signupReducer = (state, action) => {
         lastname: action.lastname,
         email: action.email,
         password: action.password,
-        street: action.street,
+        // street: action.street,
         address: action.address,
         city: action.city,
         state: action.state,
@@ -38,9 +38,9 @@ const signupReducer = (state, action) => {
     if (action.address.trim() === "") {
       errors.push("Address cannot be empty");
     }
-    if (action.street.trim() === "") {
-      errors.push("Street cannot be empty");
-    }
+    // if (action.street.trim() === "") {
+    //   errors.push("Street cannot be empty");
+    // }
     if (action.city.trim() === "") {
       errors.push("City cannot be empty");
     }
@@ -60,7 +60,7 @@ const signupReducer = (state, action) => {
         email: action.email,
         password: action.password,
         address: action.address,
-        street: action.street,
+        // street: action.street,
         city: action.city,
         state: action.state,
         country: action.country,
@@ -76,7 +76,7 @@ const signupReducer = (state, action) => {
         email: action.email,
         password: action.password,
         address: action.address,
-        street: action.street,
+        // street: action.street,
         city: action.city,
         state: action.state,
         country: action.country,
@@ -93,7 +93,7 @@ const signupReducer = (state, action) => {
       email: "",
       password: "",
       address: "",
-      street: "",
+      // street: "",
       city: "",
       state: "",
       country: "",

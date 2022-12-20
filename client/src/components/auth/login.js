@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useReducer, useContext } from 'react';
 import Input from '../UI/input';
+import Button from '../UI/button';
+import Back from '../UI/back';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
@@ -69,45 +71,68 @@ function Login() {
 
 
 	return (
-		<section id="content" className="bg-info dker wrapper-md animated fadeInUp" style={{"height":"100vh"}}>    
-	    {authLoading && <Modal>Please Wait ...</Modal>}
-	    <div className="container aside-xl">
-	      <section className="m-b-lg">
-	        <header className="wrapper text-center">
-	          <strong>
-	          	Sign in
-	          </strong>
-	        </header>
-	        <form onSubmit={submitHandler}>
-		        {authState.error && 
-	            <ul className="text-danger list-group">
-	              {authState.errorMessage.map((eachMessage, index) => (
-	                <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
-	                ))}
-	            </ul>
-	          }
-	        	<Input ref={emailRef} input={{"type":"email", "placeholder":"Email", 
-	        		"className":"form-control rounded input-lg text-center no-border"}}/>
-	        	<Input ref={passwordRef} input={{"type":"password", "placeholder":"Password",
-	        		 "className":"form-control rounded input-lg text-center no-border"}}/>
-	          <button type="submit" 
-	          	className="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded">
-	          	<i className="icon-arrow-right pull-right"></i><span className="m-r-n-lg">Sign in</span>
-          	</button>
-	          <div className="text-center m-t m-b">
-	          	<NavLink to="/forgot">
-	          		<small>Forgot password?</small>
-	          	</NavLink>
-          	</div>
-	          <div className="line line-dashed"></div>
-	          <p className="text-muted text-center"><small>Do not have an account?</small></p>
-	          <NavLink className="btn btn-lg btn-info btn-block rounded" to="/signup">
-	          	Create an account
-          	</NavLink>
-	        </form>
-	      </section>
+		<div className="main-wrapper">
+	    <div className="welcome-screens">
+	      <div className="back-page">
+	        <Back title="Back"/>
+	      </div>
+	      {authLoading && <Modal>Please Wait ...</Modal>}
+	      <form onSubmit={submitHandler}>
+	        {authState.error && 
+            <ul className="text-danger list-group">
+              {authState.errorMessage.map((eachMessage, index) => (
+                <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+                ))}
+            </ul>
+          }
+		      <div className="center-content mx-auto welcome-intro">
+		        <div className="content-grid">
+		          <div className="d-flex justify-content-center flex-column">
+		            <h2 className="m-0 primary-clr">Welcome Back!</h2>
+		            <h2>
+		              Please login to return to your family survey.
+		            </h2>
+		            <div className="login-wrapper d-flex flex-column mt-2">
+		              <div className="cross-field mb-3">
+		                <Input ref={emailRef} input={{"type":"email", "placeholder":"Email Address", 
+	        						"className":"form-control"}}/>
+		                <div className="cross-icon"></div>
+		              </div>
+		              <div className="cross-field mb-5">
+		                <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password",
+	        		 				"className":"form-control"}}/>
+		                <div className="cross-icon"></div>
+		              </div>
+		            </div>
+		            <div>
+		            <Button classes="btn btn-primary" title="Go to Survey Home" type="submit"/>
+		            </div>
+		          </div>
+		          <div>
+		            <img src={require('../../assets/images/login-cat.svg').default} className="img-fluid" alt="" />
+		          </div>
+		        </div>
+		      </div>
+	      </form>
+
+	      <div className="footer-links mt-5 px-3">
+	        <div className="d-flex align-items-center">
+	          <a href="./index.html" className="d-flex align-items-center me-4">
+	            <div className="d-flex">
+	              <img src={require('../../assets/images/home-icon.svg').default} className="img-fluid me-1" alt="" />
+	            </div>
+	            Home
+	          </a>
+	          <a href="" className="d-flex align-items-center">
+	            <div className="d-flex">
+	              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />
+	            </div>
+	            Instructions
+	          </a>
+	        </div>
+	      </div>
 	    </div>
-	  </section>
+	  </div>
 	)
 }
 

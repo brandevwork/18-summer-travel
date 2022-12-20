@@ -31,7 +31,7 @@ function SignUp(props)  {
   const emailRef = useRef();
   const passwordRef = useRef();
   const addressRef = useRef();
-  const streetRef = useRef();
+  // const streetRef = useRef();
   const cityRef = useRef();
   const stateRef = useRef();
   const countryRef = useRef();
@@ -39,7 +39,7 @@ function SignUp(props)  {
 
   const ctxAuth = useContext(AuthContext);
   
-  const initialAuthState = {name: "", email: "", password:"", address:"", street:"", city:"", state:"", country:"", zip:"", error: false, errorMessage: [""]};
+  const initialAuthState = {name: "", email: "", password:"", address:"", city:"", state:"", country:"", zip:"", error: false, errorMessage: [""]};
   const [authState, dispatch] = useReducer(signupReducer, initialAuthState);
 
   const {fetchDataHandler: sendData, loading: authLoading} = useData();
@@ -53,13 +53,12 @@ function SignUp(props)  {
     await dispatch({type:"SUBMIT", firstname: firstnameRef.current.value, lastname: lastnameRef.current.value, 
     	email: emailRef.current.value, 
     	password: passwordRef.current.value, 
-    	address: addressRef.current.value, 
-      street: streetRef.current.value, 
+    	address: addressRef.current.value,
     	city: cityRef.current.value, state: stateRef.current.value, 
     	country: countryRef.current.value, zip: zipRef.current.value});
   }
 
-  const getAuthData = async(data) => {
+  const getAuthData = async(data, headers) => {
     if (data.error) {
       dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
       return;
@@ -77,9 +76,10 @@ function SignUp(props)  {
       await localStorage.setItem("id", data.data.id);
       await localStorage.setItem("email", emailRef.current.value);
       await localStorage.setItem("name", firstnameRef.current.value+""+lastnameRef.current.value);
+      await localStorage.setItem("token", headers.get('Authorization'));
       nextClickHandler("setup",{
         "family":{id: data.data.id,"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
-          "email":emailRef.current.value,"notification":data.status.message}
+          "email":emailRef.current.value, "token":headers.get('Authorization'),"notification":data.status.message}
       })
 
     } else {
@@ -100,7 +100,7 @@ function SignUp(props)  {
         body: JSON.stringify({"family":{
         	"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
         	"email":emailRef.current.value, "password":passwordRef.current.value, "password_confirmation":passwordRef.current.value,
-        	"address":addressRef.current.value,"street":streetRef.current.value, "city":cityRef.current.value, "state":stateRef.current.value,
+        	"address":addressRef.current.value, "city":cityRef.current.value, "state":stateRef.current.value,
         	"country":countryRef.current.value, "zip":zipRef.current.value, "number_of_family_member": parseInt(familyMemberState.family_member),"family_members_attributes":familyMemberState.family_members
        	}}),
         headers: {
@@ -131,17 +131,16 @@ function SignUp(props)  {
     	{renderState === 'askFamily' && <AskFamily familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'pickKid' && <PickKid nextClickHandler={nextClickHandler}/>}
     	{renderState === 'afterKid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
-    	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'pickAge' && <PickAge firstnameRef={firstnameRef} nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'confirmAge' && <ConfirmAge familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
-    	{renderState === 'saveBeforeSignup' && <SaveBeforeSignup nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'saveBeforeSignup' && <SaveBeforeSignup familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'signupSection' && <SignUpSection 
     		firstnameRef={firstnameRef} 
     		lastnameRef={lastnameRef}
     		emailRef={emailRef}
     		passwordRef={passwordRef}
     		addressRef={addressRef}
-        streetRef={streetRef}
     		cityRef={cityRef}
     		stateRef={stateRef}
     		countryRef={countryRef}

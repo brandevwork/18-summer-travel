@@ -1,6 +1,15 @@
 import React from 'react';
+import Button from './UI/button';
+import {useNavigate } from "react-router-dom";
 
 function Intro() {
+
+  const navigate = useNavigate();
+  const buttonHandler = (param) => {
+    navigate(param)
+  }
+  
+
 	return (
     <div className="main-wrapper">
       <div className="welcome-screens">
@@ -37,7 +46,7 @@ function Intro() {
           <div className="right-buttons mb-3 ms-md-0 ms-lg-5 d-flex align-items-center">
             <div className="d-flex flex-column align-items-center">
               <div>
-                <a name="" id="" className="btn btn-primary mb-3" href="./welcome_intro_1.html" role="button">Start The Survey</a>
+                <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('signup')}}/>
               </div>
               <div>
                 <a name="" id="" className="btn btn-primary mb-3" href="#" role="button">Finish Your Survey</a>

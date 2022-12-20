@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useContext } from  'react';
 import Card from './components/UI/card';
 import Login from './components/auth/login';
+import Intro from './components/intro';
 import SignUp from './components/auth/signup';
 import Home from './components/main/home';
 import Profile from './components/main/profile';
@@ -25,11 +26,12 @@ function App() {
   return (
     <HomeContextProvider>
       <Routes>
-        <Route path='/' element={ctxUser.email === '' ? <Login/> : <Card headerClasses="bg-white-only" className="custom"><Home/></Card>} />
+        <Route path='/' element={ctxUser.email === '' ? <Intro/> : <Card headerClasses="bg-white-only" className="custom"><Intro/></Card>} />
         { ctxUser.email === '' && 
           <Fragment>
             <Route path='/signup' element={<SignUp/>} />
-            <Route path='*' element={<Login/>} />
+            <Route path='/login' element={<Login/>} />
+            <Route path='*' element={<Intro/>} />
           </Fragment>
         }
         { ctxUser.email !== '' && authRoutes }

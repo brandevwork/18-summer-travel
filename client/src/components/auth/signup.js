@@ -131,7 +131,7 @@ function SignUp(props)  {
     	{renderState === 'askFamily' && <AskFamily familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'pickKid' && <PickKid nextClickHandler={nextClickHandler}/>}
     	{renderState === 'afterKid' && <AfterKid nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
-    	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler}/>}
+    	{renderState === 'before_age' && <BeforeAge nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'pickAge' && <PickAge firstnameRef={firstnameRef} nextClickHandler={nextClickHandler} familyMemberState={familyMemberState}/>}
     	{renderState === 'confirmAge' && <ConfirmAge familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     	{renderState === 'saveBeforeSignup' && <SaveBeforeSignup nextClickHandler={nextClickHandler}/>}

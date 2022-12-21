@@ -100,7 +100,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 							</div>
 						</div>
 						<div className="activity-img">
-							<img src={require('../../assets/images/activity_1.png').default} className="img-fluid" alt="" />
+							<img src={require('../../assets/images/activity_1.png')} className="img-fluid" alt="" />
 						</div>
 					</div>
 				</div>

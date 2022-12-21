@@ -75,8 +75,6 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 		ctxHome.finishSurvey()
 		navigate("/home")
 	}
-	
-	
 
 	return (
 

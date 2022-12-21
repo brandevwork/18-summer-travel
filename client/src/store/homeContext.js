@@ -7,6 +7,7 @@ const HomeContext = React.createContext({
 	getAllFamilyMembers: (obj) => {},
 	getSurveyByMember: (obj) => {},
 	saveSurvey: (obj) => {},
+	finishSurvey: (obj) => {},
 });
 export default HomeContext;
 
@@ -25,6 +26,21 @@ export const HomeContextProvider = (props) => {
 	      // setFamilyDataState({family:obj, notification})
 	    },
 	    getSurveyByMember: (obj) => {
+	 			// obj[0].choices.push({"id": 786,
+        // "choice_text": "span 1",
+        // "choice_image": null,
+        // "category": "Destinations: Bermuda"},{"id": 900,
+        // "choice_text": "spa 2",
+        // "choice_image": null,
+        // "category": "Destinations: Bermuda"},{"id": 9400,
+        // "choice_text": "spa 3",
+        // "choice_image": null,
+        // "category": "Destinations: Bermuda"},{
+        // 	"id": 232,
+        // "choice_text": "span 4",
+        // "choice_image": null,
+        // "category": "Destinations: Bermuda"
+        // })
 	    	setFamilyDataState(prevState => {
 	      	return {family:{...prevState.family}, survey: obj}
 	      });
@@ -41,6 +57,12 @@ export const HomeContextProvider = (props) => {
 	    	
 	    	setFamilyDataState(prevState => {
 	      	return {family:{...prevState.family}, survey: sur}
+	      });
+	    },
+
+	    finishSurvey: (obj) => {	    	
+	    	setFamilyDataState(prevState => {
+	      	return {family:{...prevState.family}, survey: {}}
 	      });
 	    }
    

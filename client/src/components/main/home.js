@@ -59,7 +59,7 @@ function Home()	{
       	// navigateHandler('/main');
       }
     }
-  }, [homeState, sendData])
+  }, [homeState, sendData, ctxHome.survey])
 
 	const btnHandler = (e) => {
 		e.preventDefault()

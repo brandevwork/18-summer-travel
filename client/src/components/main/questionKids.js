@@ -23,6 +23,8 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [start,setStart] = useState(0)
+	const [end,setEnd] = useState(4)
 
 	const checkClickHandler = (e, position) => {
 
@@ -30,6 +32,8 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
       index === position ? !item : item
     );
 
+		console.log(position)
+		console.log("position")
     setCheckedState(updatedCheckedState);
 
 		let clickedId = e.target.getAttribute('id')
@@ -51,10 +55,27 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
     setCheckedState(localChoices);
 	},[question_id])
 
-	const btnHandler = (e) => {
+	const btnHandler = (e, btn) => {
 		e.preventDefault()
-		navigate("/")
+		if(btn =='next') {
+			if(end < choices.length){
+				setStart(start+1)
+				setEnd(end+1)	
+			}
+		}
+		if(btn =='prev') {
+			if(start > 0) {
+				setStart(start-1)
+				setEnd(end-1)
+			}
+		}
 	}
+
+	const finishSurvey = () => {
+		ctxHome.finishSurvey()
+		navigate("/home")
+	}
+	
 	
 
 	return (
@@ -83,29 +104,16 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
               </div>
               <div id="carouselExampleControls" className="carousel custom-carousel" data-bs-ride="carousel">
                 <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <div className="card">
-                      <div className="img-wrapper">
-                        <img src={require('../../assets/images/slide-1.png').default} alt="Slide" />
-                      </div>
-                      <div className="card-body">
-                        <div className="form-check mb-2">
-                          <input type="checkbox" className="form-check-input" id="check1" name="option1" value="something" checked="" />
-                          <label className="form-check-label font-24" for="check1"></label>
-                        </div>
-                        <h5 className="card-title">Play in the sun</h5>
-                      </div>
-                    </div>
-                  </div>
-                  {choices.map((choice, index) =>
+                  
+                  {choices.slice(start,end).map((choice, index) =>
 	                  <div className="carousel-item">
 	                    <div className="card">
 	                      <div className="img-wrapper">
-	                        <img src={require('../../assets/images/slide-2.png').default}  alt="Slide" />
+	                        <img src={choice.choice_image}  alt="Slide" />
 	                      </div>
 	                      <div className="card-body">
 	                        <div className="form-check mb-2">
-	                          <input ref={el => choiceRef.current[choice.id] = el} type="checkbox" onClick={(e) => checkClickHandler(e, index)} className="form-check-input" id="check1" name="option1" value="something" checked={checkedState[index]} />
+	                          <input ref={el => choiceRef.current[choice.id] = el} type="checkbox" onClick={(e) => checkClickHandler(e, parseInt(index)+parseInt(start))} className="form-check-input" id={choice.id}  name="option1" value="something" checked={checkedState[index+start]} />
 	                          <label className="form-check-label font-24" for="check1"></label>
 	                        </div>
 	                        <h5 className="card-title">{choice.choice_text}</h5>
@@ -113,74 +121,18 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 	                    </div>
 	                  </div>
 									)}
-                  <div className="carousel-item">
-                    <div className="card">
-                      <div className="img-wrapper">
-                        <img src={require('../../assets/images/slide-3.png').default} alt="Slide" />
-                      </div>
-                      <div className="card-body">
-                        <div className="form-check mb-2">
-                          <input type="checkbox" className="form-check-input" id="check1" name="option1" value="something" checked="" />
-                          <label className="form-check-label font-24" for="check1"></label>
-                        </div>
-                        <h5 className="card-title">Take cooking classes</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="carousel-item">
-                    <div className="card">
-                      <div className="img-wrapper">
-                        <img src={require('../../assets/images/slide-4.png').default} alt="Slide" />
-                      </div>
-                      <div className="card-body">
-                        <div className="form-check mb-2">
-                          <input type="checkbox" className="form-check-input" id="check1" name="option1" value="something" checked="" />
-                          <label className="form-check-label font-24" for="check1"></label>
-                        </div>
-                        <h5 className="card-title">Visit Theme Parks</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="carousel-item">
-                    <div className="card">
-                      <div className="img-wrapper">
-                        <img src={require('../../assets/images/slide-1.png').default} alt="Slide" />
-                      </div>
-                      <div className="card-body">
-                        <div className="form-check mb-2">
-                          <input type="checkbox" className="form-check-input" id="check1" name="option1" value="something" checked="" />
-                          <label className="form-check-label font-24" for="check1"></label>
-                        </div>
-                        <h5 className="card-title">Play in the sun</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="carousel-item">
-                    <div className="card">
-                      <div className="img-wrapper">
-                        <img src={require('../../assets/images/slide-1.png').default} alt="Slide" />
-                      </div>
-                      <div className="card-body">
-                        <div className="form-check mb-2">
-                          <input type="checkbox" className="form-check-input" id="check1" name="option1" value="something" checked="" />
-                          <label className="form-check-label font-24" for="check1"></label>
-                        </div>
-                        <h5 className="card-title">Play in the sun</h5>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <button className="carousel-control-prev" onClick={(e) => btnHandler(e,"prev")} type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                   <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <button className="carousel-control-next" onClick={(e) => btnHandler(e,"next")} type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                   <span className="carousel-control-next-icon" aria-hidden="true"></span>
                   <span className="visually-hidden">Next</span>
                 </button>
               </div>
               <div className="mt-4 d-flex justify-content-center">
-                <Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? navigate("/home") : parseInt(questionIndex)+1)}/>
+                <Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? finishSurvey() : parseInt(questionIndex)+1)}/>
               </div>
             </div>
           </div>

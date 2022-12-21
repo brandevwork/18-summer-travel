@@ -133,6 +133,7 @@ function Survey()	{
   	console.log(question_id)
   	console.log(choices)
   	console.log("question_id")
+  	// return false
   	await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
   	await setQuestionIndex(questionIndex)
   	if (fromWhere == 'Next') {

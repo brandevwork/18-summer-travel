@@ -34,3 +34,7 @@
 /backend/config/master.key
 /config/master.key
 node_modules
+/backend/public/assets/
+/client/build/
+/backend/public/api-docs.json
+/backend/public/api/v1

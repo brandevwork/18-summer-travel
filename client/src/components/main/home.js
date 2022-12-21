@@ -111,7 +111,7 @@ function Home()	{
 			                		if (member.survey_status == 'completed')
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<NavLink to={`/survey/${member.id}`} className="btn btn-success btn-sm me-2">
+							                	<NavLink to="/" className="btn btn-success btn-sm me-2">
 							                		Finished
 							                	</NavLink>
 							                </div>

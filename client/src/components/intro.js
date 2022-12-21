@@ -68,7 +68,7 @@ function Intro() {
                     <Button classes="btn btn-primary mb-3" title="Finish Your Survey" buttonClickHandler={() => {buttonHandler('home')}}/>
                   </div>                
                   <div>
-                    <a name="" id="" className="btn btn-primary mb-3" href="#" role="button">Survey Results</a>
+                    <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
                   </div>
                   <div>
                     <a name="" id="" className="btn btn-primary" href="#" role="button">View Recomendations</a>

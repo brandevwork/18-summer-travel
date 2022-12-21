@@ -1,0 +1,32 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "recomendations",
+  "apis": [
+    {
+      "path": "/api/v1/recomendation",
+      "operations": [
+        {
+          "summary": "Fetches the recomendations of a family",
+          "notes": "These are the recomendations for a family",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "The request you made is not acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Recomendations#recomendation",
+          "method": "get"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

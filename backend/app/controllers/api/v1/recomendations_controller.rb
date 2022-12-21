@@ -1,5 +1,14 @@
 class  Api::V1::RecomendationsController < BaseController
 
+  swagger_controller :recomendations, "Recomendations"
+
+  swagger_api :recomendation do
+    summary "Fetches the recomendations of a family"
+    notes "These are the recomendations for a family"
+    response :unauthorized
+    response :not_acceptable, "The request you made is not acceptable"
+  end
+
   def recomendation
     all_members = current_family.family_members
     family_members = all_members.where("age > ?", 4)

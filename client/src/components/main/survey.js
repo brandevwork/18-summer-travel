@@ -7,6 +7,7 @@ import HomeContext from "../../store/homeContext";
 import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Question from "./question";
+import QuestionKids from "./questionKids";
 
 function Survey()	{
 	let isInitial = true;
@@ -16,11 +17,8 @@ function Survey()	{
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
 
-	let currAge = 0
-	if(ctxHome.family.length > 0) {
-		let currFamily = ctxHome.family.filter(f => f.id == id);
-		currAge = (currFamily[0].age);
-	}
+	const [currAge, setCurrAge] = useState(0)
+	
 
 	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 1, "choice_ids":{}});
 	const [questionIndex, setQuestionIndex] = useState(0);
@@ -95,6 +93,13 @@ function Survey()	{
   		ctxHome.saveSurvey(questionData);
   },[questionData])
 
+  useEffect(()=>{
+  	if(ctxHome.family.length > 0) {
+			let currFamily = ctxHome.family.filter(f => f.id == id);
+			setCurrAge(currFamily[0].age);
+		}
+  },[ctxHome.family])
+
 	useEffect(() => {
     if (isInitial) {
       isInitial = false;
@@ -124,30 +129,38 @@ function Survey()	{
     }
   }, [homeState, sendData])
 
-  const submitHandler = async(family_id, question_id, choices, questionIndex) => {
+  const submitHandler = async(family_id, question_id, choices, questionIndex, fromWhere="Next") => {
   	console.log(question_id)
   	console.log(choices)
   	console.log("question_id")
   	await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
   	await setQuestionIndex(questionIndex)
-  	// await ctxHome.saveSurvey(questionData);
-		sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
-	    method: 'POST',
-	    body: JSON.stringify({"family_member_id": family_id, "question_id": question_id, "choice_ids": choices}),
-		  headers: {
-		    "Content-Type": "application/json",
-		    Authorization: localStorage.getItem("token"),
-		  },
-		}, questionSaved);
+  	if (fromWhere == 'Next') {
+			sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
+		    method: 'POST',
+		    body: JSON.stringify({"family_member_id": family_id, "question_id": question_id, "choice_ids": choices}),
+			  headers: {
+			    "Content-Type": "application/json",
+			    Authorization: localStorage.getItem("token"),
+			  },
+			}, questionSaved);
+  	}
   }
 
 	return (
 		<div>
-			{ctxHome.survey.length > 0 &&
-				ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
-					<Question questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
-				)
-			}	
+		{
+			currAge > 14  ?
+				ctxHome.survey.length > 0 &&
+					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
+						<Question questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+					)
+			:
+			ctxHome.survey.length > 0 &&
+					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
+						<QuestionKids questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+					)
+		}
 		</div>
 	)
 }

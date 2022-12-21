@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({questionIndex, question_text, question_id, choices, submitHandler})	{
+function QuestionKids({questionIndex, question_text, question_id, choices, submitHandler})	{
 
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -62,7 +62,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 		<div className="main-wrapper">
       <div className="welcome-screens">
         <div className="back-page p-4">
-          <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1)}}/>
+          <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1, "Back")}}/>
         </div>
 
         <div className="center-content mx-auto">
@@ -202,4 +202,4 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 	)
 }
 
-export default Question;
+export default QuestionKids;

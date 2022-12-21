@@ -70,7 +70,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 			<div className="main-wrapper">
 			<div className="welcome-screens">
 				<div className="back-page p-4">
-					<Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1)}}/>
+					<Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1, "Back")}}/>
 				</div>
 
 				<div className="center-content mx-auto">

@@ -46,6 +46,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 	}
 
 	useEffect(()=>{
+		setChoicesAnswers([])
 		let localSurvey = ctxHome.survey.findIndex(sur => sur.id.toString() == question_id.toString())
 		let localChoices = (ctxHome.survey[localSurvey].choices.map(eachChoice => typeof eachChoice.answer !== 'undefined'))
     setCheckedState(localChoices);

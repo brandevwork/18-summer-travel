@@ -31,9 +31,6 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 		const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
-
-		console.log(position)
-		console.log("position")
     setCheckedState(updatedCheckedState);
 
 		let clickedId = e.target.getAttribute('id')
@@ -50,6 +47,7 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 	}
 
 	useEffect(()=>{
+		setChoicesAnswers([])
 		let localSurvey = ctxHome.survey.findIndex(sur => sur.id.toString() == question_id.toString())
 		let localChoices = (ctxHome.survey[localSurvey].choices.map(eachChoice => typeof eachChoice.answer !== 'undefined'))
     setCheckedState(localChoices);

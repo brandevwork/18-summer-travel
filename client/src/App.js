@@ -4,12 +4,14 @@ import Login from './components/auth/login';
 import Intro from './components/intro';
 import SignUp from './components/auth/signup';
 import Home from './components/main/home';
-import Profile from './components/main/profile';
+import Settings from './components/main/settings';
 import Result from './components/result/result';
 import Survey from './components/main/survey';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import AuthContext from './store/authContext';
 import { HomeContextProvider } from './store/homeContext';
+import './assets/scss/main.scss';
+
 
 function App() {
   const ctxUser = useContext(AuthContext);
@@ -21,7 +23,7 @@ function App() {
     <Route path='/home' element={<Card headerClasses="bg-white-only" className="custom"><Home /></Card>} />
     <Route path='/result' element={<Card headerClasses="bg-white-only" className="custom"><Result /></Card>} />
     <Route path='/survey/:id' element={<Card headerClasses="bg-white-only" className="custom"><Survey /></Card>} />
-    <Route path='/profile' element={<Card headerClasses="bg-white-only" className="custom"><Profile/></Card>} />
+    <Route path='/settings' element={<Card headerClasses="bg-white-only" className="custom"><Settings/></Card>} />
     <Route path='*' element={<div>404 not found</div>} />
   </Fragment>;
 

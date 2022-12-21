@@ -63,7 +63,7 @@ function Home()	{
 
 	const btnHandler = (e) => {
 		e.preventDefault()
-		navigate(e)
+		navigate("/")
 	}
 	
 
@@ -71,7 +71,7 @@ function Home()	{
 		<div className="main-wrapper">
 	    <div className="welcome-screens">
 	      <div className="back-page p-4">
-	        <Back title="back"  buttonClickHandler={(e) => btnHandler('/')}/>
+	        <Back title="back"  buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	      </div>
 	  
 	      <div className="center-content mx-auto">
@@ -89,7 +89,7 @@ function Home()	{
 	              {ctxHome.family.length > 0 &&
 									ctxHome.family.map(member =>
 			                	{
-			                		if (member.survey_status == 'pending') {
+			                		if (member.survey_status == 'pending' && member.age > 4) {
 														return (<div className="d-flex align-items-center mb-2">
 							                <div>
 							                	<NavLink to={`/survey/${member.id}`} className="btn btn-warning btn-sm me-2">
@@ -99,7 +99,7 @@ function Home()	{
 							                <div className="font-30 ms-4 lh-1">{member.name}</div>
 							              </div>)
 			                		}
-			                		if (member.survey_status == 'in_progress')
+			                		if (member.survey_status == 'in_progress' && member.age > 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
 							                	<NavLink to={`/survey/${member.id}`} className="btn btn-yellow btn-sm me-2">
@@ -108,7 +108,7 @@ function Home()	{
 							                </div>
 							                <div className="font-30 ms-4 lh-1">{member.name}</div>
 							              </div>)
-			                		if (member.survey_status == 'completed')
+			                		if (member.survey_status == 'completed' && member.age > 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
 							                	<NavLink to="/" className="btn btn-success btn-sm me-2">
@@ -117,11 +117,11 @@ function Home()	{
 							                </div>
 							                <div className="font-30 ms-4 lh-1">{member.name}</div>
 							              </div>)
-						              if (member.survey_status == 'too_young')
+						              if (member.age <= 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<NavLink to={`/survey/${member.id}`} className="btn btn-default btn-sm me-2">
-							                		Finished
+							                	<NavLink to="/home" className="btn btn-default btn-sm me-2">
+							                		Too Young
 							                	</NavLink>
 							                </div>
 							                <div className="font-30 ms-4 lh-1">{member.name}</div>
@@ -160,7 +160,7 @@ function Home()	{
 	  
 	      <div className="footer-links mt-5 px-3">
 	        <div className="d-flex align-items-center">
-	          <HomeBtn title="Home" buttonClickHandler={(e) => btnHandler}/>
+	          <HomeBtn title="Home" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	          <a href="" className="d-flex align-items-center">
 	            <div className="d-flex">
 	              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />

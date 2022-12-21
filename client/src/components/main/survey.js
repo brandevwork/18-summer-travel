@@ -16,6 +16,12 @@ function Survey()	{
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
 
+	let currAge = 0
+	if(ctxHome.family.length > 0) {
+		let currFamily = ctxHome.family.filter(f => f.id == id);
+		currAge = (currFamily[0].age);
+	}
+
 	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 1, "choice_ids":{}});
 	const [questionIndex, setQuestionIndex] = useState(0);
 
@@ -24,6 +30,30 @@ function Survey()	{
 	
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   
+  const setFamilyMemebers = async(data) => {
+  	if (data.error) {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+  		return;
+  	}
+  	if (!data.data) {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  	}
+  	if (data.status == "400") {
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  	}
+  	if(data.status == "ok"){
+  		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
+    	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
+	      method: 'GET',
+			  headers: {
+			    "Content-Type": "application/json",
+			    Authorization: localStorage.getItem("token"),
+			  },
+			},
+		  getAuthData);
+  	}
+  }
+
   const getAuthData = async(data) => {
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
@@ -71,7 +101,7 @@ function Survey()	{
       return;
     }
     if(!isInitial) {
-      if (ctxUser.id !== '') {
+      if (ctxUser.id !== '' && ctxHome.family.length > 0) {
       	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
 			  headers: {
@@ -81,6 +111,15 @@ function Survey()	{
 			},
 		  getAuthData);
       	// navigateHandler('/main');
+      } else {
+      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+		      method: 'GET',
+				  headers: {
+				    "Content-Type": "application/json",
+				    Authorization: localStorage.getItem("token"),
+				  },
+				},
+			  setFamilyMemebers);
       }
     }
   }, [homeState, sendData])

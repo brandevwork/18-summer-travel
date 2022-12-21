@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useReducer, useContext } from 'react';
 import Input from '../UI/input';
 import Button from '../UI/button';
 import Back from '../UI/back';
+import HomeBtn from '../UI/homeBtn';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
@@ -128,12 +129,7 @@ function Login() {
 
 	      <div className="footer-links mt-5 px-3">
 	        <div className="d-flex align-items-center">
-	          <a href="./index.html" className="d-flex align-items-center me-4">
-	            <div className="d-flex">
-	              <img src={require('../../assets/images/home-icon.svg').default} className="img-fluid me-1" alt="" />
-	            </div>
-	            Home
-	          </a>
+	          <HomeBtn buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	          <a href="" className="d-flex align-items-center">
 	            <div className="d-flex">
 	              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />

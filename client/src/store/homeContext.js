@@ -26,7 +26,7 @@ export const HomeContextProvider = (props) => {
 	    },
 	    getSurveyByMember: (obj) => {
 	    	setFamilyDataState(prevState => {
-	      	return {...prevState, survey: obj}
+	      	return {family:{...prevState.family}, survey: obj}
 	      });
 	    },
 	    saveSurvey: (obj) => {
@@ -40,7 +40,7 @@ export const HomeContextProvider = (props) => {
 	    	})
 	    	
 	    	setFamilyDataState(prevState => {
-	      	return {...prevState, survey: sur}
+	      	return {family:{...prevState.family}, survey: sur}
 	      });
 	    }
    

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Button from './UI/button';
-import {useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import HomeContext from "../store/homeContext";
 import AuthContext from "../store/authContext";
 
@@ -12,6 +12,11 @@ function Intro() {
   const buttonHandler = (param) => {
     navigate(param)
   }
+
+  const logoutHandler = () => {
+    ctxAuth.logout()
+  }
+  
   
 
 	return (
@@ -87,18 +92,25 @@ function Intro() {
               </div>
               Instructions
             </a>
-            <a href="" className="d-flex align-items-center">
+            <NavLink to="/" className="d-flex align-items-center">
               <div className="d-flex">
                 <img src={require('../assets/images/about-icon.svg').default} className="img-fluid me-1" alt="" />
               </div>
               About
-            </a>
-            <a href="./settings.html" className="d-flex align-items-center ms-3">
+            </NavLink>
+            <NavLink to="/settings" className="d-flex align-items-center ms-3">
               Settings
-            </a>
-            <a href="./login.html" className="d-flex align-items-center ms-3">
-              Login
-            </a>
+            </NavLink>
+            {ctxAuth.email !== '' &&
+              <NavLink onClick={logoutHandler} className="d-flex align-items-center ms-3">
+                Logout
+              </NavLink>
+            }
+            {ctxAuth.email === '' &&
+              <NavLink to="/login" className="d-flex align-items-center ms-3">
+                Login
+              </NavLink>
+            }
           </div>
           <a href="" className="d-flex align-items-center">
             <div className="d-flex">

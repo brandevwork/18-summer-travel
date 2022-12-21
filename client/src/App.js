@@ -17,7 +17,7 @@ function App() {
   <Fragment>
     <Route path='/login' element={navigateToRoot} />
     <Route path='/signup' element={navigateToRoot} />
-    <Route path='/home' element={navigateToRoot} />
+    <Route path='/home' element={<Card headerClasses="bg-white-only" className="custom"><Home /></Card>} />
     <Route path='/survery/:id' element={<Card headerClasses="bg-white-only" className="custom"><Survey /></Card>} />
     <Route path='/profile' element={<Card headerClasses="bg-white-only" className="custom"><Profile/></Card>} />
     <Route path='*' element={<div>404 not found</div>} />

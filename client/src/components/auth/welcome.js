@@ -1,14 +1,22 @@
 import React from 'react';
 import Button from '../UI/button';
 import Back from '../UI/back';
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 function Welcome({nextClickHandler})	{
+	const navigate = useNavigate()
+	
+	const backHandler = (e) => {
+		e.preventDefault()
+		navigate("/")
+	}
+	
 
 	return (
 		<div className="main-wrapper">
 	    <div className="welcome-screens">
 	      <div className="back-page p-4">
-	        <Back title="Back" />
+	        <Back title="Back" buttonClickHandler={backHandler} />
 	      </div>
 	  
 	      <div className="d-flex">

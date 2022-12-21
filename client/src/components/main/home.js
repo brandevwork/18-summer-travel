@@ -59,7 +59,6 @@ function Home()	{
 	console.log(ctxHome)
 	return (
 		<div>
-			<h1>Home</h1>
 			<h3>Here is the status of each person survery results</h3>
 			{ctxHome.family.length > 0 &&
 				ctxHome.family.map(member =>

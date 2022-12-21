@@ -69,12 +69,17 @@ function Login() {
     }
   }, [authState, sendData])
 
+	const backHandler = (e) => {
+		e.preventDefault()
+		navigate("/")
+	}
+	
 
 	return (
 		<div className="main-wrapper">
 	    <div className="welcome-screens">
 	      <div className="back-page">
-	        <Back title="Back"/>
+	        <Back title="Back" buttonClickHandler={backHandler}/>
 	      </div>
 	      {authLoading && <Modal>Please Wait ...</Modal>}
 	      <form onSubmit={submitHandler}>

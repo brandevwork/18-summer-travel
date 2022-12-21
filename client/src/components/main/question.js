@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect, useReducer, useContext } from 'react';
 import Input from '../UI/input';
+import HomeBtn from '../UI/homeBtn';
+import Back from '../UI/back';
 import { NavLink, useNavigate, useLocation, useParams } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
@@ -8,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({question_text, question_id, choices, submitHandler})	{
+function Question({questionIndex, question_text, question_id, choices, submitHandler})	{
 
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -20,6 +22,7 @@ function Question({question_text, question_id, choices, submitHandler})	{
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	const checkClickHandler = (e, position) => {
 
@@ -48,6 +51,12 @@ function Question({question_text, question_id, choices, submitHandler})	{
     setCheckedState(localChoices);
 	},[question_id])
 
+	const btnHandler = (e) => {
+		e.preventDefault()
+		navigate("/")
+	}
+	
+
 	return (
 		// <div>
 		// 	<p>{question_text}</p><br/>
@@ -61,12 +70,7 @@ function Question({question_text, question_id, choices, submitHandler})	{
 			<div className="main-wrapper">
 			<div className="welcome-screens">
 				<div className="back-page p-4">
-					<a href="./index.html">
-						<div className="d-flex align-items-center">
-							<div><img src={require('../../assets/images/back-arrow.svg').default} className="img-fluid me-1" alt="" /></div>
-							<div className="back-text">Back</div>
-						</div>
-					</a>
+					<Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1)}}/>
 				</div>
 
 				<div className="center-content mx-auto">
@@ -79,33 +83,15 @@ function Question({question_text, question_id, choices, submitHandler})	{
 								Check all the things you like to do!
 							</p>
 							<div>
-								<div className="form-check mb-2">
-									<input type="checkbox" className="form-check-input" id="check1" name="option1" value="something" checked />
-									<label className="form-check-label font-24" for="check1">Go to a spa: get a massage</label>
-								</div>
-								<div className="form-check mb-2">
-									<input type="checkbox" className="form-check-input" id="check2" name="option1" value="something" checked />
-									<label className="form-check-label font-24" for="check2">Enjoy the sun: Work on your suntan</label>
-								</div>
-								<div className="form-check mb-2">
-									<input type="checkbox" className="form-check-input" id="check3" name="option1" value="something" checked />
-									<label className="form-check-label font-24" for="check3">Go shopping</label>
-								</div>
-								<div className="form-check mb-2">
-									<input type="checkbox" className="form-check-input" id="check4" name="option1" value="something" checked />
-									<label className="form-check-label font-24" for="check4">Visit a winery</label>
-								</div>
-								<div className="form-check mb-2">
-									<input type="checkbox" className="form-check-input" id="check5" name="option1" value="something" checked />
-									<label className="form-check-label font-24" for="check5">Take cooking classes</label>
-								</div>
-								<div className="form-check mb-2">
-									<input type="checkbox" className="form-check-input" id="check6" name="option1" value="something" checked />
-									<label className="form-check-label font-24" for="check6">Experience the city night life</label>
-								</div>
+								{choices.map((choice, index) =>
+									<div className="form-check mb-2">
+										<input className="form-check-input" ref={el => choiceRef.current[choice.id] = el} checked={checkedState[index]}  id={choice.id} type="checkbox" onClick={(e) => checkClickHandler(e, index)}/>
+										<label className="form-check-label font-24" for="check1">{choice.choice_text}</label>
+									</div>
+								)}
 							</div>
 							<div className="mt-4">
-								<a name="" id="" className="btn btn-primary me-5" href="./interests_activity_2.html" role="button">Next</a>
+								<Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? navigate("/home") : parseInt(questionIndex)+1)}/>							
 							</div>
 						</div>
 						<div className="activity-img">
@@ -116,12 +102,7 @@ function Question({question_text, question_id, choices, submitHandler})	{
 
 				<div className="footer-links mt-5 px-3">
 					<div className="d-flex align-items-center">
-						<a href="./index.html" className="d-flex align-items-center me-4">
-							<div className="d-flex">
-								<img src={require('../../assets/images/home-icon.svg').default} className="img-fluid me-1" alt="" />
-							</div>
-							Home
-						</a>
+						<HomeBtn title="Home" buttonClickHandler={btnHandler}/>
 						<a href="" className="d-flex align-items-center">
 							<div className="d-flex">
 								<img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />

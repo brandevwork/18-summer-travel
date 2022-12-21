@@ -73,6 +73,11 @@ function Login() {
 		e.preventDefault()
 		navigate("/")
 	}
+
+	const createHandler = (e) => {
+		e.preventDefault()
+		navigate("/signup")
+	}
 	
 
 	return (
@@ -111,6 +116,7 @@ function Login() {
 		            </div>
 		            <div>
 		            <Button classes="btn btn-primary" title="Go to Survey Home" type="submit"/>
+		            <Button classes="btn btn-primary" title="Create Account" buttonClickHandler={createHandler} />
 		            </div>
 		          </div>
 		          <div>

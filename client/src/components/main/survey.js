@@ -16,7 +16,8 @@ function Survey()	{
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
 
-	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 0, "choice_ids":{}});
+	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 1, "choice_ids":{}});
+	const [questionIndex, setQuestionIndex] = useState(0);
 
 	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
@@ -41,6 +42,8 @@ function Survey()	{
   }
 
   const questionSaved = async(data) => {
+  	console.log(data)
+  	console.log("data sur")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -82,28 +85,28 @@ function Survey()	{
     }
   }, [homeState, sendData])
 
-  const submitHandler = async(family_id, question_id, choices) => {
+  const submitHandler = async(family_id, question_id, choices, questionIndex) => {
   	console.log(question_id)
   	console.log(choices)
   	console.log("question_id")
   	await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
+  	await setQuestionIndex(questionIndex)
   	// await ctxHome.saveSurvey(questionData);
-		// sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
-	  //   method: 'POST',
-	  //   body: JSON.stringify({"family_member_id": family_id, "question_id": question_id, "choice_ids": choices}),
-		//   headers: {
-		//     "Content-Type": "application/json",
-		//     Authorization: localStorage.getItem("token"),
-		//   },
-		// }, questionSaved);
+		sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
+	    method: 'POST',
+	    body: JSON.stringify({"family_member_id": family_id, "question_id": question_id, "choice_ids": choices}),
+		  headers: {
+		    "Content-Type": "application/json",
+		    Authorization: localStorage.getItem("token"),
+		  },
+		}, questionSaved);
   }
 
 	return (
 		<div>
-			<h1>Survey</h1>
 			{ctxHome.survey.length > 0 &&
-				ctxHome.survey.slice(questionData.question_id,questionData.question_id+1).map(question =>
-					<Question question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+				ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
+					<Question questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 				)
 			}	
 		</div>

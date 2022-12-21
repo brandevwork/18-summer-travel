@@ -47,7 +47,6 @@ function Home()	{
       return;
     }
     if(!isInitial) {
-    	alert("here")
       if (ctxUser.id !== '') {
       	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
 	      method: 'GET',

@@ -16,6 +16,14 @@
       "description": "Settings"
     },
     {
+      "path": "/api/v1/survey_results.{format}",
+      "description": "Survey Result"
+    },
+    {
+      "path": "/api/v1/recomendations.{format}",
+      "description": "Recomendations"
+    },
+    {
       "path": "/families/registrations.{format}",
       "description": "Family Registration"
     },

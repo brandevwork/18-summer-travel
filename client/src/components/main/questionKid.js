@@ -26,7 +26,7 @@ function QuestionKid()	{
                 </p>
               </div>
               <div>
-                <img src={require('../../assets/images/vacation.png').default} className="img-fluid" alt="" />
+                <img src={require('../../assets/images/vacation.png')} className="img-fluid" alt="" />
               </div>
             </div>
             <div id="carouselExampleControls" className="carousel custom-carousel" data-bs-ride="carousel">
@@ -34,7 +34,7 @@ function QuestionKid()	{
                 <div className="carousel-item active">
                   <div className="card">
                     <div className="img-wrapper">
-                      <img src={require('../../assets/images/slide-1.png').default} alt="Slide" />
+                      <img src={require('../../assets/images/slide-1.png')} alt="Slide" />
                     </div>
                     <div className="card-body">
                       <div className="form-check mb-2">
@@ -48,7 +48,7 @@ function QuestionKid()	{
                 <div className="carousel-item">
                   <div className="card">
                     <div className="img-wrapper">
-                      <img src={require('../../assets/images/slide-2.png').default}  alt="Slide" />
+                      <img src={require('../../assets/images/slide-2.png')}  alt="Slide" />
                     </div>
                     <div className="card-body">
                       <div className="form-check mb-2">
@@ -62,7 +62,7 @@ function QuestionKid()	{
                 <div className="carousel-item">
                   <div className="card">
                     <div className="img-wrapper">
-                      <img src={require('../../assets/images/slide-3.png').default} alt="Slide" />
+                      <img src={require('../../assets/images/slide-3.png')} alt="Slide" />
                     </div>
                     <div className="card-body">
                       <div className="form-check mb-2">
@@ -76,7 +76,7 @@ function QuestionKid()	{
                 <div className="carousel-item">
                   <div className="card">
                     <div className="img-wrapper">
-                      <img src={require('../../assets/images/slide-4.png').default} alt="Slide" />
+                      <img src={require('../../assets/images/slide-4.png')} alt="Slide" />
                     </div>
                     <div className="card-body">
                       <div className="form-check mb-2">
@@ -90,7 +90,7 @@ function QuestionKid()	{
                 <div className="carousel-item">
                   <div className="card">
                     <div className="img-wrapper">
-                      <img src={require('../../assets/images/slide-1.png').default} alt="Slide" />
+                      <img src={require('../../assets/images/slide-1.png')} alt="Slide" />
                     </div>
                     <div className="card-body">
                       <div className="form-check mb-2">
@@ -104,7 +104,7 @@ function QuestionKid()	{
                 <div className="carousel-item">
                   <div className="card">
                     <div className="img-wrapper">
-                      <img src={require('../../assets/images/slide-1.png').default} alt="Slide" />
+                      <img src={require('../../assets/images/slide-1.png')} alt="Slide" />
                     </div>
                     <div className="card-body">
                       <div className="form-check mb-2">

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useReducer, useContext } from 'react';
 import Input from '../UI/input';
 import Button from '../UI/button';
 import Back from '../UI/back';
+import HomeBtn from '../UI/homeBtn';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
@@ -69,12 +70,22 @@ function Login() {
     }
   }, [authState, sendData])
 
+	const backHandler = (e) => {
+		e.preventDefault()
+		navigate("/")
+	}
+
+	const createHandler = (e) => {
+		e.preventDefault()
+		navigate("/signup")
+	}
+	
 
 	return (
 		<div className="main-wrapper">
 	    <div className="welcome-screens">
 	      <div className="back-page">
-	        <Back title="Back"/>
+	        <Back title="Back" buttonClickHandler={backHandler}/>
 	      </div>
 	      {authLoading && <Modal>Please Wait ...</Modal>}
 	      <form onSubmit={submitHandler}>
@@ -106,6 +117,7 @@ function Login() {
 		            </div>
 		            <div>
 		            <Button classes="btn btn-primary" title="Go to Survey Home" type="submit"/>
+		            <Button classes="btn btn-primary" title="Create Account" buttonClickHandler={createHandler} />
 		            </div>
 		          </div>
 		          <div>
@@ -117,12 +129,7 @@ function Login() {
 
 	      <div className="footer-links mt-5 px-3">
 	        <div className="d-flex align-items-center">
-	          <a href="./index.html" className="d-flex align-items-center me-4">
-	            <div className="d-flex">
-	              <img src={require('../../assets/images/home-icon.svg').default} className="img-fluid me-1" alt="" />
-	            </div>
-	            Home
-	          </a>
+	          <HomeBtn buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	          <a href="" className="d-flex align-items-center">
 	            <div className="d-flex">
 	              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />

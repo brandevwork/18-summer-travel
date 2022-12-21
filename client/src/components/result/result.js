@@ -1,16 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
+import Back from '../../components/UI/back'
 
 function Result()	{
+  const navigate = useNavigate()
 	return (
     <div className="main-wrapper">
     <div className="welcome-screens family-results">
       <div className="back-page">
-        <a href="./welcome_intro_5.html" className="d-flex align-items-center p-4">
-          <div className="d-flex">
-            <img src={require('../../assets/images/back-arrow.svg').default} className="img-fluid me-1" alt="" />
-          </div>
-          <div className="back-text">Back</div>
-        </a>
+        <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
       </div>
       <div className="center-content mx-auto">
         <div className="result-header">

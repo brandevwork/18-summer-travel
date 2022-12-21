@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from './UI/button';
-import {useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import HomeContext from "../store/homeContext";
+import AuthContext from "../store/authContext";
 
 function Intro() {
 
+  const ctxHome = useContext(HomeContext);
+  const ctxAuth = useContext(AuthContext);
   const navigate = useNavigate();
   const buttonHandler = (param) => {
     navigate(param)
   }
+
+  const logoutHandler = () => {
+    ctxAuth.logout()
+  }
+  
   
 
 	return (
@@ -45,18 +54,32 @@ function Intro() {
           </div>
           <div className="right-buttons mb-3 ms-md-0 ms-lg-5 d-flex align-items-center">
             <div className="d-flex flex-column align-items-center">
-              <div>
-                <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('signup')}}/>
-              </div>
-              <div>
-                <a name="" id="" className="btn btn-primary mb-3" href="#" role="button">Finish Your Survey</a>
-              </div>
-              <div>
-                <a name="" id="" className="btn btn-primary mb-3" href="#" role="button">Survey Results</a>
-              </div>
-              <div>
-                <a name="" id="" className="btn btn-primary" href="#" role="button">View Recomendations</a>
-              </div>
+              {ctxAuth.email === '' &&
+                <>
+                  <div>
+                    <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('login')}}/>
+                  </div>
+                  <div>
+                    <Button classes="btn btn-primary mb-3" title="Finish Your Survey" buttonClickHandler={() => {buttonHandler('login')}}/>
+                  </div>
+                </>
+              }
+              {ctxAuth.email !== '' &&
+                <>
+                  <div>
+                    <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('home')}}/>
+                  </div>
+                  <div>
+                    <Button classes="btn btn-primary mb-3" title="Finish Your Survey" buttonClickHandler={() => {buttonHandler('home')}}/>
+                  </div>                
+                  <div>
+                    <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
+                  </div>
+                  <div>
+                    <a name="" id="" className="btn btn-primary" href="#" role="button">View Recomendations</a>
+                  </div>
+                </>
+              }
             </div>
           </div>
         </div>
@@ -69,18 +92,25 @@ function Intro() {
               </div>
               Instructions
             </a>
-            <a href="" className="d-flex align-items-center">
+            <NavLink to="/" className="d-flex align-items-center">
               <div className="d-flex">
                 <img src={require('../assets/images/about-icon.svg').default} className="img-fluid me-1" alt="" />
               </div>
               About
-            </a>
-            <a href="./settings.html" className="d-flex align-items-center ms-3">
+            </NavLink>
+            <NavLink to="/settings" className="d-flex align-items-center ms-3">
               Settings
-            </a>
-            <a href="./login.html" className="d-flex align-items-center ms-3">
-              Login
-            </a>
+            </NavLink>
+            {ctxAuth.email !== '' &&
+              <NavLink onClick={logoutHandler} className="d-flex align-items-center ms-3">
+                Logout
+              </NavLink>
+            }
+            {ctxAuth.email === '' &&
+              <NavLink to="/login" className="d-flex align-items-center ms-3">
+                Login
+              </NavLink>
+            }
           </div>
           <a href="" className="d-flex align-items-center">
             <div className="d-flex">

@@ -56,11 +56,6 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 		e.preventDefault()
 		navigate("/")
 	}
-	
-	const finishSurvey = () => {
-		ctxHome.finishSurvey()
-		navigate("/home")
-	}
 
 	return (
 		// <div>
@@ -96,7 +91,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 								)}
 							</div>
 							<div className="mt-4">
-								<Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? finishSurvey() : parseInt(questionIndex)+1)}/>							
+								<Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? parseInt(questionIndex) : parseInt(questionIndex)+1, parseInt(questionIndex) == ctxHome.survey.length - 1 ? "last_question" : "Next")}/>							
 							</div>
 						</div>
 						<div className="activity-img">

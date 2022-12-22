@@ -16,12 +16,14 @@ function Survey()	{
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	const [currAge, setCurrAge] = useState(0)
 	
 
 	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 1, "choice_ids":{}});
 	const [questionIndex, setQuestionIndex] = useState(0);
+	const [questionIndexTemp, setQuestionIndexTemp] = useState(0);
 
 	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
@@ -70,8 +72,8 @@ function Survey()	{
   }
 
   const questionSaved = async(data) => {
+  	console.log("ret data")
   	console.log(data)
-  	console.log("data sur")
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -83,15 +85,21 @@ function Survey()	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status == "200"){
-  		// await ctxHome.saveSurvey(questionData);
+  		let resData = {"family_member_id": id, "question_id":data.data.question_id, "choice_ids":data.data.choice_ids}
+  		await ctxHome.saveSurvey(resData);
     	// navigateHandler('/');
   	}
   }
 
+  // useEffect(()=>{
+  // 	if(questionData.choice_ids.length > 0)
+  // 		ctxHome.saveSurvey(questionData);
+  // },[questionData])
+
   useEffect(()=>{
-  	if(questionData.choice_ids.length > 0)
-  		ctxHome.saveSurvey(questionData);
-  },[questionData])
+  	console.log("after")
+  	setQuestionIndex(questionIndexTemp)
+  },[ctxHome])
 
   useEffect(()=>{
   	if(ctxHome.family.length > 0) {
@@ -129,22 +137,28 @@ function Survey()	{
     }
   }, [homeState, sendData])
 
+  const finishSurvey = async() => {
+  	ctxHome.finishSurvey()
+		navigate("/home")
+	}
+
   const submitHandler = async(family_id, question_id, choices, questionIndex, fromWhere="Next") => {
   	console.log(question_id)
-  	console.log(choices)
+  	console.log(Object.assign({},choices))
   	console.log("question_id")
-  	// return false
-  	await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
-  	await setQuestionIndex(questionIndex)
-  	if (fromWhere == 'Next') {
-			sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
+  	// await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
+  	await setQuestionIndexTemp(questionIndex)
+  	if (fromWhere == 'Next' || fromWhere == 'last_question') {
+			await sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
 		    method: 'POST',
-		    body: JSON.stringify({"family_member_id": family_id, "question_id": question_id, "choice_ids": choices}),
+		    body: JSON.stringify({"family_member_id": parseInt(family_id), "question_id": parseInt(question_id), "choice_ids": Object.assign({},choices)}),
 			  headers: {
 			    "Content-Type": "application/json",
 			    Authorization: localStorage.getItem("token"),
 			  },
 			}, questionSaved);
+			if(fromWhere == 'last_question')
+  			await finishSurvey()
   	}
   }
 

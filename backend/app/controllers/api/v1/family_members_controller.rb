@@ -7,17 +7,8 @@ class  Api::V1::FamilyMembersController < BaseController
   swagger_api :index do
     summary "Fetches all family members of a family"
     notes "These are the family members against a family"
-    param :query, :family_id, :integer, :optional, "Family Id"
     response :unauthorized
     response :not_acceptable, "The request you made is not acceptable"
-  end
-
-  swagger_api :create do
-    summary "Creates a new Family member"
-    param :form, :name, :string, :required, "Name"
-    param :form, :birth_year, :date, :required, "Date of Birth"
-    param :form, :email, :string, :required, "Email address"
-    response :not_acceptable
   end
 
   swagger_api :show do
@@ -29,37 +20,38 @@ class  Api::V1::FamilyMembersController < BaseController
     response :not_found
   end
 
+  swagger_api :update do
+    summary "Updates the is_active status of given id family member"
+    param :path, :id, :integer, :required, "FamilyMember Id"
+    response :ok, "Success", :Survey
+    response :unauthorized
+    response :not_acceptable
+    response :not_found
+  end
+
   def index
     families = current_family.family_members
-    render json: {data: {family: families}, status: :ok, success: true}
+    render json: { data: { family: families }, status: :ok, success: true }
   end
 
   def show
-    if @family_member
-      survey = Survey.includes(:questions).first
-      questions = (@family_member.age < 14) ? survey.questions.limit(4) : survey.questions
-      render json: questions, each_serializer: QuestionsSerializer, meta: {status: :ok, code: 200}
+    if @family_member.is_active? && !@family_member.completed?
+      questions = Survey.first.questions
+      questions = @family_member.age < 14 ? questions.limit(4) : questions
+      response_choices = @family_member.response_choices
+      if response_choices.present?
+        questions = Question.where.not(id: response_choices.pluck(:question_id))
+        questions = questions.limit(4 - response_choices.select(:question_id).distinct.count) if @family_member.age < 14
+      end
+      render json: questions, each_serializer: QuestionsSerializer, meta: { status: :ok, code: 200, success: true }
     else
-      render json: {error: "Family Member not found"}
-    end
-  end
-
-  def create
-    family_member = current_family.family_members.create(family_member_params)
-    if family_member.save
-      render json: family_member, status: 200
-    else
-      render json: {error: "Cannot create family member"}
+      render json: { error: (@family_member.completed?) ? 'Family Member survey is already completed' : 'Family Member status is not active', success: false }
     end
   end
 
   def update
-    if @family_member
-      @family_member.update(is_active: !@family_member.is_active)
-      render json: { status: :ok, success: true }
-    else
-      render json: {error: "Family Member not found"}
-    end
+    @family_member.update(is_active: !@family_member.is_active)
+    render json: { status: :ok, success: true }
   end
 
   private
@@ -70,5 +62,7 @@ class  Api::V1::FamilyMembersController < BaseController
 
   def get_family_member
     @family_member = FamilyMember.find_by(id: params[:id])
+    return render json: { error: "Family Member not found", status: 404, success: false } if @family_member.nil?
+    render json: { error: "You are unauthorized", status: 401, success: false } unless @family_member.family_id.eql?(current_family.id)
   end
 end

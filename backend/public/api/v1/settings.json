@@ -1,0 +1,53 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "settings",
+  "apis": [
+    {
+      "path": "/api/v1/settings/family",
+      "operations": [
+        {
+          "summary": "Fetches a family and its all family members on settings page",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "The request you made is not acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Settings#family",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/settings/reset_survey",
+      "operations": [
+        {
+          "summary": "Reset the survey response of all the family members of the family that is login",
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            },
+            {
+              "code": 406,
+              "responseModel": null,
+              "message": "The request you made is not acceptable"
+            }
+          ],
+          "nickname": "Api::V1::Settings#reset_family_survey",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

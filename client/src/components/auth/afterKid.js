@@ -23,22 +23,6 @@ function AfterKid({familyMemberState: {family_member, first_name}, nextClickHand
           </div>
         </div>
       </div>
-      <div className="footer-links mt-5 px-3">
-        <div className="d-flex align-items-center">
-          <a href="./index.html" className="d-flex align-items-center me-4">
-            <div className="d-flex">
-              <img src={require('../../assets/images/home-icon.svg').default} className="img-fluid me-1" alt="" />
-            </div>
-            Home
-          </a>
-          <a href="" className="d-flex align-items-center">
-            <div className="d-flex">
-              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />
-            </div>
-            Instructions
-          </a>
-        </div>
-      </div>
     </React.Fragment>
 	)
 }

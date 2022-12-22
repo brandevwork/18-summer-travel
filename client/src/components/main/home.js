@@ -12,7 +12,7 @@ import homeReducer from "../../reducer/homeReducer";
 
 function Home()	{
 
-	let isInitial = true;
+	let isInitial = false;
 
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);

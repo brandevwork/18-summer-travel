@@ -49,9 +49,15 @@ export const HomeContextProvider = (props) => {
 	    	let sur = familyDataState.survey
 	    	let objIndex = sur.findIndex((objArr => objArr.id == obj.question_id));
 	    	sur[objIndex].choices.map(function(sur_ch,i){
-	    		if(obj.choice_ids.includes(sur_ch.id.toString())) {
-	    			sur_ch.answer = true
-	    		}
+	    		// if(obj.choice_ids.includes(sur_ch.id.toString())) {
+	    		// 	sur_ch.answer = true
+	    		// }
+	    		for (const key in obj.choice_ids) {
+					  if (obj.choice_ids.hasOwnProperty(key)) {
+					    if(sur_ch.id.toString() == obj.choice_ids[key])
+	    					sur_ch.answer = true  
+					  }
+					}
 	    		return sur_ch
 	    	})
 	    	

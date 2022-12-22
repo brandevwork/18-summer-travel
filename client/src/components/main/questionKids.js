@@ -128,7 +128,7 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
                 </button>
               </div>
               <div className="mt-4 d-flex justify-content-center">
-                <Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? finishSurvey() : parseInt(questionIndex)+1)}/>
+                <Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? parseInt(questionIndex) : parseInt(questionIndex)+1, parseInt(questionIndex) == ctxHome.survey.length - 1 ? "last_question" : "Next")}/>
               </div>
             </div>
           </div>

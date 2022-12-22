@@ -10,7 +10,7 @@ import Question from "./question";
 import QuestionKids from "./questionKids";
 
 function Survey()	{
-	let isInitial = true;
+	let isInitial = false;
 
 	const { id } = useParams();
 	const ctxUser = useContext(AuthContext);

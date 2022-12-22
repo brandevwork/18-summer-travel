@@ -160,7 +160,7 @@ function Survey()	{
   }
 
 	return (
-		<div>
+		<React.Fragment>
 		{homeLoading && <Modal>Please wait! Data is being processed ...</Modal>}
 		{
 			currAge > 14  ?
@@ -174,7 +174,7 @@ function Survey()	{
 						<QuestionKids questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 					)
 		}
-		</div>
+		</React.Fragment>
 	)
 }
 

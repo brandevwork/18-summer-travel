@@ -124,7 +124,7 @@ function SignUp(props)  {
   }
 
   return (
-  	<div>
+  	<React.Fragment>
     	{renderState === 'welcome' && <Welcome nextClickHandler={nextClickHandler}/>}
     	{renderState === 'askUser' && <AskUser nextClickHandler={nextClickHandler}/>}
     	{renderState === 'askUserFirstname' && <AskUserFirstName familyMemberState={familyMemberState}  nextClickHandler={nextClickHandler}/>}
@@ -150,7 +150,7 @@ function SignUp(props)  {
         authState = {authState}
   		/>}
     	{renderState === 'setup' && <Setup familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
-    </div>
+    </React.Fragment>
   )
 }
 

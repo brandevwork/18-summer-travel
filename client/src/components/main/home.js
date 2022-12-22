@@ -68,12 +68,10 @@ function Home()	{
 	
 
 	return (
-		<div className="main-wrapper">
-	    <div className="welcome-screens">
+		<React.Fragment>
 	      <div className="back-page p-4">
 	        <Back title="back"  buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	      </div>
-	  
 	      <div className="center-content mx-auto">
 	        <div className="content-grid content-grid-survey-home">
 	          <div className="d-flex justify-content-center flex-column">
@@ -157,20 +155,7 @@ function Home()	{
 	          </div>
 	        </div>
 	      </div>
-	  
-	      <div className="footer-links mt-5 px-3">
-	        <div className="d-flex align-items-center">
-	          <HomeBtn title="Home" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
-	          <a href="" className="d-flex align-items-center">
-	            <div className="d-flex">
-	              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />
-	            </div>
-	            Instructions
-	          </a>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+    </React.Fragment>
 	)
 }
 

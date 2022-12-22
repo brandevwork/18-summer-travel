@@ -82,64 +82,50 @@ function Login() {
 	
 
 	return (
-		<div className="main-wrapper">
-	    <div className="welcome-screens">
-	      <div className="back-page">
-	        <Back title="Back" buttonClickHandler={backHandler}/>
-	      </div>
-	      {authLoading && <Modal>Please Wait ...</Modal>}
-	      <form onSubmit={submitHandler}>
-	        {authState.error && 
-            <ul className="text-danger list-group">
-              {authState.errorMessage.map((eachMessage, index) => (
-                <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
-                ))}
-            </ul>
-          }
-		      <div className="center-content mx-auto welcome-intro">
-		        <div className="content-grid">
-		          <div className="d-flex justify-content-center flex-column">
-		            <h2 className="m-0 primary-clr">Welcome Back!</h2>
-		            <h2>
-		              Please login to return to your family survey.
-		            </h2>
-		            <div className="login-wrapper d-flex flex-column mt-2">
-		              <div className="cross-field mb-3">
-		                <Input ref={emailRef} input={{"type":"email", "placeholder":"Email Address", 
-	        						"className":"form-control"}}/>
-		                <div className="cross-icon"></div>
-		              </div>
-		              <div className="cross-field mb-5">
-		                <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password",
-	        		 				"className":"form-control"}}/>
-		                <div className="cross-icon"></div>
-		              </div>
-		            </div>
-		            <div>
-		            <Button classes="btn btn-primary" title="Go to Survey Home" type="submit"/>
-		            <Button classes="btn btn-primary" title="Create Account" buttonClickHandler={createHandler} />
-		            </div>
-		          </div>
-		          <div>
-		            <img src={require('../../assets/images/login-cat.svg').default} className="img-fluid" alt="" />
-		          </div>
-		        </div>
-		      </div>
-	      </form>
-
-	      <div className="footer-links mt-5 px-3">
-	        <div className="d-flex align-items-center">
-	          <HomeBtn buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
-	          <a href="" className="d-flex align-items-center">
-	            <div className="d-flex">
-	              <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />
+		<React.Fragment>
+	    <div className="back-page">
+	      <Back title="Back" buttonClickHandler={backHandler}/>
+	    </div>
+	    {authLoading && <Modal>Please Wait ...</Modal>}
+	    <form onSubmit={submitHandler}>
+	      {authState.error && 
+	        <ul className="text-danger list-group">
+	          {authState.errorMessage.map((eachMessage, index) => (
+	            <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+	            ))}
+	        </ul>
+	      }
+	      <div className="center-content mx-auto welcome-intro">
+	        <div className="content-grid">
+	          <div className="d-flex justify-content-center flex-column">
+	            <h2 className="m-0 primary-clr">Welcome Back!</h2>
+	            <h2>
+	              Please login to return to your family survey.
+	            </h2>
+	            <div className="login-wrapper d-flex flex-column mt-2">
+	              <div className="cross-field mb-3">
+	                <Input ref={emailRef} input={{"type":"email", "placeholder":"Email Address", 
+	      						"className":"form-control"}}/>
+	                <div className="cross-icon"></div>
+	              </div>
+	              <div className="cross-field mb-5">
+	                <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password",
+	      		 				"className":"form-control"}}/>
+	                <div className="cross-icon"></div>
+	              </div>
 	            </div>
-	            Instructions
-	          </a>
+	            <div>
+	            <Button classes="btn btn-primary" title="Go to Survey Home" type="submit"/>
+	            <Button classes="btn btn-primary" title="Create Account" buttonClickHandler={createHandler} />
+	            </div>
+	          </div>
+	          <div>
+	            <img src={require('../../assets/images/login-cat.svg').default} className="img-fluid" alt="" />
+	          </div>
 	        </div>
 	      </div>
-	    </div>
-	  </div>
+	    </form>
+    </React.Fragment>
 	)
 }
 

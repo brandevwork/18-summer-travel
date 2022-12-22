@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useContext } from  'react';
 import Card from './components/UI/card';
+import Wrapper from './components/UI/wrapper';
 import Login from './components/auth/login';
 import Intro from './components/intro';
 import SignUp from './components/auth/signup';
@@ -20,22 +21,22 @@ function App() {
   <Fragment>
     <Route path='/login' element={navigateToRoot} />
     <Route path='/signup' element={navigateToRoot} />
-    <Route path='/home' element={<Card headerClasses="bg-white-only" className="custom"><Home /></Card>} />
-    <Route path='/result' element={<Card headerClasses="bg-white-only" className="custom"><Result /></Card>} />
-    <Route path='/survey/:id' element={<Card headerClasses="bg-white-only" className="custom"><Survey /></Card>} />
-    <Route path='/settings' element={<Card headerClasses="bg-white-only" className="custom"><Settings/></Card>} />
+    <Route path='/home' element={<Wrapper><Home /></Wrapper>} />
+    <Route path='/result' element={<Wrapper><Result /></Wrapper>} />
+    <Route path='/survey/:id' element={<Wrapper><Survey /></Wrapper>} />
+    <Route path='/settings' element={<Wrapper><Settings/></Wrapper>} />
     <Route path='*' element={<div>404 not found</div>} />
   </Fragment>;
 
   return (
     <HomeContextProvider>
       <Routes>
-        <Route path='/' element={ctxUser.email === '' ? <Intro/> : <Card headerClasses="bg-white-only" className="custom"><Intro/></Card>} />
+        <Route path='/' element={ctxUser.email === '' ? <Wrapper><Intro/></Wrapper> : <Wrapper><Intro/></Wrapper>} />
         { ctxUser.email === '' && 
           <Fragment>
-            <Route path='/signup' element={<SignUp/>} />
-            <Route path='/login' element={<Login/>} />
-            <Route path='*' element={<Intro/>} />
+            <Route path='/signup' element={<Wrapper><SignUp/></Wrapper>} />
+            <Route path='/login' element={<Wrapper><Login/></Wrapper>} />
+            <Route path='*' element={<Wrapper><Intro/></Wrapper>} />
           </Fragment>
         }
         { ctxUser.email !== '' && authRoutes }

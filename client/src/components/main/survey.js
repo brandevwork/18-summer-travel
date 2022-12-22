@@ -28,7 +28,9 @@ function Survey()	{
 	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
 	
-	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
+	const {fetchDataHandler: sendDataMember, loading: homeLoadingMember} = useData();
+	const {fetchDataHandler: sendDataSurvey, loading: homeLoadingSurvey} = useData();
+	const {fetchDataHandler: sendDataSurveySaved, loading: homeLoadingSurveySaved} = useData();
   
   const setFamilyMemebers = async(data) => {
   	if (data.error) {
@@ -42,7 +44,7 @@ function Survey()	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status == "ok"){
-  		// await ctxHome.getAllFamilyMembers(data.data.family,data.status);
+  		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
     	// sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	    //   method: 'GET',
 			//   headers: {
@@ -106,13 +108,17 @@ function Survey()	{
   },[ctxHome.family])
 
 	useEffect(() => {
+		console.log(ctxHome)
+		console.log("ctxHome")
     if (isInitial) {
       isInitial = false;
       return;
     }
+    if(Object.keys(ctxHome.survey).length > 0)
+    	return;
     if(!isInitial) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
-      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
+      	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
 			  headers: {
 			    "Content-Type": "application/json",
@@ -122,7 +128,7 @@ function Survey()	{
 		  getAuthData);
       	// navigateHandler('/main');
       } else {
-      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+      	sendDataMember(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
 		      method: 'GET',
 				  headers: {
 				    "Content-Type": "application/json",
@@ -132,7 +138,7 @@ function Survey()	{
 			  setFamilyMemebers);
       }
     }
-  }, [homeState, sendData])
+  }, [homeState, ctxHome, sendDataMember, sendDataSurvey])
 
   const finishSurvey = async() => {
   	ctxHome.finishSurvey()
@@ -146,7 +152,7 @@ function Survey()	{
   	// await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
   	await setQuestionIndexTemp(questionIndex)
   	if (fromWhere == 'Next' || fromWhere == 'last_question') {
-			await sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
+			await sendDataSurveySaved(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
 		    method: 'POST',
 		    body: JSON.stringify({"family_member_id": parseInt(family_id), "question_id": parseInt(question_id), "choice_ids": Object.assign({},choices)}),
 			  headers: {
@@ -161,7 +167,9 @@ function Survey()	{
 
 	return (
 		<React.Fragment>
-		{homeLoading && <Modal>Please wait! Data is being processed ...</Modal>}
+		{homeLoadingMember && <Modal>Please wait! Member is initializing ...</Modal>}
+		{homeLoadingSurvey && <Modal>Please wait! Survey Data is being fetched ...</Modal>}
+		{homeLoadingSurveySaved && <Modal>Please wait! Survey Data is being saved ...</Modal>}
 		{
 			currAge > 14  ?
 				ctxHome.survey.length > 0 &&

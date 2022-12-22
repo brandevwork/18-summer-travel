@@ -42,7 +42,7 @@ export const HomeContextProvider = (props) => {
         // "category": "Destinations: Bermuda"
         // })
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family}, survey: obj}
+	      	return {family:[...prevState.family], survey: obj}
 	      });
 	    },
 	    saveSurvey: (obj) => {
@@ -62,7 +62,7 @@ export const HomeContextProvider = (props) => {
 	    	})
 	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family}, survey: sur}
+	      	return {family:[...prevState.family], survey: sur}
 	      });
 	    },
 

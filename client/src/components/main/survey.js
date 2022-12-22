@@ -42,15 +42,15 @@ function Survey()	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status == "ok"){
-  		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
-    	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
-	      method: 'GET',
-			  headers: {
-			    "Content-Type": "application/json",
-			    Authorization: localStorage.getItem("token"),
-			  },
-			},
-		  getAuthData);
+  		// await ctxHome.getAllFamilyMembers(data.data.family,data.status);
+    	// sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
+	    //   method: 'GET',
+			//   headers: {
+			//     "Content-Type": "application/json",
+			//     Authorization: localStorage.getItem("token"),
+			//   },
+			// },
+		  // getAuthData);
   	}
   }
 

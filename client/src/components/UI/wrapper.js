@@ -3,7 +3,7 @@ import { NavLink, useNavigate} from 'react-router-dom';
 import AuthContext from "../../store/authContext";
 import HomeBtn from "./homeBtn";
 
-function Wrapper({className, children})	{
+function Wrapper({customClassName, children})	{
 
   const ctxAuth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Wrapper({className, children})	{
 
 	return (
 		<div className="main-wrapper">
-      <div className="welcome-screens">
+      <div className={`welcome-screens ${customClassName}`}>
 				{children}
 				<div className="footer-links mt-5 px-3">
           <div className="d-flex align-items-center">

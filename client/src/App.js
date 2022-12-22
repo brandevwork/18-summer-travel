@@ -21,22 +21,22 @@ function App() {
   <Fragment>
     <Route path='/login' element={navigateToRoot} />
     <Route path='/signup' element={navigateToRoot} />
-    <Route path='/home' element={<Wrapper><Home /></Wrapper>} />
-    <Route path='/result' element={<Wrapper><Result /></Wrapper>} />
-    <Route path='/survey/:id' element={<Wrapper><Survey /></Wrapper>} />
-    <Route path='/settings' element={<Wrapper><Settings/></Wrapper>} />
+    <Route path='/home' element={<Wrapper customClassName=""><Home /></Wrapper>} />
+    <Route path='/result' element={<Wrapper customClassName="family-results"><Result /></Wrapper>} />
+    <Route path='/survey/:id' element={<Wrapper customClassName=""><Survey /></Wrapper>} />
+    <Route path='/settings' element={<Wrapper customClassName=""><Settings/></Wrapper>} />
     <Route path='*' element={<div>404 not found</div>} />
   </Fragment>;
 
   return (
     <HomeContextProvider>
       <Routes>
-        <Route path='/' element={ctxUser.email === '' ? <Wrapper><Intro/></Wrapper> : <Wrapper><Intro/></Wrapper>} />
+        <Route path='/' element={ctxUser.email === '' ? <Wrapper customClassName=""><Intro/></Wrapper> : <Wrapper customClassName=""><Intro/></Wrapper>} />
         { ctxUser.email === '' && 
           <Fragment>
-            <Route path='/signup' element={<Wrapper><SignUp/></Wrapper>} />
-            <Route path='/login' element={<Wrapper><Login/></Wrapper>} />
-            <Route path='*' element={<Wrapper><Intro/></Wrapper>} />
+            <Route path='/signup' element={<Wrapper customClassName=""><SignUp/></Wrapper>} />
+            <Route path='/login' element={<Wrapper customClassName=""><Login/></Wrapper>} />
+            <Route path='*' element={<Wrapper customClassName=""><Intro/></Wrapper>} />
           </Fragment>
         }
         { ctxUser.email !== '' && authRoutes }

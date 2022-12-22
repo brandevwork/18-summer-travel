@@ -72,8 +72,6 @@ function Survey()	{
   }
 
   const questionSaved = async(data) => {
-  	console.log("ret data")
-  	console.log(data)
   	if (data.error) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
@@ -97,7 +95,6 @@ function Survey()	{
   // },[questionData])
 
   useEffect(()=>{
-  	console.log("after")
   	setQuestionIndex(questionIndexTemp)
   },[ctxHome])
 
@@ -164,6 +161,7 @@ function Survey()	{
 
 	return (
 		<div>
+		{homeLoading && <Modal>Please wait! Data is being processed ...</Modal>}
 		{
 			currAge > 14  ?
 				ctxHome.survey.length > 0 &&

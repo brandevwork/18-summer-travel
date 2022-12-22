@@ -8,7 +8,7 @@ const Backdrop = ({onClose, children}) => {
 
 const ModalOverlay = ({children}) => {
   return (
-    <div className={classes.modal}>
+    <div className={`${classes.modal} alert alert-success`}>
       <div className={classes.content}>
         {children}
       </div>

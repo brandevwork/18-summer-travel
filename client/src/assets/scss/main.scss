@@ -209,7 +209,7 @@ h3 {
   background-size: cover;
   max-width: 100%;
   margin: 0 auto;
-  height: 100%;
+  height: 100vh;
   &-finished {
     background: url("../images/finished-bg.png") no-repeat center top;
     background-size: cover;
@@ -562,9 +562,9 @@ input {
         grid-gap: 55px;
         align-items: center;
         &-confirm {
-          grid-template-columns: 120px auto;
+          grid-template-columns: 180px auto;
           place-content: flex-start;
-          grid-gap: 10px;
+          grid-gap: 200px;
         }
         span {
           font-size: 14px;

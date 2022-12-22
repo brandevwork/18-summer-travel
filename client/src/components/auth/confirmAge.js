@@ -24,14 +24,12 @@ function ConfirmAge({familyMemberState: {family_member, family_members}, nextCli
 		let content = [];
 		for(let i = 0; i < totalMembers; i++) {
 			content.push(
-				<ol>
 					<li className="mb-1 ps-2">
 	          <div className="list-grid list-grid-confirm">
 	            <div ref={el => yearRef.current[i+1] = el}>{totalMembersData[i].name}</div>
 	            <div ef={el => yearRef.current[i+1] = el}>{getAge(totalMembersData[i].birth_year)}</div>
 	          </div>
 	        </li>
-			  </ol> 
 			)
 		}
 		return content   
@@ -49,7 +47,9 @@ function ConfirmAge({familyMemberState: {family_member, family_members}, nextCli
 	          </h2>
 	          <p className="font-bold">Click the <NavLink onClick={() => nextClickHandler('pickAge')}>Back</NavLink> button to make a correction.</p>
 	          <div className="age-edit-list">
+	          <ol>
 							{renderNameAndYear ()}
+							</ol>
 	          </div>
 	          <div className="mt-4">
 	            <Button classes="btn btn-primary" title="Next" buttonClickHandler={() => nextClickHandler('saveBeforeSignup')}/>

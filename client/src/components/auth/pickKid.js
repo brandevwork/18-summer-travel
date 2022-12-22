@@ -28,11 +28,11 @@ function PickKid({nextClickHandler}) {
             </h2>
               <Dropdown  onSelect={selectMemberHandler}>
 					      <Dropdown.Toggle variant="light" id="dropdown-basic">
-					        {familyMember != 0 ? familyMember : "Pick Kid"}
+					        {familyMember != 0 ? familyMember : "Pick One"}
 					      </Dropdown.Toggle>
 
 					      <Dropdown.Menu>
-					        <Dropdown.Item eventKey="0">Pick Kid</Dropdown.Item>
+					        <Dropdown.Item eventKey="0">Pick One</Dropdown.Item>
 					        <Dropdown.Item eventKey="1">1</Dropdown.Item>
 					        <Dropdown.Item eventKey="2">2</Dropdown.Item>
 					        <Dropdown.Item eventKey="3">3</Dropdown.Item>

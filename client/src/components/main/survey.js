@@ -9,7 +9,6 @@ import Question from "./question";
 import QuestionKids from "./questionKids";
 
 function Survey()	{
-	let isInitial = false;
 
 	const { id } = useParams();
 	const ctxUser = useContext(AuthContext);
@@ -66,11 +65,11 @@ function Survey()	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
   	}
-  	if (!data.data) {
+  	if (!data) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
   	if (data.status == "400") {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
   	if(data.status == "200"){
   		let resData = {"family_member_id": id, "question_id":data.data.question_id, "choice_ids":data.data.choice_ids}
@@ -79,9 +78,9 @@ function Survey()	{
   	}
   }
 
-  useEffect(()=>{
-  	setQuestionIndex(questionIndexTemp)
-  },[ctxHome])
+  // useEffect(()=>{
+  // 	setQuestionIndex(questionIndexTemp)
+  // },[ctxHome])
 
   useEffect(()=>{
   	if(ctxHome.family.length > 0) {
@@ -91,13 +90,12 @@ function Survey()	{
   },[ctxHome.family])
 
 	useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
+    if(homeState.error){
+    	setQuestionIndex(questionIndex-1)
     }
     if(Object.keys(ctxHome.survey).length > 0)
     	return;
-    if(!isInitial && !homeState.error) {
+    if(!homeState.error) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
       	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
@@ -127,11 +125,13 @@ function Survey()	{
 	}
 
   const submitHandler = async(family_id, question_id, choices, questionIndex, fromWhere="Next") => {
+  	console.log(questionIndex)
+  	console.log("questionIndex")
   	console.log(question_id)
   	console.log(Object.assign({},choices))
   	console.log("question_id")
   	// await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
-  	await setQuestionIndexTemp(questionIndex)
+  	await setQuestionIndex(questionIndex)
   	if (fromWhere == 'Next' || fromWhere == 'last_question') {
 			await sendDataSurveySaved(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
 		    method: 'POST',

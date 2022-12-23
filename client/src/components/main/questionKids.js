@@ -47,10 +47,18 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 	}
 
 	useEffect(()=>{
-		setChoicesAnswers([])
+		
 		let localSurvey = ctxHome.survey.findIndex(sur => sur.id.toString() == question_id.toString())
 		let localChoices = (ctxHome.survey[localSurvey].choices.map(eachChoice => typeof eachChoice.answer !== 'undefined'))
     setCheckedState(localChoices);
+    let ids = ctxHome.survey[localSurvey].choices.map(eachChoice => typeof eachChoice.answer !== 'undefined' ? eachChoice.id.toString() : null)
+    var filtered = ids.filter(function (el) {
+		  return el != null;
+		});
+    if(filtered.length > 0) 
+    	setChoicesAnswers(filtered)
+    else
+    	setChoicesAnswers([])
 	},[question_id])
 
 	const btnHandler = (e, btn) => {
@@ -86,7 +94,7 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
             <div className="slide-heading">
               <div className="pe-4 mt-5">
                 <h2>
-                  What do you like to do when on vacation?
+                  {question_text}
                 </h2>
                 <p className="font-23">
                   Check all the things you like to do!

@@ -50,6 +50,14 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 		let localSurvey = ctxHome.survey.findIndex(sur => sur.id.toString() == question_id.toString())
 		let localChoices = (ctxHome.survey[localSurvey].choices.map(eachChoice => typeof eachChoice.answer !== 'undefined'))
     setCheckedState(localChoices);
+    let ids = ctxHome.survey[localSurvey].choices.map(eachChoice => typeof eachChoice.answer !== 'undefined' ? eachChoice.id.toString() : null)
+    var filtered = ids.filter(function (el) {
+		  return el != null;
+		});
+    if(filtered.length > 0) 
+    	setChoicesAnswers(filtered)
+    else
+    	setChoicesAnswers([])
 	},[question_id])
 
 	const btnHandler = (e) => {

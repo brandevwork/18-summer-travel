@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useContext } from  'react';
-import Card from './components/UI/card';
+import React, { Fragment, useContext } from  'react';
 import Wrapper from './components/UI/wrapper';
 import Login from './components/auth/login';
 import Intro from './components/intro';

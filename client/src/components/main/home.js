@@ -1,9 +1,6 @@
-import React, { useRef, useEffect, useReducer, useContext } from 'react';
-import Input from '../UI/input';
-import Button from '../UI/button';
+import React, { useEffect, useReducer, useContext } from 'react';
 import Back from '../UI/back';
-import HomeBtn from '../UI/homeBtn';
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
@@ -12,11 +9,8 @@ import homeReducer from "../../reducer/homeReducer";
 
 function Home()	{
 
-	let isInitial = false;
-
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
-	const location = useLocation();
 	const navigate = useNavigate();
 
 	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
@@ -29,7 +23,7 @@ function Home()	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
   	}
-  	if (!data.data) {
+  	if (!data) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
   	if (data.status == "400") {
@@ -42,34 +36,23 @@ function Home()	{
   }
 
 	useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
-    if(!isInitial) {
-      if (ctxUser.id !== '') {
-      	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
-	      method: 'GET',
-			  headers: {
-			    "Content-Type": "application/json",
-			    Authorization: localStorage.getItem("token"),
-			  },
-			},
-		  getAuthData);
-      	// navigateHandler('/main');
-      }
+    if (ctxUser.id !== '') {
+    	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+      method: 'GET',
+		  headers: {
+		    "Content-Type": "application/json",
+		    Authorization: localStorage.getItem("token"),
+		  },
+		},
+	  getAuthData);
+    	// navigateHandler('/main');
     }
   }, [homeState, sendData, ctxHome.survey])
-
-	const btnHandler = (e) => {
-		e.preventDefault()
-		navigate("/")
-	}
 	
 
 	return (
 		<React.Fragment>
-				{homeLoading && <Modal>Please wait! FAmily members are being fetched ...</Modal>}
+				{homeLoading && <Modal>Please wait! Family members are being fetched ...</Modal>}
 	      <div className="back-page p-4">
 	        <Back title="back"  buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	      </div>

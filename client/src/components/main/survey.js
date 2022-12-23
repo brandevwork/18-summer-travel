@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect, useReducer, useContext } from 'react';
-import Input from '../UI/input';
-import { NavLink, useNavigate, useLocation, useParams } from "react-router-dom";
+import React, { useState, useEffect, useReducer, useContext } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
@@ -15,13 +14,10 @@ function Survey()	{
 	const { id } = useParams();
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
-	const location = useLocation();
 	const navigate = useNavigate();
 
 	const [currAge, setCurrAge] = useState(0)
 	
-
-	const [questionData, setQuestionData] = useState({"family_member_id": id, "question_id": 1, "choice_ids":{}});
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [questionIndexTemp, setQuestionIndexTemp] = useState(0);
 
@@ -45,14 +41,6 @@ function Survey()	{
   	}
   	if(data.status == "ok"){
   		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
-    	// sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
-	    //   method: 'GET',
-			//   headers: {
-			//     "Content-Type": "application/json",
-			//     Authorization: localStorage.getItem("token"),
-			//   },
-			// },
-		  // getAuthData);
   	}
   }
 
@@ -61,7 +49,7 @@ function Survey()	{
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
   		return;
   	}
-  	if (!data.data) {
+  	if (!data) {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
   	}
   	if (data.status == "400") {
@@ -91,11 +79,6 @@ function Survey()	{
   	}
   }
 
-  // useEffect(()=>{
-  // 	if(questionData.choice_ids.length > 0)
-  // 		ctxHome.saveSurvey(questionData);
-  // },[questionData])
-
   useEffect(()=>{
   	setQuestionIndex(questionIndexTemp)
   },[ctxHome])
@@ -108,15 +91,13 @@ function Survey()	{
   },[ctxHome.family])
 
 	useEffect(() => {
-		console.log(ctxHome)
-		console.log("ctxHome")
     if (isInitial) {
       isInitial = false;
       return;
     }
     if(Object.keys(ctxHome.survey).length > 0)
     	return;
-    if(!isInitial) {
+    if(!isInitial && !homeState.error) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
       	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
@@ -138,7 +119,7 @@ function Survey()	{
 			  setFamilyMemebers);
       }
     }
-  }, [homeState, ctxHome, sendDataMember, sendDataSurvey])
+  }, [homeState, ctxHome, sendDataMember, sendDataSurvey, id])
 
   const finishSurvey = async() => {
   	ctxHome.finishSurvey()
@@ -167,6 +148,13 @@ function Survey()	{
 
 	return (
 		<React.Fragment>
+		{homeState.error && 
+      <ul className="text-danger list-group">
+        {homeState.errorMessage.map((eachMessage, index) => (
+          <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+          ))}
+      </ul>
+    }
 		{homeLoadingMember && <Modal>Please wait! Member is initializing ...</Modal>}
 		{homeLoadingSurvey && <Modal>Please wait! Survey Data is being fetched ...</Modal>}
 		{homeLoadingSurveySaved && <Modal>Please wait! Survey Data is being saved ...</Modal>}

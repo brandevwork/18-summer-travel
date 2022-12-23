@@ -1,25 +1,16 @@
 import React, { useContext } from 'react';
 import Button from './UI/button';
-import HomeBtn from './UI/homeBtn';
 import { NavLink, useNavigate } from "react-router-dom";
-import HomeContext from "../store/homeContext";
 import AuthContext from "../store/authContext";
 
 function Intro() {
 
-  const ctxHome = useContext(HomeContext);
   const ctxAuth = useContext(AuthContext);
   const navigate = useNavigate();
   const buttonHandler = (param) => {
     navigate(param)
   }
-
-  const logoutHandler = () => {
-    ctxAuth.logout()
-  }
   
-  
-
 	return (
     <React.Fragment>
       <div className="d-flex justify-content-end">
@@ -38,7 +29,6 @@ function Intro() {
             <h3>Planning of Your Family's “18 Summers” of Vacations</h3>
           </div>
         </div>
-
         <div className="sparkling-star-wrapper">
           <div className="star d-flex justify-content-center align-items-center">
             <img src={require('../assets/images/star.svg').default} className="img-fluid" alt="" />
@@ -74,7 +64,7 @@ function Intro() {
                   <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
                 </div>
                 <div>
-                  <a name="" id="" className="btn btn-primary" href="#" role="button">View Recomendations</a>
+                  <NavLink name="" id="" className="btn btn-primary" role="button">View Recomendations</NavLink>
                 </div>
               </>
             }

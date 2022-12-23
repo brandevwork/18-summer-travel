@@ -69,6 +69,7 @@ function Home()	{
 
 	return (
 		<React.Fragment>
+				{homeLoading && <Modal>Please wait! FAmily members are being fetched ...</Modal>}
 	      <div className="back-page p-4">
 	        <Back title="back"  buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	      </div>

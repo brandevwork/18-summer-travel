@@ -24,7 +24,7 @@ function App() {
     <Route path='/home' element={<Wrapper customClassName=""><Home /></Wrapper>} />
     <Route path='/result' element={<Wrapper customClassName="family-results"><Result /></Wrapper>} />
     <Route path='/survey/:id' element={<Wrapper customClassName=""><Survey /></Wrapper>} />
-    <Route path='/settings' element={<Wrapper customClassName=""><Settings/></Wrapper>} />
+    <Route path='/settings' element={<Settings/>} />
     <Route path='*' element={<div>404 not found</div>} />
   </Fragment>;
 

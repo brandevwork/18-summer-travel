@@ -8,6 +8,7 @@ const HomeContext = React.createContext({
 	getSurveyByMember: (obj) => {},
 	saveSurvey: (obj) => {},
 	finishSurvey: (obj) => {},
+	updateMemberStatus: (family_id) => {},
 });
 export default HomeContext;
 
@@ -68,7 +69,16 @@ export const HomeContextProvider = (props) => {
 
 	    finishSurvey: (obj) => {	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family}, survey: {}}
+	      	return {family:[...prevState.family], survey: {}}
+	      });
+	    },
+
+	    updateMemberStatus: (family_id) => {  
+	    	let fam = familyDataState.family
+	    	let objIndex = fam.findIndex((objArr => objArr.id == family_id));
+	    	fam[objIndex].is_active = !(fam[objIndex].is_active)
+	    	setFamilyDataState(prevState => {
+	      	return {survey:{...prevState.survey}, family: fam}
 	      });
 	    }
    

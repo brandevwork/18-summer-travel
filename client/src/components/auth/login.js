@@ -115,7 +115,7 @@ function Login() {
 	              </div>
 	            </div>
 	            <div>
-	            <Button classes="btn btn-primary" title="Go to Survey Home" type="submit"/>
+	            <Button classes="btn btn-primary me-3" title="Go to Survey Home" type="submit"/>
 	            <Button classes="btn btn-primary" title="Create Account" buttonClickHandler={createHandler} />
 	            </div>
 	          </div>

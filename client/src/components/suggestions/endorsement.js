@@ -20,7 +20,7 @@ function Endorsement()	{
           <div className="d-flex flex-column justify-content-center align-items-center mb-3">
             <div className="font-17 lh-1 my-2">See Results</div>
             <div>
-              <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center" href="#" role="button">
+              <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3" href="#" role="button">
                 <img src={require('../../assets/images/print-icon.svg').default} className="me-1" alt="" />
                 Print Recommendations
               </a>

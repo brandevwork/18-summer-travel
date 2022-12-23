@@ -7,6 +7,30 @@ html,body {
 
 body {
   font-family: 'Neutra Text Light Alt';
+  background: url("../images/map-bg.png") repeat center top;
+  background-size: cover;
+}
+
+.fade-in {
+ -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+         animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @font-face {
@@ -205,9 +229,8 @@ h3 {
 }
 
 .main-wrapper {
-  background: url("../images/map-bg.png") no-repeat center top;
-  background-size: cover;
-  max-width: 100%;
+  max-width: 1133px;
+  width: 100%;
   margin: 0 auto;
   height: 100vh;
   &-finished {
@@ -304,18 +327,20 @@ h3 {
   font-size: 17px;
 }
 .cross-field {
-  position: relative;
+  .form-group {
+    position: relative;
+    .cross-icon {
+      background: url("../images/cross.svg") no-repeat;
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
   .form-control {
     padding-right: 40px;
-  }
-  .cross-icon {
-    background: url("../images/cross.svg") no-repeat;
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 }
 
@@ -765,7 +790,7 @@ input {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr auto;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
   a {
     color: $black;
     text-decoration: none;

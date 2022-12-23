@@ -33,12 +33,12 @@ function PickAge({familyMemberState, nextClickHandler})	{
           <div className="list-grid">
             <div className="cross-field">
               <Input ref={el => nameRef.current[i+1] = el}  input={{"key":Math.random() , "type":"text", "placeholder":"Name",
-			      "className":"form-control rounded input-lg text-center no-border"}}/>
+			      "className":"form-control input-lg text-center "}}/>
               <div className="cross-icon"></div>
             </div>
             <div className="cross-field">
               <Input ref={el => yearRef.current[i+1] = el} input={{"key":Math.random() ,"type":"text", "placeholder":"Year",
-			      "className":"form-control rounded input-lg text-center no-border"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[i+1] = el}></span>
+			      "className":"form-control input-lg text-center"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[i+1] = el}></span>
               <div className="cross-icon"></div>
             </div>
           </div>
@@ -96,22 +96,15 @@ function PickAge({familyMemberState, nextClickHandler})	{
 	          <div className="age-edit-list">
 	            <ol>
 	              <li className="mb-3 ps-2">
-	                <div className="list-grid">
-  							    <div class="col-auto">
-								      <div class="input-group mb-2">
-								        <input type="text" class="form-control" id="inlineFormInputGroup" ref={el => nameRef.current[0] = el} value={familyMemberState.first_name} />
-								        <div class="input-group-prepend">
-								          <div class="input-group-text" style={{"padding":"8px"}}>This is you</div>
-								        </div>
-								      </div>
-								    </div>
-	                  <div className="cross-field">
-	                   <Input ref={el => yearRef.current[0] = el}  input={{"type":"text", "placeholder":"Year",
-	    									"className":"form-control"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[0] = el}></span>
-	                    <div className="cross-icon"></div>
-	                  </div>
-	                </div>
-	              </li>
+ 	                <div className="list-grid">
+ 	                  <div><Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
+		      							"className":"form-control"}}/><span className="position-absolute font-11">This is you!</span></div>
+ 	                  <div className="cross-field">
+ 	                   <Input ref={el => yearRef.current[0] = el}  input={{"type":"text", "placeholder":"Year",
+ 	    									"className":"form-control"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[0] = el}></span>
+ 	                  </div>
+ 	                </div>
+ 	              </li>
 	              {renderNameAndYear ()}
 	            </ol>
 	          </div>

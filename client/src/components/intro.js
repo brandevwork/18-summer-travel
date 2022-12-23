@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Button from './UI/button';
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/authContext";
 
 function Intro() {
@@ -64,7 +64,7 @@ function Intro() {
                   <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
                 </div>
                 <div>
-                  <NavLink name="" id="" className="btn btn-primary" role="button">View Recomendations</NavLink>
+                  <Button classes="btn btn-primary" title="View Recomendations" buttonClickHandler={() => {buttonHandler('/')}}/>
                 </div>
               </>
             }

@@ -3,26 +3,28 @@ import React, { useState } from 'react';
 const HomeContext = React.createContext({
 	survey:{},
 	family:{},
-	notification:"",
+	notification:[],
 	getAllFamilyMembers: (obj) => {},
 	getSurveyByMember: (obj) => {},
 	saveSurvey: (obj) => {},
 	finishSurvey: (obj) => {},
 	updateMemberStatus: (family_id) => {},
+	setNotifications: (notifications) => {},
 });
 export default HomeContext;
 
 export const HomeContextProvider = (props) => {
 
-	const [familyDataState, setFamilyDataState] = useState({family:{}, survey:{}, notification:""});
+	const [familyDataState, setFamilyDataState] = useState({family:{}, survey:{}, notification:[]});
 	
 	const home = {
 		 	family:familyDataState.family,
 		 	survey:familyDataState.survey,
+		 	notification:familyDataState.notification,
 
 	    getAllFamilyMembers: (obj,notification) => {
 	      setFamilyDataState(prevState => {
-	      	return {...prevState, family: obj, "notification": notification}
+	      	return {...prevState, family: obj, notification:[]}
 	      });
 	      // setFamilyDataState({family:obj, notification})
 	    },
@@ -43,7 +45,7 @@ export const HomeContextProvider = (props) => {
         // "category": "Destinations: Bermuda"
         // })
 	    	setFamilyDataState(prevState => {
-	      	return {family:[...prevState.family], survey: obj}
+	      	return {family:{...prevState.family}, survey: obj, notification:[]}
 	      });
 	    },
 	    saveSurvey: (obj) => {
@@ -63,13 +65,13 @@ export const HomeContextProvider = (props) => {
 	    	})
 	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:[...prevState.family], survey: sur}
+	      	return {family:{...prevState.family}, survey: sur, notification: []}
 	      });
 	    },
 
 	    finishSurvey: (obj) => {	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:[...prevState.family], survey: {}}
+	      	return {family:{...prevState.family}, survey: {},notification: []}
 	      });
 	    },
 
@@ -78,7 +80,12 @@ export const HomeContextProvider = (props) => {
 	    	let objIndex = fam.findIndex((objArr => objArr.id == family_id));
 	    	fam[objIndex].is_active = !(fam[objIndex].is_active)
 	    	setFamilyDataState(prevState => {
-	      	return {survey:{...prevState.survey}, family: fam}
+	      	return {survey:{...prevState.survey}, family: fam, notification:[]}
+	      });
+	    },
+	    setNotifications: (notifications) => {
+	    	setFamilyDataState(prevState => {
+	      	return {survey:{...prevState.survey}, family:{...prevState.family}, notification: notifications}
 	      });
 	    }
    

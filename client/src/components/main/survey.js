@@ -20,7 +20,7 @@ function Survey()	{
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [questionIndexTemp, setQuestionIndexTemp] = useState(0);
 
-	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
+	const initialHomeState = { familyError: false, surveyError: false, questionSavedError: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
 	
 	const {fetchDataHandler: sendDataMember, loading: homeLoadingMember} = useData();
@@ -29,14 +29,14 @@ function Survey()	{
   
   const setFamilyMemebers = async(data) => {
   	if (data.error) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+  		dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.error});
   		return;
   	}
-  	if (!data.data) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  	if (!data) {
+  		dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.message})
   	}
   	if (data.status == "400") {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  		dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.status.message})
   	}
   	if(data.status == "ok"){
   		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
@@ -45,14 +45,14 @@ function Survey()	{
 
   const getAuthData = async(data) => {
   	if (data.error) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+  		dispatch({type: "SERVER_ERROR", surveyError: true, errorMessage:data.error});
   		return;
   	}
   	if (!data) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  		dispatch({type: "SERVER_ERROR", surveyError: true, errorMessage:data.message})
   	}
   	if (data.status == "400") {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  		dispatch({type: "SERVER_ERROR", surveyError: true, errorMessage:data.status.message})
   	}
   	if(data.length > 0){
   		await ctxHome.getSurveyByMember(data);
@@ -62,14 +62,14 @@ function Survey()	{
 
   const questionSaved = async(data) => {
   	if (data.error) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+  		dispatch({type: "SERVER_ERROR", questionSavedError: true, errorMessage:data.error});
   		return;
   	}
   	if (!data) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  		dispatch({type: "SERVER_ERROR", questionSavedError: true, errorMessage:data.message})
   	}
   	if (data.status == "400") {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  		dispatch({type: "SERVER_ERROR", questionSavedError: true, errorMessage:data.message})
   	}
   	if(data.status == "200"){
   		let resData = {"family_member_id": id, "question_id":data.data.question_id, "choice_ids":data.data.choice_ids}
@@ -90,12 +90,21 @@ function Survey()	{
   },[ctxHome.family])
 
 	useEffect(() => {
-    if(homeState.error){
-    	setQuestionIndex(questionIndex-1)
+    if(homeState.questionSavedError){
+    	if(questionIndex > 0)
+    		setQuestionIndex(questionIndex-1)
+    }
+    if(homeState.familyError){
+    	ctxHome.setNotifications(homeState.errorMessage)
+    	navigate("/home")
+    }
+    if(homeState.surveyError){
+    	ctxHome.setNotifications(homeState.errorMessage)
+    	navigate("/home")
     }
     if(Object.keys(ctxHome.survey).length > 0)
     	return;
-    if(!homeState.error) {
+    if(!homeState.familyError && !homeState.surveyError && !homeState.questionSavedError ) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
       	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
@@ -148,7 +157,7 @@ function Survey()	{
 
 	return (
 		<React.Fragment>
-		{homeState.error && 
+		{homeState.questionSavedError && 
       <ul className="text-danger list-group">
         {homeState.errorMessage.map((eachMessage, index) => (
           <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>

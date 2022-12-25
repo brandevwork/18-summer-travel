@@ -13,7 +13,7 @@ function Home()	{
 	const ctxHome = useContext(HomeContext);
 	const navigate = useNavigate();
 
-	const initialHomeState = { family_members:{}, error: false, errorMessage: []};
+	const initialHomeState = { familyError: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
 	
 	const {fetchDataHandler: sendData, loading: homeLoading} = useData();
@@ -53,6 +53,13 @@ function Home()	{
 	return (
 		<React.Fragment>
 				{homeLoading && <Modal>Please wait! Family members are being fetched ...</Modal>}
+				{ctxHome.notification.length > 0 && 
+		      <ul className="text-danger list-group">
+		        {ctxHome.notification.map((eachMessage, index) => (
+		          <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+		          ))}
+		      </ul>
+		    }
 	      <div className="back-page p-4">
 	        <Back title="back"  buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
 	      </div>

@@ -5,15 +5,17 @@ const homeReducer = (state, action) => {
   if (action.type == 'SERVER_ERROR') {
   	errors.push(action.errorMessage);
   	return {
-      family_members: state.family_members,
-      error: action.error,
+      familyError: typeof action.familyError !== 'undefined' ? action.familyError :false,
+      surveyError: typeof action.surveyError !== 'undefined' ? action.surveyError :false,
+      questionSavedError: typeof action.questionSavedError !== 'undefined' ? action.questionSavedError :false,
       errorMessage: errors
     }
   }
   else {
     return {
-      family_members: state.family_members,
-      error: false,
+      familyError: false,
+      surveyError: false,
+      questionSavedError: false,
       errorMessage:[]
     }
   }

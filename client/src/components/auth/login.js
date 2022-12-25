@@ -43,7 +43,7 @@ function Login() {
   		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
   	}
   	if(data.status.code == "200"){
-  		await ctxAuth.login({"name": data.data.first_name+" "+data.data.last_name, "email": data.data.email, "id": data.data.id,"token": headers.get('Authorization'), "notification": data.status.message});
+  		await ctxAuth.login({"name": data.data.first_name+" "+data.data.last_name, "email": data.data.email, "id": data.data.id,"token": headers.get('Authorization'), "notification": ""});
     	navigateHandler('/');
   	}
   }

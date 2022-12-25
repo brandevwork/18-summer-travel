@@ -8,7 +8,7 @@ function Setup({familyMemberState: {family :{first_name, last_name, email, id, t
 	const navigate = useNavigate();
 	const navigateHandler = (e) => {
 		// navigate(e);
-    ctxAuth.signup({"name": first_name+" "+last_name, "email": email, "id": id, "token": token, "notification":notification});
+    ctxAuth.signup({"name": first_name+" "+last_name, "email": email, "id": id, "token": token, "notification":""});
 
 	}
 	return (

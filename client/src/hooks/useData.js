@@ -1,6 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
+import AuthContext from "../store/authContext";
 const delay = ms => new Promise(res => setTimeout(res, ms));
 function useData()	{
+  const ctxUser = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const fetchDataHandler = useCallback(async (url, config="", applyData) => {
     setLoading(true);
@@ -14,6 +16,7 @@ function useData()	{
         let data = JSON.parse(text)
         applyData(data,response.headers);
       }catch(err){
+        ctxUser.logout(text)
         applyData({"error":text});
       }
     } catch (error) {

@@ -13,6 +13,11 @@ function Intro() {
   
 	return (
     <React.Fragment>
+      {ctxAuth.notification !== "" && 
+        <ul className="text-danger list-group">
+            <li className="list-group-item list-group-item-danger" key={Math.random()}>{ctxAuth.notification}</li>
+        </ul>
+      }
       <div className="d-flex justify-content-end">
         <div className="logo">
           <img src={require('../assets/images/logo.svg').default} className="img-fluid" alt="" />

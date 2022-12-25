@@ -79,7 +79,7 @@ function SignUp(props)  {
       await localStorage.setItem("token", headers.get('Authorization'));
       nextClickHandler("setup",{
         "family":{id: data.data.id,"first_name":firstnameRef.current.value, "last_name":lastnameRef.current.value,
-          "email":emailRef.current.value, "token":headers.get('Authorization'),"notification":data.status.message}
+          "email":emailRef.current.value, "token":headers.get('Authorization'),"notification":""}
       })
 
     } else {

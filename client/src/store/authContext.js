@@ -35,6 +35,7 @@ export const AuthContextProvider = (props) => {
 	    id: authDataState.id,
 	    jti: authDataState.jti,
 	    token: authDataState.token,
+	    notification: authDataState.notification,
 	    login: (obj) => {
 	      setauthDataState(obj);
 	      localStorage.setItem("id", obj.id);
@@ -43,8 +44,8 @@ export const AuthContextProvider = (props) => {
 				localStorage.setItem("jti", obj.jti);
 				localStorage.setItem("token", obj.token);
 	    },
-	    logout: () => {
-	      setauthDataState({email:"", name:"",notification:"Logged Out"});
+	    logout: (notify="Logged Out") => {
+	      setauthDataState({email:"", name:"", jti:"",token: "", id:"", notification: notify});
 	      localStorage.removeItem("email");
 	      localStorage.removeItem("name");
 	      localStorage.removeItem("jti");

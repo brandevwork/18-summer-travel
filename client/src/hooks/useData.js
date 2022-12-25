@@ -8,9 +8,14 @@ function useData()	{
       let response="";
       response = config !== "" ? await fetch(url,config) : await fetch(url);
       await delay(1000);
-      const data = await response.json();
+      const text = await response.text();
       setLoading(false);
-      applyData(data,response.headers);
+      try{
+        let data = JSON.parse(text)
+        applyData(data,response.headers);
+      }catch(err){
+        applyData({"error":text});
+      }
     } catch (error) {
       setLoading(false);
       applyData({"error":error.message});

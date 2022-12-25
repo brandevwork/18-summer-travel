@@ -24,7 +24,7 @@ export const HomeContextProvider = (props) => {
 
 	    getAllFamilyMembers: (obj,notification) => {
 	      setFamilyDataState(prevState => {
-	      	return {...prevState, family: obj, notification:[]}
+	      	return {...prevState, family: obj}
 	      });
 	      // setFamilyDataState({family:obj, notification})
 	    },

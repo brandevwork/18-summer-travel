@@ -12,7 +12,7 @@ import Modal from "../UI/modal";
 function Settings(props)	{
   const ctxUser = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
-  const initialHomeState = { family_members:{}, error: false, errorMessage: []};
+  const initialHomeState = { familyError: false, resetError: false, activeError: false, errorMessage: []};
   const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
   const {fetchDataHandler: sendData, loading: homeLoading} = useData();
   const {fetchDataHandler: sendDataReset, loading: homeLoadingReset} = useData();
@@ -24,14 +24,14 @@ function Settings(props)	{
   
   const getAuthData = async(data) => {
     if (data.error) {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.error});
       return;
     }
     if (!data.data) {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.message})
     }
     if (data.status == "400") {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.status.message})
     }
     if(data.status == "ok"){
       await ctxHome.getAllFamilyMembers(data.data.family,data.status);
@@ -41,14 +41,14 @@ function Settings(props)	{
 
   const getAuthDataReset = async(data) => {
     if (data.error) {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+      dispatch({type: "SERVER_ERROR", resetError: true, errorMessage:data.error});
       return;
     }
     if (!data.data) {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+      dispatch({type: "SERVER_ERROR", resetError: true, errorMessage:data.message})
     }
     if (data.status == "400") {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+      dispatch({type: "SERVER_ERROR", resetError: true, errorMessage:data.status.message})
     }
     if(data.status == "200"){
       await ctxHome.finishSurvey();
@@ -58,14 +58,14 @@ function Settings(props)	{
 
   const getAuthDataActive = async(data) => {
     if (data.error) {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+      dispatch({type: "SERVER_ERROR", activeError: true, errorMessage:data.error});
       return;
     }
     if (!data.data) {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+      dispatch({type: "SERVER_ERROR", activeError: true, errorMessage:data.message})
     }
     if (data.status == "400") {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+      dispatch({type: "SERVER_ERROR", activeError: true, errorMessage:data.status.message})
     }
     if(data.status == "ok"){
       // navigateHandler('/');
@@ -80,7 +80,7 @@ function Settings(props)	{
       setCheckedState(currStatus)
       return  
     }
-    if (ctxUser.id !== '') {
+    if (ctxUser.id !== '' && !homeState.familyError) {
       sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
       method: 'GET',
       headers: {
@@ -129,6 +129,13 @@ function Settings(props)	{
     {homeLoading && <Modal>Please wait! Family members are being fetched ...</Modal>}
     {homeLoadingActive && <Modal>Please wait! This member status is being updated ...</Modal>}
     {homeLoadingReset && <Modal>Please wait! Survey is being reset ...</Modal>}
+    {(homeState.familyError || homeState.activeError || homeState.resetError)  && 
+      <ul className="text-danger list-group">
+        {homeState.errorMessage.map((eachMessage, index) => (
+          <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+          ))}
+      </ul>
+    }
     <div className="settings-page">
       <div className="back-page">
         <NavLink to="/" className="d-flex align-items-center p-4">

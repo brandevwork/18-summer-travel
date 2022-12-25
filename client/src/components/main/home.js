@@ -20,14 +20,16 @@ function Home()	{
   
   const getAuthData = async(data) => {
   	if (data.error) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.error});
+  		dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.error});
   		return;
   	}
   	if (!data) {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
+  		dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.message})
+  		return;
   	}
   	if (data.status == "400") {
-  		dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+  		dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.status.message})
+  		return;
   	}
   	if(data.status == "ok"){
   		await ctxHome.getAllFamilyMembers(data.data.family,data.status);
@@ -36,7 +38,7 @@ function Home()	{
   }
 
 	useEffect(() => {
-    if (ctxUser.id !== '') {
+    if (ctxUser.id !== '' && !homeState.familyError) {
     	sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
       method: 'GET',
 		  headers: {
@@ -56,6 +58,13 @@ function Home()	{
 				{ctxHome.notification.length > 0 && 
 		      <ul className="text-danger list-group">
 		        {ctxHome.notification.map((eachMessage, index) => (
+		          <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+		          ))}
+		      </ul>
+		    }
+		    {homeState.familyError && 
+		      <ul className="text-danger list-group">
+		        {homeState.errorMessage.map((eachMessage, index) => (
 		          <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
 		          ))}
 		      </ul>

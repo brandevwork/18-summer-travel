@@ -106,7 +106,7 @@ function Survey()	{
     	return;
     if(!homeState.familyError && !homeState.surveyError && !homeState.questionSavedError ) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
-      	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
+      	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/999999`, {
 	      method: 'GET',
 			  headers: {
 			    "Content-Type": "application/json",

@@ -27,7 +27,7 @@ function Settings(props)	{
       dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.error});
       return;
     }
-    if (!data.data) {
+    if (!data) {
       dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.message})
     }
     if (data.status == "400") {
@@ -44,7 +44,7 @@ function Settings(props)	{
       dispatch({type: "SERVER_ERROR", resetError: true, errorMessage:data.error});
       return;
     }
-    if (!data.data) {
+    if (!data) {
       dispatch({type: "SERVER_ERROR", resetError: true, errorMessage:data.message})
     }
     if (data.status == "400") {
@@ -61,7 +61,7 @@ function Settings(props)	{
       dispatch({type: "SERVER_ERROR", activeError: true, errorMessage:data.error});
       return;
     }
-    if (!data.data) {
+    if (!data) {
       dispatch({type: "SERVER_ERROR", activeError: true, errorMessage:data.message})
     }
     if (data.status == "400") {
@@ -73,6 +73,8 @@ function Settings(props)	{
   }
 
   useEffect(() => {
+    console.log(homeState)
+    console.log("homeState")
     if(familyMemberId > 0)
       ctxHome.updateMemberStatus(familyMemberId);
     if(ctxHome.family.length > 0) {

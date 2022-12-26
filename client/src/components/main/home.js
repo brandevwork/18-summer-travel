@@ -49,6 +49,9 @@ function Home()	{
 	  getAuthData);
     	// navigateHandler('/main');
     }
+    return () => {
+    	// ctxHome.finishSurvey({});
+    }
   }, [homeState, sendData, ctxHome.survey])
 	
 

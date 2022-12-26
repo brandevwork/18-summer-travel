@@ -14,7 +14,6 @@ const AuthContext = React.createContext({
 export default AuthContext;
 
 export const AuthContextProvider = (props) => {
-
 	const [authDataState, setauthDataState] = useState({id:"", email:"", name:"", jti:"",token:"", notification:""});
 	
 	useEffect(() => {
@@ -44,7 +43,7 @@ export const AuthContextProvider = (props) => {
 				localStorage.setItem("jti", obj.jti);
 				localStorage.setItem("token", obj.token);
 	    },
-	    logout: (notify="Logged Out") => {
+	    logout: async(notify="Logged Out") => {
 	      setauthDataState({email:"", name:"", jti:"",token: "", id:"", notification: notify});
 	      localStorage.removeItem("email");
 	      localStorage.removeItem("name");

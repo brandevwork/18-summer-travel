@@ -11,6 +11,7 @@ const HomeContext = React.createContext({
 	finishSurvey: (obj) => {},
 	updateMemberStatus: (family_id) => {},
 	setNotifications: (notifications) => {},
+	clearContext: () => {},
 });
 export default HomeContext;
 
@@ -67,7 +68,7 @@ export const HomeContextProvider = (props) => {
 	    	})
 	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family}, currFamilyMemberId:prevState.currFamilyMemberId, survey: sur, notification: []}
+	      	return {family:{...prevState.family}, currFamilyMemberId: prevState.currFamilyMemberId, survey: sur, notification: []}
 	      });
 	    },
 
@@ -89,6 +90,9 @@ export const HomeContextProvider = (props) => {
 	    	setFamilyDataState(prevState => {
 	      	return {survey:{}, family:{...prevState.family}, currFamilyMemberId:0 ,notification: notifications}
 	      });
+	    },
+	    clearContext: () => {
+	    	setFamilyDataState({survey:{}, family:{}, currFamilyMemberId:0 ,notification: []});
 	    }
    
 	}

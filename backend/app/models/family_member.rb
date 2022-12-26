@@ -1,5 +1,5 @@
 class FamilyMember < ApplicationRecord
-  enum survey_status: [:pending, :in_progress, :completed]
+  enum survey_status: %i[pending in_progress completed]
   before_save :set_age
 
   belongs_to :family
@@ -8,6 +8,7 @@ class FamilyMember < ApplicationRecord
 
   validates :name, :birth_year, presence: true
   validate :check_year_of_birth
+  validates_format_of :name, without: /\A[0-9]+\z/, message: 'only characters are allowed'
 
   private
 

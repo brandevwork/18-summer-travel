@@ -5,6 +5,7 @@ import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
 import Modal from "../UI/modal";
+import ComponentToPrint from "./componentToPrint";
 import homeReducer from "../../reducer/homeReducer";
 import ReactToPrint from 'react-to-print';
 
@@ -105,7 +106,7 @@ function Result()	{
       <div className="back-page">
         <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
       </div>
-      <div className="center-content mx-auto" ref={printRef}>
+      <div className="center-content mx-auto">
         <div className="result-header">
           <div className="d-flex">
             <div className="family-icon">
@@ -120,17 +121,6 @@ function Result()	{
             <div className="font-17 lh-1 my-2">See Recommendations</div>
             <div>
             <ReactToPrint
-            pageStyle={{
-              "display": "grid",
-              "gridTemplateColumns": "62% 36%",
-              "gridGap": "15px",
-              "background": "#FFF9E8",
-              "boxShadow": "0px 4px 4px rgb(0 0 0 / 25%)",
-              "borderRadius": "15px",
-              "padding": "15px",
-              "height": "calc(100vh - 340px)",
-              "overflow": "auto"
-            }} 
         trigger={() => <button name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3" role="button">
                 <img src={require('../../assets/images/print-icon.svg').default} className="me-1" alt="" />
                 Print Results
@@ -144,7 +134,7 @@ function Result()	{
             </div>
           </div>
         </div>
-        <div  className="result-grid" ref={printRef}>
+        <div  className="result-grid" >
           <div className="table-wrap">
             
             {Object.keys(acticityQuestions).length > 0 &&
@@ -186,20 +176,22 @@ function Result()	{
               </div>
               </>
             )}
-
           </div>
 
           <div className="rightsidebar">
-          {Object.keys(acticityQuestions).length > 0 && Object.keys(acticityQuestions).map((key) => 
-            <section>
-              <h4 className="font-bold">{key}</h4>
-              <ul>
-              {(acticityQuestions[key]).map(childKey => 
-                <li><a href="">{childKey.choice_text}</a></li>
-              )}
-              </ul>
-            </section>
-          )}
+            {Object.keys(acticityQuestions).length > 0 && Object.keys(acticityQuestions).map((key) => 
+              <section>
+                <h4 className="font-bold">{key}</h4>
+                <ul>
+                {(acticityQuestions[key]).map(childKey => 
+                  <li><a href="">{childKey.choice_text}</a></li>
+                )}
+                </ul>
+              </section>
+            )}
+          </div>
+          <div style={{ display: "none" }}>
+             <ComponentToPrint acticityQuestions={acticityQuestions} ctxHomeResults={ctxHome.results} ref={printRef} />
           </div>
         </div>
       </div>

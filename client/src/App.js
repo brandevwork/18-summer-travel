@@ -6,6 +6,7 @@ import SignUp from './components/auth/signup';
 import Home from './components/main/home';
 import Settings from './components/main/settings';
 import Result from './components/result/result';
+import LetsStart from './components/main/letsStart';
 import Recomendation from './components/suggestions/recomendation';
 import Survey from './components/main/survey';
 import { Route, Routes, Navigate } from 'react-router-dom';
@@ -22,6 +23,7 @@ function App() {
     <Route path='/login' element={navigateToRoot} />
     <Route path='/signup' element={navigateToRoot} />
     <Route path='/home' element={<Wrapper customClassName=""><Home /></Wrapper>} />
+    <Route path='/lets_start/:id' element={<Wrapper customClassName="family-results"><LetsStart /></Wrapper>} />
     <Route path='/result' element={<Wrapper customClassName="family-results"><Result /></Wrapper>} />
     <Route path='/recomendation' element={<Wrapper customClassName="family-results recommendations"><Recomendation /></Wrapper>} />
     <Route path='/survey/:id' element={<Wrapper customClassName=""><Survey /></Wrapper>} />

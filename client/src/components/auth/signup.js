@@ -22,7 +22,7 @@ let isInitial = true;
 
 
 function SignUp(props)  {
-
+  let regex = /^[a-zA-Z ]*$/;
   const ctxAuth = useContext(AuthContext);
   const [renderState, setRenderState] = useState(ctxAuth.familyMemberState.family_members ? 'signupSection':'welcome');
   const [familyMemberState, setFamilyMemberState] = useState(ctxAuth.familyMemberState);
@@ -93,6 +93,52 @@ function SignUp(props)  {
       return;
     }
     if (!isInitial) {
+      if(authState.firstname == "")
+        firstnameRef.current.style.border = "1px solid red";
+      else{
+        if(regex.test(authState.firstname)) {
+          firstnameRef.current.style.border = "0.5px solid #C6C6C8";
+        }
+        else
+         firstnameRef.current.style.border = "1px solid red";
+      }
+      if(authState.lastname == "")
+        lastnameRef.current.style.border = "1px solid red";
+      else{
+        if(regex.test(authState.lastname)) {
+          lastnameRef.current.style.border = "0.5px solid #C6C6C8";
+        }
+        else
+         lastnameRef.current.style.border = "1px solid red";
+      }
+      if(authState.email == "")
+        emailRef.current.style.border = "1px solid red";
+      else
+        emailRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.address == "")
+        addressRef.current.style.border = "1px solid red";
+      else
+        addressRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.city == "")
+        cityRef.current.style.border = "1px solid red";
+      else
+        cityRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.state == "")
+        stateRef.current.style.border = "1px solid red";
+      else
+        stateRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.country == "")
+        countryRef.current.style.border = "1px solid red";
+      else
+        countryRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.password == "")
+        passwordRef.current.style.border = "1px solid red";
+      else
+        passwordRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.zip == "")
+        zipRef.current.style.border = "1px solid red";
+      else
+        zipRef.current.style.border = "0.5px solid #C6C6C8";
       if (!authState.error && authState.email !== '' && authState.password !== '') {
         sendData(`${process.env.REACT_APP_SERVER_URL}families`, {
         method: 'POST',

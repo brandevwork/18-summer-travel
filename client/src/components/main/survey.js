@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useContext } from 'react';
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation, } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
@@ -171,7 +171,7 @@ function Survey()	{
 			currAge > 14  ?
 				ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
-						<Question questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						<Question question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 					)
 			:
 			ctxHome.survey.length > 0 &&

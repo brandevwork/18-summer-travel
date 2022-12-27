@@ -8,7 +8,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 
 function Home()	{
-
+	const allEqual = arr => arr.every( v => v === arr[0] )
 	const ctxUser = useContext(AuthContext);
 	const ctxHome = useContext(HomeContext);
 	const navigate = useNavigate();
@@ -53,7 +53,29 @@ function Home()	{
     	// ctxHome.finishSurvey({});
     }
   }, [homeState, sendData, ctxHome.survey])
+
+  useEffect(() => {
+  	ctxHome.setNotifications([])
+  },[])
 	
+	const decideForResults = () => {
+		const status = ctxHome.family.map(member =>member.survey_status)
+		if (allEqual(status))
+			navigate("/result")
+		else{
+			dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:"Survey is not completed by the whole famliy"});
+  		return;
+		}
+	}
+	const decideForRec = () => {
+		const status = ctxHome.family.map(member =>member.survey_status)
+		if (allEqual(status))
+			navigate("/recomendation")
+		else{
+			dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:"Survey is not completed by the whole famliy"});
+  		return;
+		}
+	}
 
 	return (
 		<React.Fragment>
@@ -93,7 +115,7 @@ function Home()	{
 			                		if (member.survey_status == 'pending' && member.age > 4) {
 														return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<NavLink to={`/survey/${member.id}`} className="btn btn-warning btn-sm me-2">
+							                	<NavLink to={`/lets_start/${member.id}`} className="btn btn-warning btn-sm me-2">
 							                		Not Started
 							                	</NavLink>
 							                </div>
@@ -103,7 +125,7 @@ function Home()	{
 			                		if (member.survey_status == 'in_progress' && member.age > 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<NavLink to={`/survey/${member.id}`} className="btn btn-yellow btn-sm me-2">
+							                	<NavLink to={`/lets_start/${member.id}`} className="btn btn-yellow btn-sm me-2">
 							                		Started
 							                	</NavLink>
 							                </div>
@@ -112,18 +134,18 @@ function Home()	{
 			                		if (member.survey_status == 'completed' && member.age > 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<NavLink to="/" className="btn btn-success btn-sm me-2">
+							                	<button onClick={decideForResults} className="btn btn-success btn-sm me-2">
 							                		Finished
-							                	</NavLink>
+							                	</button>
 							                </div>
 							                <div className="font-30 ms-4 lh-1">{member.name}</div>
 							              </div>)
 						              if (member.age <= 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<NavLink to="/home" className="btn btn-default btn-sm me-2">
+							                	<button onClick={decideForResults} className="btn btn-default btn-sm me-2">
 							                		Too Young
-							                	</NavLink>
+							                	</button>
 							                </div>
 							                <div className="font-30 ms-4 lh-1">{member.name}</div>
 							              </div>)
@@ -133,7 +155,7 @@ function Home()	{
 
 	            </div>
 	            <div className="mb-3">
-	              <a name="" id="" className="btn btn-primary" href="./interests.html" role="button">View Recomendations</a>
+	              <button name="" id="" className="btn btn-primary" onClick={decideForRec} role="button">View Recomendations</button>
 	            </div>
 	            <div className="d-flex flex-column">
 	              <div>

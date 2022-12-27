@@ -34,7 +34,9 @@ function Result()	{
       return;
     }
     if (data.status == "204") {
-      dispatch({type: "SERVER_ERROR", resultError: true, errorMessage:data.message})
+      ctxHome.setNotifications([data.message])
+      navigate("/")
+      // dispatch({type: "SERVER_ERROR", resultError: true, errorMessage:data.message})
       return;
     }
     if(data.length > 0){

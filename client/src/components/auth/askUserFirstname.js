@@ -5,12 +5,22 @@ import Back from '../UI/back';
 
 function AskUserFirstName({familyMemberState: {first_name}, nextClickHandler})	{
 	const firstnameRef = useRef()
-
+  const errRef = useRef()
+  let regex = /^[a-zA-Z ]*$/;
 	const nextHandler = (e) => {
-		if (firstnameRef.current.value !== '')
-			nextClickHandler('askFamily', {"first_name": firstnameRef.current.value})
-		else
+		if (firstnameRef.current.value !== '' )
+      if(regex.test(firstnameRef.current.value)){
+			 nextClickHandler('askFamily', {"first_name": firstnameRef.current.value})
+      }
+      else{
+        firstnameRef.current.style.border = "1px solid red";
+        errRef.current.innerHTML="Only alphabets are allowed";
+      }
+
+		else{
+      errRef.current.innerHTML="Please fill this field";
 			firstnameRef.current.style.border = "1px solid red";
+    }
 	}	
 
 	useEffect (() => {
@@ -35,7 +45,7 @@ function AskUserFirstName({familyMemberState: {first_name}, nextClickHandler})	{
             <div>
               <div className="mt-4 mb-5 cross-field">
               	<Input ref={firstnameRef} input={{"type":"text", "placeholder":"First Name", 
-									"className":"form-control", "aria-describedby" :"helpId"}}/>
+									"className":"form-control", "aria-describedby" :"helpId"}}/><span style={{"color":"red"}} ref={errRef}></span>
                 <div className="cross-icon"></div>
               </div>
             </div>

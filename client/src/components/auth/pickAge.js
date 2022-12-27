@@ -18,10 +18,11 @@ function yearValidation(year) {
 }
 
 function PickAge({familyMemberState, nextClickHandler})	{
-
+	let regex = /^[a-zA-Z ]*$/;
 	const nameRef =  useRef([])
 	const yearRef =  useRef([])
 	const yearErrRef = useRef([])
+	const nameErrRef = useRef([])
 
 	let memberData={}
 	let totalMembers = familyMemberState.family_member
@@ -33,7 +34,7 @@ function PickAge({familyMemberState, nextClickHandler})	{
           <div className="list-grid">
             <div className="cross-field">
               <Input ref={el => nameRef.current[i+1] = el}  input={{"key":Math.random() , "type":"text", "placeholder":"Name",
-			      "className":"form-control input-lg text-center "}}/>
+			      "className":"form-control input-lg text-center "}}/><span style={{"color":"red"}} ref={el => nameErrRef.current[i+1] = el}></span>
               <div className="cross-icon"></div>
             </div>
             <div className="cross-field">
@@ -54,17 +55,40 @@ function PickAge({familyMemberState, nextClickHandler})	{
 			if(nameRef.current[i].value == '') {
 				error = true
 				nameRef.current[i].style.border = "1px solid red";
+					nameErrRef.current[i].innerHTML = "plese fill this field";
+			}
+			else{
+				if(regex.test(nameRef.current[i].value)) {
+					error = false
+					nameRef.current[i].style.border = "0.5px solid #C6C6C8";
+					nameErrRef.current[i].innerHTML = "";
+				}else{
+					error = true
+					nameRef.current[i].style.border = "1px solid red";
+					nameErrRef.current[i].innerHTML = "Only alphabets are allowed";
+				}
 			}
 			if(yearRef.current[i].value == '') {
 				error = true
 				yearRef.current[i].style.border = "1px solid red";
+					yearErrRef.current[i].innerHTML = "plese fill this field";
+
+			}
+			else{
+				error = false
+				yearRef.current[i].style.border = "0.5px solid #C6C6C8";
 			}
 			if(yearRef.current[i].value !== '') {
-				let retObj = yearValidation(yearRef.current[i].value)
+				let retObj = yearValidation(yearRef.current[i].value);
 				if(!retObj.res){
-					error = true
+					error = true;
 					yearRef.current[i].style.border = "1px solid red";
-					yearErrRef.current[i].innerHTML = retObj.msg
+					yearErrRef.current[i].innerHTML = retObj.msg;
+				}
+				else{
+					error = false;
+					yearRef.current[i].style.border = "0.5px solid #C6C6C8";
+					yearErrRef.current[i].innerHTML = "";
 				}
 			}
 			let obj ={"name":nameRef.current[i].value, "birth_year": yearRef.current[i].value}
@@ -98,7 +122,7 @@ function PickAge({familyMemberState, nextClickHandler})	{
 	              <li className="mb-3 ps-2">
  	                <div className="list-grid">
  	                  <div><Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
-		      							"className":"form-control"}}/><span className="position-absolute font-11">This is you!</span></div>
+		      							"className":"form-control"}}/><span className="position-absolute font-11">This is you!</span><span style={{"color":"red"}} ref={el => nameErrRef.current[0] = el}></span></div>
  	                  <div className="cross-field">
  	                   <Input ref={el => yearRef.current[0] = el}  input={{"type":"text", "placeholder":"Year",
  	    									"className":"form-control"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[0] = el}></span>

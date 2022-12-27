@@ -33,10 +33,10 @@ function Recomendation()	{
       return;
     }
     if (data.status == "204") {
-      dispatch({type: "SERVER_ERROR", recomendationError: true, errorMessage:data.message})
-      return;
+      ctxHome.setNotifications([data.message])
+      navigate("/")
     }
-    if(data.data.length > 0){
+    if(data.data){
       await ctxHome.getRecomendations(data.data);
     }
   }
@@ -59,12 +59,10 @@ function Recomendation()	{
   }
 
   useEffect(() => {
-    console.log(Array.from(ctxHome.family).map(f => 
-                              <div class="d-flex flex-column">{f.name} <span>(f.age +1)</span></div>
-                            ))
-    if(ctxHome.recomendations > 0 && Array.from(ctxHome.family).length > 0)
+    if(ctxHome.recomendations > 0 && Array.from(ctxHome.family).length > 0){
       return
-    if (ctxUser.id !== '' && !homeState.recomendationError && !(ctxHome.recomendations.length > 0)) {
+    }
+    if (ctxUser.id !== '' && !homeState.recomendationError && !(Array.from(ctxHome.recomendations).length > 0)) {
       sendDataFamily(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
       method: 'GET',
       headers: {

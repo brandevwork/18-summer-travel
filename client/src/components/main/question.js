@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({questionIndex, question_text, question_id, choices, submitHandler})	{
+function Question({questionIndex, question_image, question_text, question_id, choices, submitHandler})	{
 
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -68,7 +68,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 	return (
 		<React.Fragment>
 			<div className="back-page p-4">
-				<Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1, "Back")}}/>
+				<Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate(`/lets_start/${id}`) : parseInt(questionIndex)-1, "Back")}}/>
 			</div>
 			<div className="center-content mx-auto">
 				<div className="content-grid">
@@ -92,7 +92,7 @@ function Question({questionIndex, question_text, question_id, choices, submitHan
 						</div>
 					</div>
 					<div className="activity-img">
-						<img src={require('../../assets/images/activity_1.png')} className="img-fluid" alt="" />
+						<img src={question_image} className="img-fluid" alt="" />
 					</div>
 				</div>
 			</div>

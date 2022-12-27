@@ -86,7 +86,7 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 
 		<React.Fragment>
       <div className="back-page p-4">
-        <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate("/home") : parseInt(questionIndex)-1, "Back")}}/>
+        <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();submitHandler(id, parseInt(question_id), {}, parseInt(questionIndex)-1 < 0 ? navigate(`/lets_start/${id}`) : parseInt(questionIndex)-1, "Back")}}/>
       </div>
       <div className="center-content mx-auto">
         <div className="content-grid">

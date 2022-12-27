@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import Button from './UI/button';
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/authContext";
+import HomeContext from "../store/homeContext";
 
 function Intro() {
 
   const ctxAuth = useContext(AuthContext);
+  const ctxHome = useContext(HomeContext);
   const navigate = useNavigate();
   const buttonHandler = (param) => {
     navigate(param)
@@ -16,6 +18,13 @@ function Intro() {
       {ctxAuth.notification !== "" && 
         <ul className="text-danger list-group">
             <li className="list-group-item list-group-item-danger" key={Math.random()}>{ctxAuth.notification}</li>
+        </ul>
+      }
+      {ctxHome.notification.length > 0 && 
+        <ul className="text-danger list-group">
+          {ctxHome.notification.map((eachMessage, index) => (
+            <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+            ))}
         </ul>
       }
       <div className="d-flex justify-content-end">
@@ -61,10 +70,7 @@ function Intro() {
               <>
                 <div>
                   <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('home')}}/>
-                </div>
-                <div>
-                  <Button classes="btn btn-primary mb-3" title="Finish Your Survey" buttonClickHandler={() => {buttonHandler('home')}}/>
-                </div>                
+                </div>              
                 <div>
                   <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
                 </div>

@@ -4,7 +4,7 @@ const HomeContext = React.createContext({
 	survey:{},
 	family:{},
 	results:{},
-	recomendations:{},
+	recomendations:[],
 	notification:[],
 	currFamilyMemberId:0,
 	getAllFamilyMembers: (obj) => {},
@@ -21,7 +21,7 @@ export default HomeContext;
 
 export const HomeContextProvider = (props) => {
 
-	const [familyDataState, setFamilyDataState] = useState({family:{},results:{},recomendations:{},currFamilyMemberId:0, survey:{}, notification:[]});
+	const [familyDataState, setFamilyDataState] = useState({family:{},results:{},recomendations:[],currFamilyMemberId:0, survey:{}, notification:[]});
 	
 	const home = {
 		 	family:familyDataState.family,
@@ -33,7 +33,7 @@ export const HomeContextProvider = (props) => {
 
 	    getAllFamilyMembers: (obj,notification) => {
 	      setFamilyDataState(prevState => {
-	      	return {...prevState,results:{...prevState.results},recomendation:{...prevState.recomendation}, family: obj}
+	      	return {...prevState,results:{...prevState.results},recomendations:{...prevState.recomendations}, family: obj}
 	      });
 	      // setFamilyDataState({family:obj, notification})
 	    },
@@ -54,7 +54,7 @@ export const HomeContextProvider = (props) => {
         // "category": "Destinations: Bermuda"
         // })
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family},results:{...prevState.results}, recomendation:{...prevState.recomendation}, survey: obj,currFamilyMemberId:currFamilyMemberId, notification:[]}
+	      	return {family:{...prevState.family},results:{...prevState.results}, recomendations:{...prevState.recomendations}, survey: obj,currFamilyMemberId:currFamilyMemberId, notification:[]}
 	      });
 	    },
 	    saveSurvey: (obj) => {
@@ -74,13 +74,13 @@ export const HomeContextProvider = (props) => {
 	    	})
 	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family},results:{...prevState.results},recomendation:{...prevState.recomendation}, currFamilyMemberId: prevState.currFamilyMemberId, survey: sur, notification: []}
+	      	return {family:{...prevState.family},results:{...prevState.results},recomendations:{...prevState.recomendations}, currFamilyMemberId: prevState.currFamilyMemberId, survey: sur, notification: []}
 	      });
 	    },
 
 	    finishSurvey: (obj) => {	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family}, survey: {},results:{...prevState.results},recomendation:{...prevState.recomendation}, currFamilyMemberId:0, notification: []}
+	      	return {family:{...prevState.family}, survey: {},results:{...prevState.results},recomendations:{...prevState.recomendations}, currFamilyMemberId:0, notification: []}
 	      });
 	    },
 
@@ -89,17 +89,17 @@ export const HomeContextProvider = (props) => {
 	    	let objIndex = fam.findIndex((objArr => objArr.id == family_id));
 	    	fam[objIndex].is_active = !(fam[objIndex].is_active)
 	    	setFamilyDataState(prevState => {
-	      	return {survey:{...prevState.survey},results:{...prevState.results},recomendation:{...prevState.recomendation}, family: fam, notification:[]}
+	      	return {survey:{...prevState.survey},results:{...prevState.results},recomendations:{...prevState.recomendations}, family: fam, notification:[]}
 	      });
 	    },
 	    setNotifications: (notifications) => {
 	    	setFamilyDataState(prevState => {
-	      	return {survey:{}, family:{...prevState.family},results:{...prevState.results},recomendation:{...prevState.recomendation}, currFamilyMemberId:0 ,notification: notifications}
+	      	return {survey:{}, family:{...prevState.family},results:{...prevState.results},recomendations:{...prevState.recomendations}, currFamilyMemberId:0 ,notification: notifications}
 	      });
 	    },
 	    getResults: (results) => {
 	    	setFamilyDataState(prevState => {
-	      	return {results:results, recomendations:{...prevState.recomendations}, survey:{}, family:{...prevState.family}, currFamilyMemberId:0 ,notification: []}
+	      	return {results:results, recomendations:[...prevState.recomendations], survey:{}, family:{...prevState.family}, currFamilyMemberId:0 ,notification: []}
 	      });
 	    },
 	    getRecomendations: (recomendations) => {
@@ -108,7 +108,7 @@ export const HomeContextProvider = (props) => {
 	      });
 	    },
 	    clearContext: () => {
-	    	setFamilyDataState({survey:{}, family:{},results:{},recomendations:{}, currFamilyMemberId:0 ,notification: []});
+	    	setFamilyDataState({survey:{}, family:{},results:{},recomendations:[], currFamilyMemberId:0 ,notification: []});
 	    }
    
 	}

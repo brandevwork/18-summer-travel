@@ -59,10 +59,11 @@ function Home()	{
   },[])
 	
 	const decideForResults = () => {
-		const status = ctxHome.family.map(member =>member.survey_status)
+		const status = ctxHome.family.map(member => member.age>4 ? member.survey_status:"completed")
 		if (allEqual(status))
 			navigate("/result")
 		else{
+
 			dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:"Survey is not completed by the whole famliy"});
   		return;
 		}

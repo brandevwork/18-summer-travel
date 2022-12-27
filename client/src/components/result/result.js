@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useContext, useState } from 'react';
+import React, { useRef, useEffect, useReducer, useContext, useState } from 'react';
 import Back from '../UI/back';
 import { NavLink, useNavigate } from "react-router-dom";
 import useData from "../../hooks/useData";
@@ -6,10 +6,14 @@ import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
 import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
+import ReactToPrint from 'react-to-print';
+
+
 
 let colors = ['bar-zinc', 'bar-purple', 'bar-green', 'bar-orange', 'bar-red', 'bar-blue', 'bar-yellow']
 
 function Result()	{
+  const printRef = useRef(null);
   const navigate = useNavigate();
   const ctxUser = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
@@ -101,7 +105,7 @@ function Result()	{
       <div className="back-page">
         <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
       </div>
-      <div className="center-content mx-auto">
+      <div className="center-content mx-auto" ref={printRef}>
         <div className="result-header">
           <div className="d-flex">
             <div className="family-icon">
@@ -115,10 +119,24 @@ function Result()	{
           <div className="d-flex flex-column justify-content-center align-items-center mb-3">
             <div className="font-17 lh-1 my-2">See Recommendations</div>
             <div>
-              <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3" href="./results_recommendations_19.html" role="button">
+            <ReactToPrint
+            pageStyle={{
+              "display": "grid",
+              "gridTemplateColumns": "62% 36%",
+              "gridGap": "15px",
+              "background": "#FFF9E8",
+              "boxShadow": "0px 4px 4px rgb(0 0 0 / 25%)",
+              "borderRadius": "15px",
+              "padding": "15px",
+              "height": "calc(100vh - 340px)",
+              "overflow": "auto"
+            }} 
+        trigger={() => <button name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3" role="button">
                 <img src={require('../../assets/images/print-icon.svg').default} className="me-1" alt="" />
                 Print Results
-              </a>
+              </button>}
+        content={() => printRef.current}
+      />
               <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center" href="#" role="button">
                 <img src={require('../../assets/images/email-icon.svg').default} className="me-1" alt="" />
                 Email Results
@@ -126,7 +144,7 @@ function Result()	{
             </div>
           </div>
         </div>
-        <div className="result-grid">
+        <div  className="result-grid" ref={printRef}>
           <div className="table-wrap">
             
             {Object.keys(acticityQuestions).length > 0 &&

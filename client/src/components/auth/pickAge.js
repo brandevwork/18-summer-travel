@@ -55,16 +55,29 @@ function PickAge({familyMemberState, nextClickHandler})	{
 				error = true
 				nameRef.current[i].style.border = "1px solid red";
 			}
+			else{
+				error = false
+				nameRef.current[i].style.border = "0.5px solid #C6C6C8";
+			}
 			if(yearRef.current[i].value == '') {
 				error = true
 				yearRef.current[i].style.border = "1px solid red";
 			}
+			else{
+				error = false
+				yearRef.current[i].style.border = "0.5px solid #C6C6C8";
+			}
 			if(yearRef.current[i].value !== '') {
-				let retObj = yearValidation(yearRef.current[i].value)
+				let retObj = yearValidation(yearRef.current[i].value);
 				if(!retObj.res){
-					error = true
+					error = true;
 					yearRef.current[i].style.border = "1px solid red";
-					yearErrRef.current[i].innerHTML = retObj.msg
+					yearErrRef.current[i].innerHTML = retObj.msg;
+				}
+				else{
+					error = false;
+					yearRef.current[i].style.border = "0.5px solid #C6C6C8";
+					yearErrRef.current[i].innerHTML = "";
 				}
 			}
 			let obj ={"name":nameRef.current[i].value, "birth_year": yearRef.current[i].value}

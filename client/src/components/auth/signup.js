@@ -93,6 +93,42 @@ function SignUp(props)  {
       return;
     }
     if (!isInitial) {
+      if(authState.firstname == "")
+        firstnameRef.current.style.border = "1px solid red";
+      else
+        firstnameRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.lastname == "")
+        lastnameRef.current.style.border = "1px solid red";
+      else
+        lastnameRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.email == "")
+        emailRef.current.style.border = "1px solid red";
+      else
+        emailRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.address == "")
+        addressRef.current.style.border = "1px solid red";
+      else
+        addressRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.city == "")
+        cityRef.current.style.border = "1px solid red";
+      else
+        cityRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.state == "")
+        stateRef.current.style.border = "1px solid red";
+      else
+        stateRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.country == "")
+        countryRef.current.style.border = "1px solid red";
+      else
+        countryRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.password == "")
+        passwordRef.current.style.border = "1px solid red";
+      else
+        passwordRef.current.style.border = "0.5px solid #C6C6C8";
+      if(authState.zip == "")
+        zipRef.current.style.border = "1px solid red";
+      else
+        zipRef.current.style.border = "0.5px solid #C6C6C8";
       if (!authState.error && authState.email !== '' && authState.password !== '') {
         sendData(`${process.env.REACT_APP_SERVER_URL}families`, {
         method: 'POST',

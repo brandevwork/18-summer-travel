@@ -7,15 +7,16 @@ const AuthContext = React.createContext({
 	notification:"",
 	jti:"",
 	token:"",
+	familyMemberState:{},
 	login: (obj) => {},
 	logout: () => {},
-	signup: (obj) => {}
+	signup: (obj) => {},
+	saveWork: (obj) => {},
 });
 export default AuthContext;
 
 export const AuthContextProvider = (props) => {
-
-	const [authDataState, setauthDataState] = useState({id:"", email:"", name:"", jti:"",token:"", notification:""});
+	const [authDataState, setauthDataState] = useState({id:"", email:"", name:"", jti:"",token:"", notification:"", familyMemberState:{}});
 	
 	useEffect(() => {
     const localEmail = localStorage.getItem("email");
@@ -36,6 +37,12 @@ export const AuthContextProvider = (props) => {
 	    jti: authDataState.jti,
 	    token: authDataState.token,
 	    notification: authDataState.notification,
+	    familyMemberState: authDataState.familyMemberState,
+	    saveWork: (obj) => {
+	      setauthDataState(prevState => {
+	      	return {...prevState, familyMemberState: obj}
+	      });
+	    },
 	    login: (obj) => {
 	      setauthDataState(obj);
 	      localStorage.setItem("id", obj.id);
@@ -44,8 +51,8 @@ export const AuthContextProvider = (props) => {
 				localStorage.setItem("jti", obj.jti);
 				localStorage.setItem("token", obj.token);
 	    },
-	    logout: (notify="Logged Out") => {
-	      setauthDataState({email:"", name:"", jti:"",token: "", id:"", notification: notify});
+	    logout: async(notify="Logged Out") => {
+	      setauthDataState({email:"", name:"", jti:"",token: "", id:"",familyMemberState:{}, notification: notify});
 	      localStorage.removeItem("email");
 	      localStorage.removeItem("name");
 	      localStorage.removeItem("jti");

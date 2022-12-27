@@ -6,6 +6,7 @@ import SignUp from './components/auth/signup';
 import Home from './components/main/home';
 import Settings from './components/main/settings';
 import Result from './components/result/result';
+import Recomendation from './components/suggestions/recomendation';
 import Survey from './components/main/survey';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import AuthContext from './store/authContext';
@@ -22,6 +23,7 @@ function App() {
     <Route path='/signup' element={navigateToRoot} />
     <Route path='/home' element={<Wrapper customClassName=""><Home /></Wrapper>} />
     <Route path='/result' element={<Wrapper customClassName="family-results"><Result /></Wrapper>} />
+    <Route path='/recomendation' element={<Wrapper customClassName="family-results recommendations"><Recomendation /></Wrapper>} />
     <Route path='/survey/:id' element={<Wrapper customClassName=""><Survey /></Wrapper>} />
     <Route path='/settings' element={<Settings/>} />
     <Route path='*' element={<div>404 not found</div>} />

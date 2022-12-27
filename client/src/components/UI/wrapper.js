@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate} from 'react-router-dom';
 import AuthContext from "../../store/authContext";
+import HomeContext from "../../store/homeContext";
 import HomeBtn from "./homeBtn";
 
 function Wrapper({customClassName, children})	{
 
   const ctxAuth = useContext(AuthContext);
+  const ctxHome = useContext(HomeContext);
   const navigate = useNavigate();
 
-  const logoutHandler = () => {
+  const logoutHandler = async() => {
+    await ctxHome.clearContext()
     ctxAuth.logout()
   }
 
@@ -36,9 +39,11 @@ function Wrapper({customClassName, children})	{
               </NavLink>
             }
           </div>
-          <NavLink to="/settings" className="d-flex align-items-center ms-3">
-              Settings
-          </NavLink>
+          {ctxAuth.email !== '' &&
+            <NavLink to="/settings" className="d-flex align-items-center ms-3">
+                Settings
+            </NavLink>
+          }
         </div>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useContext } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import useData from "../../hooks/useData";
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
@@ -55,7 +55,7 @@ function Survey()	{
   		dispatch({type: "SERVER_ERROR", surveyError: true, errorMessage:data.status.message})
   	}
   	if(data.length > 0){
-  		await ctxHome.getSurveyByMember(data);
+  		await ctxHome.getSurveyByMember(data, id);
     	// navigateHandler('/');
   	}
   }
@@ -102,11 +102,11 @@ function Survey()	{
     	ctxHome.setNotifications(homeState.errorMessage)
     	navigate("/home")
     }
-    if(Object.keys(ctxHome.survey).length > 0)
+    if(Object.keys(ctxHome.survey).length > 0 && ctxHome.currFamilyMemberId == id)
     	return;
     if(!homeState.familyError && !homeState.surveyError && !homeState.questionSavedError ) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
-      	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/999999`, {
+      	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
 	      method: 'GET',
 			  headers: {
 			    "Content-Type": "application/json",

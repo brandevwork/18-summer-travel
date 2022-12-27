@@ -99,7 +99,7 @@ export const HomeContextProvider = (props) => {
 	    },
 	    getResults: (results) => {
 	    	setFamilyDataState(prevState => {
-	      	return {results:results, recomendations:[...prevState.recomendations], survey:{}, family:{...prevState.family}, currFamilyMemberId:0 ,notification: []}
+	      	return {results:results, recomendations:{...prevState.recomendations}, survey:{}, family:{...prevState.family}, currFamilyMemberId:0 ,notification: []}
 	      });
 	    },
 	    getRecomendations: (recomendations) => {

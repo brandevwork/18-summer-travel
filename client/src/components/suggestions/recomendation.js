@@ -62,7 +62,9 @@ function Recomendation()	{
   }
 
   useEffect(() => {
-    if(ctxHome.recomendations > 0 && Array.from(ctxHome.family).length > 0){
+    if(typeof ctxHome.recomendations === 'object')
+      ctxHome.recomendations = Object.values(ctxHome.recomendations)
+    if(ctxHome.recomendations.length > 0 && Array.from(ctxHome.family).length > 0){
       return
     }
     if (ctxUser.id !== '' && !homeState.recomendationError && !(Array.from(ctxHome.recomendations).length > 0)) {

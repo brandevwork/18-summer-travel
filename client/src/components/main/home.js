@@ -69,7 +69,7 @@ function Home()	{
 		}
 	}
 	const decideForRec = () => {
-		const status = ctxHome.family.map(member =>member.survey_status)
+		const status = ctxHome.family.map(member =>member.age>4 ? member.survey_status:"completed")
 		if (allEqual(status))
 			navigate("/recomendation")
 		else{

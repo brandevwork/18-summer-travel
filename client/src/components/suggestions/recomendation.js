@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useContext, useState } from 'react';
+import React, { useRef,useEffect, useReducer, useContext, useState } from 'react';
 import Back from '../UI/back';
 import { NavLink, useNavigate } from "react-router-dom";
 import useData from "../../hooks/useData";
@@ -6,9 +6,12 @@ import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
 import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
+import ReactToPrint from 'react-to-print';
+
 
 
 function Recomendation()	{
+  const printRef = useRef(null);
   const navigate = useNavigate();
   const ctxUser = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
@@ -85,7 +88,7 @@ function Recomendation()	{
   }, [homeState, sendData, ctxHome.recomendations])  
 
 	return (
-    <React.Fragment>
+    <div ref={printRef}>
     {recLoading && <Modal>Please wait! Results are being fetched ...</Modal>}
       {ctxHome.notification.length > 0 && 
         <ul className="text-danger list-group">
@@ -104,7 +107,7 @@ function Recomendation()	{
       <div className="back-page">
         <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
       </div>
-      <div className="center-content mx-auto">
+      <div className="center-content mx-auto" ref={printRef}>
         <div className="result-header">
           <div className="d-flex flex-column justify-content-center">
             <p className="font-17 mt-3 mb-0">Scroll To See Your Recommendations. Print a copy and send via email.</p>
@@ -112,10 +115,13 @@ function Recomendation()	{
           <div className="d-flex flex-column justify-content-center align-items-center mb-3">
             <div className="font-17 lh-1 my-2">See Results</div>
             <div>
-              <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3" href="#" role="button">
+            <ReactToPrint
+                trigger={() => <button name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3"  role="button">
                 <img src={require('../../assets/images/print-icon.svg').default} className="me-1" alt="" />
                 Print Recommendations
-              </a>
+              </button>}
+                content={() => printRef.current}
+              />
               <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center" href="#" role="button">
                 <img src={require('../../assets/images/email-icon.svg').default} className="me-1" alt="" />
                 Email Results
@@ -150,7 +156,7 @@ function Recomendation()	{
                         <div className="tile">
                               {rs.choice_text}
                         </div>
-                         <div class="names d-flex justify-content-evenly px-2 text-center">
+                         <div class="names d-flex justify-content-evenly px-2 py-4 text-center">
                          {Object.keys(ctxHome.family).length > 0 &&
                             Object.keys(ctxHome.family).filter(fil => ctxHome.family[fil].age < 18).map(key => 
                               <div class="d-flex flex-column">{ctxHome.family[key].name} <span>({parseInt(ctxHome.family[key].age) +ind})</span></div>
@@ -163,7 +169,7 @@ function Recomendation()	{
           
         </div>
       </div>
-    </React.Fragment>
+    </div>
   )
 }
 

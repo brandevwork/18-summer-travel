@@ -23,21 +23,20 @@ let isInitial = true;
 
 function SignUp(props)  {
 
-  const [renderState, setRenderState] = useState('welcome');
-  const [familyMemberState, setFamilyMemberState] = useState({});
+  const ctxAuth = useContext(AuthContext);
+  const [renderState, setRenderState] = useState(ctxAuth.familyMemberState.family_members ? 'signupSection':'welcome');
+  const [familyMemberState, setFamilyMemberState] = useState(ctxAuth.familyMemberState);
   
   const firstnameRef = useRef();
   const lastnameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const addressRef = useRef();
-  // const streetRef = useRef();
   const cityRef = useRef();
   const stateRef = useRef();
   const countryRef = useRef();
   const zipRef = useRef();
 
-  const ctxAuth = useContext(AuthContext);
   
   const initialAuthState = {name: "", email: "", password:"", address:"", city:"", state:"", country:"", zip:"", error: false, errorMessage: [""]};
   const [authState, dispatch] = useReducer(signupReducer, initialAuthState);
@@ -113,6 +112,10 @@ function SignUp(props)  {
       }
     }
   }, [authState])
+
+  useEffect(()=>{
+    ctxAuth.saveWork(familyMemberState)
+  },[familyMemberState])
 
   const nextClickHandler = ($$state, data = null) => {
   	setRenderState($$state)

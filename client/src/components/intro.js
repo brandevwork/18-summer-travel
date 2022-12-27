@@ -69,7 +69,7 @@ function Intro() {
                   <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
                 </div>
                 <div>
-                  <Button classes="btn btn-primary" title="View Recomendations" buttonClickHandler={() => {buttonHandler('/')}}/>
+                  <Button classes="btn btn-primary" title="View Recomendations" buttonClickHandler={() => {buttonHandler('/recomendation')}}/>
                 </div>
               </>
             }

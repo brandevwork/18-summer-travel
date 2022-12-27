@@ -73,8 +73,6 @@ function Settings(props)	{
   }
 
   useEffect(() => {
-    console.log(homeState)
-    console.log("homeState")
     if(familyMemberId > 0)
       ctxHome.updateMemberStatus(familyMemberId);
     if(ctxHome.family.length > 0) {

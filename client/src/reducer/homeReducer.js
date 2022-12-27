@@ -6,6 +6,8 @@ const homeReducer = (state, action) => {
   	errors.push(action.errorMessage);
   	return {
       familyError: typeof action.familyError !== 'undefined' ? action.familyError :false,
+      resultError: typeof action.resultError !== 'undefined' ? action.resultError :false,
+      recomendationError: typeof action.recomendationError !== 'undefined' ? action.recomendationError :false,
       surveyError: typeof action.surveyError !== 'undefined' ? action.surveyError :false,
       questionSavedError: typeof action.questionSavedError !== 'undefined' ? action.questionSavedError :false,
       resetError: typeof action.resetError !== 'undefined' ? action.resetError :false,
@@ -16,6 +18,8 @@ const homeReducer = (state, action) => {
   else {
     return {
       familyError: false,
+      resultError: false,
+      recomendationError: false,
       surveyError: false,
       questionSavedError: false,
       resetError: false,

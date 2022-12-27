@@ -1,0 +1,172 @@
+import React, { useEffect, useReducer, useContext, useState } from 'react';
+import Back from '../UI/back';
+import { NavLink, useNavigate } from "react-router-dom";
+import useData from "../../hooks/useData";
+import AuthContext from "../../store/authContext";
+import HomeContext from "../../store/homeContext";
+import Modal from "../UI/modal";
+import homeReducer from "../../reducer/homeReducer";
+
+
+function Recomendation()	{
+  const navigate = useNavigate();
+  const ctxUser = useContext(AuthContext);
+  const ctxHome = useContext(HomeContext);
+
+  const initialHomeState = { recomendationError: false, errorMessage: []};
+  const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
+  
+  const {fetchDataHandler: sendData, loading: recLoading} = useData();
+  const {fetchDataHandler: sendDataFamily, loading: familyLoading} = useData();
+  
+  const getAuthData = async(data) => {
+    if (data.error) {
+      dispatch({type: "SERVER_ERROR", recomendationError: true, errorMessage:data.error});
+      return;
+    }
+    if (!data) {
+      dispatch({type: "SERVER_ERROR", recomendationError: true, errorMessage:data.message})
+      return;
+    }
+    if (data.status == "400") {
+      dispatch({type: "SERVER_ERROR", recomendationError: true, errorMessage:data.message})
+      return;
+    }
+    if (data.status == "204") {
+      dispatch({type: "SERVER_ERROR", recomendationError: true, errorMessage:data.message})
+      return;
+    }
+    if(data.data.length > 0){
+      await ctxHome.getRecomendations(data.data);
+    }
+  }
+    const getAuthDataFamily = async(data) => {
+      if (data.error) {
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.error});
+      return;
+    }
+    if (!data) {
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.message})
+      return;
+    }
+    if (data.status == "400") {
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.status.message})
+      return;
+    }
+    if(data.status == "ok"){
+      await ctxHome.getAllFamilyMembers(data.data.family,data.status);
+    }
+  }
+
+  useEffect(() => {
+    console.log(Array.from(ctxHome.family).map(f => 
+                              <div class="d-flex flex-column">{f.name} <span>(f.age +1)</span></div>
+                            ))
+    if(ctxHome.recomendations > 0 && Array.from(ctxHome.family).length > 0)
+      return
+    if (ctxUser.id !== '' && !homeState.recomendationError && !(ctxHome.recomendations.length > 0)) {
+      sendDataFamily(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    },
+    getAuthDataFamily)
+
+    sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/recomendation`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    },
+    getAuthData)
+
+    }
+  }, [homeState, sendData, ctxHome.recomendations])  
+
+	return (
+    <React.Fragment>
+    {recLoading && <Modal>Please wait! Results are being fetched ...</Modal>}
+      {ctxHome.notification.length > 0 && 
+        <ul className="text-danger list-group">
+          {ctxHome.notification.map((eachMessage, index) => (
+            <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+            ))}
+        </ul>
+      }
+      {homeState.recomendationError && 
+        <ul className="text-danger list-group">
+          {homeState.errorMessage.map((eachMessage, index) => (
+            <li className="list-group-item list-group-item-danger" key={index}>{eachMessage}</li>
+            ))}
+        </ul>
+      }
+      <div className="back-page">
+        <Back title="Back" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
+      </div>
+      <div className="center-content mx-auto">
+        <div className="result-header">
+          <div className="d-flex flex-column justify-content-center">
+            <p className="font-17 mt-3 mb-0">Scroll To See Your Recommendations. Print a copy and send via email.</p>
+          </div>
+          <div className="d-flex flex-column justify-content-center align-items-center mb-3">
+            <div className="font-17 lh-1 my-2">See Results</div>
+            <div>
+              <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center me-3" href="#" role="button">
+                <img src={require('../../assets/images/print-icon.svg').default} className="me-1" alt="" />
+                Print Recommendations
+              </a>
+              <a name="" id="" className="btn btn-primary d-inline-flex align-items-center justify-content-center" href="#" role="button">
+                <img src={require('../../assets/images/email-icon.svg').default} className="me-1" alt="" />
+                Email Results
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="result-grid">
+          <div className="top-section mb-3">
+            <div className="d-flex justify-content-between align-items-center">
+              <div>
+                <img  src={require('../../assets/images/recom-cat.svg').default} className="me-1" alt="" />
+              </div>
+              <div>
+                <h2 className="m-0">Jones Family - 18 Summers</h2>
+                <h2 className="m-0">Family Travel Recommendations</h2>
+              </div>
+              <div className="result-logo">
+                <img src={require('../../assets/images/logo.svg').default} className="me-1 img-fluid" alt="" />
+              </div>
+            </div>
+          </div>
+          
+                {ctxHome.recomendations.length > 0 &&
+                <div className="tiles-wrapper mb-4">
+                  <span className="dot-first"></span>
+                  <div className="tiles-grid shade1">
+                {ctxHome.recomendations.map((rs,ind) =>
+                  <>{ind%3 ==0 ? <span className="dot-first"></span> : ""} 
+                      <div className="dgrid">
+                        <div className="year">{2023 + ind}</div>
+                        <div className="tile">
+                              {rs.choice_text}
+                        </div>
+                         <div class="names d-flex justify-content-evenly px-2 text-center">
+                         {Object.keys(ctxHome.family).length > 0 &&
+                            Object.keys(ctxHome.family).filter(fil => ctxHome.family[fil].age < 18).map(key => 
+                              <div class="d-flex flex-column">{ctxHome.family[key].name} <span>({parseInt(ctxHome.family[key].age) +ind})</span></div>
+                            )
+                          }
+                        </div>
+                      </div></>)}
+                  </div>
+                </div>}
+          
+        </div>
+      </div>
+    </React.Fragment>
+  )
+}
+
+export default Recomendation;

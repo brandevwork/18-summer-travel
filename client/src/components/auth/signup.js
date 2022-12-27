@@ -22,7 +22,7 @@ let isInitial = true;
 
 
 function SignUp(props)  {
-
+  let regex = /^[a-zA-Z ]*$/;
   const ctxAuth = useContext(AuthContext);
   const [renderState, setRenderState] = useState(ctxAuth.familyMemberState.family_members ? 'signupSection':'welcome');
   const [familyMemberState, setFamilyMemberState] = useState(ctxAuth.familyMemberState);
@@ -95,12 +95,22 @@ function SignUp(props)  {
     if (!isInitial) {
       if(authState.firstname == "")
         firstnameRef.current.style.border = "1px solid red";
-      else
-        firstnameRef.current.style.border = "0.5px solid #C6C6C8";
+      else{
+        if(regex.test(authState.firstname)) {
+          firstnameRef.current.style.border = "0.5px solid #C6C6C8";
+        }
+        else
+         firstnameRef.current.style.border = "1px solid red";
+      }
       if(authState.lastname == "")
         lastnameRef.current.style.border = "1px solid red";
-      else
-        lastnameRef.current.style.border = "0.5px solid #C6C6C8";
+      else{
+        if(regex.test(authState.lastname)) {
+          lastnameRef.current.style.border = "0.5px solid #C6C6C8";
+        }
+        else
+         lastnameRef.current.style.border = "1px solid red";
+      }
       if(authState.email == "")
         emailRef.current.style.border = "1px solid red";
       else

@@ -1,6 +1,7 @@
 import React from 'react';
 
-const signupReducer = (state, action) => {  
+const signupReducer = (state, action) => {
+  let regex = /^[a-zA-Z ]*$/;  
   let errors = [];
   if (action.type == 'SERVER_ERROR') {
     errors.push(action.errorMessage);
@@ -23,8 +24,18 @@ const signupReducer = (state, action) => {
     if (action.firstname.trim() === "") {
       errors.push("First name cannot be empty");
     }
+    if (action.firstname.trim() !== "") {
+      if(!regex.test(action.firstname.trim())){
+        errors.push("Only alphabets allowed in first name");
+      }
+    }
     if (action.lastname.trim() === "") {
       errors.push("Last name cannot be empty");
+    }
+    if (action.lastname.trim() !== "") {
+      if(!regex.test(action.lastname.trim())){
+        errors.push("Only alphabets allowed in last name");
+      }
     }
     if (action.email.trim() === "") {
       errors.push("Email cannot be empty");

@@ -63,7 +63,7 @@ function Intro() {
       let ch = ctxHome.family.map(f => f.age > 4 ? f.survey_status : 'completed');
       if (allEqual(ch))
         setShowResults(true)
-      if (ch.includes('in_progress') || ch.includes('pending')) 
+      if (ch.includes('in_progress')) 
         setTitle('Finish The Survey')
       else
         setTitle("Start The Survey")
@@ -125,9 +125,11 @@ function Intro() {
             }
             {ctxAuth.email !== '' &&
               <>
+              {!showResults && 
                 <div>
                   <Button classes="btn btn-primary mb-3" title={title} buttonClickHandler={() => {buttonHandler('home')}}/>
                 </div>
+              }
                 {showResults && 
                   <div>
                     <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>

@@ -57,7 +57,7 @@
     "category_id": 3
   },
   {
-    "question": "Which of these cities or areas in <b>Europe</b> do you want to visit?",
+    "question": "Which of these cities or areas in Europe do you want to visit?",
     "heading": "Europe",
     "choices": [
       "Vienna, Austria",
@@ -79,7 +79,7 @@
     "category_id": 4
   },
   {
-    "question": "How about these cities in the <b>United Kingdom, the UK and Ireland</b>",
+    "question": "How about these cities in the United Kingdom, the UK and Ireland",
     "heading": "United Kingdom & Ireland",
     "choices": [
       "London, England",
@@ -90,7 +90,7 @@
     "category_id": 5
   },
   {
-    "question": "What about visiting <b>Africa</b>?",
+    "question": "What about visiting Africa?",
     "heading": "Africa",
     "choices": [
       "Cairo, Egypt, (The Pyramids)",
@@ -100,7 +100,7 @@
     "category_id": 6
   },
   {
-    "question": "What places in <b>South America</b> interest you?",
+    "question": "What places in South America interest you?",
     "heading": "South America",
     "choices": [
       "Rio de Janeiro, Brazil",
@@ -110,7 +110,7 @@
     "category_id": 7
   },
   {
-    "question": "How about <b>Central America</b>",
+    "question": "How about Central America?",
     "heading": "Central America",
     "choices": [
       "Costa Rica, (Rain Forest)"
@@ -118,7 +118,7 @@
     "category_id": 8
   },
   {
-    "question": "Interested in visiting <b>Oceania</b>? This is the area including Australia and New Zealand",
+    "question": "Interested in visiting Oceania? This is the area including Australia and New Zealand",
     "heading": "Australia & Oceania",
     "choices": [
       "Sydney, Australia"
@@ -126,7 +126,7 @@
     "category_id": 9
   },
   {
-    "question": "Which of these cities in the <b>United States</b> do you wish to visit for vacations",
+    "question": "Which of these cities in the United States do you wish to visit for vacations?",
     "heading": "United States",
     "choices": [
       "Boston, MA",
@@ -148,7 +148,7 @@
     "category_id": 10
   },
   {
-    "question": "Are you interested in these cities in <b>Mexico</b>",
+    "question": "Are you interested in these cities in Mexico?",
     "heading": "Mexico",
     "choices": [
       "Cabo",
@@ -157,7 +157,7 @@
     "category_id": 11
   },
   {
-    "question": "Are you interested in <b>Caribbean</b> destinations? Including perhaps a Caribbean Cruise?",
+    "question": "Are you interested in Caribbean destinations? Including perhaps a Caribbean Cruise?",
     "heading": "Caribbean",
     "choices": [
       "Barbados",
@@ -167,7 +167,7 @@
     "category_id": 12
   },
   {
-    "question": "would you like to visit <b>Canada</b>",
+    "question": "would you like to visit Canada?",
     "heading": "Canada",
     "choices": [
       "Montreal (Eastern Canada)",
@@ -177,7 +177,7 @@
     "category_id": 13
   },
   {
-    "question": "Interesting in visiting <b>Bermuda</b>",
+    "question": "Interesting in visiting Bermuda?",
     "heading": "Bermuda",
     "choices": [
       "Hamilton, Bermuda"

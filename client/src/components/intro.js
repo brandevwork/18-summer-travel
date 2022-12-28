@@ -1,18 +1,78 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect, useReducer } from 'react';
 import Button from './UI/button';
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../store/authContext";
 import HomeContext from "../store/homeContext";
+import useData from "../hooks/useData";
+import homeReducer from "../reducer/homeReducer";
+
 
 function Intro() {
-
+  const allEqual = arr => arr.every( v => v === arr[0] )
+  const[title, setTitle] = useState('Start The Survey');
+  const[showResults, setShowResults] = useState(false);
   const ctxAuth = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
   const navigate = useNavigate();
   const buttonHandler = (param) => {
     navigate(param)
   }
+
+  const initialHomeState = { familyError: false, errorMessage: []};
+  const [homeState, dispatch] = useReducer(homeReducer, initialHomeState);
   
+  const {fetchDataHandler: sendData, loading: homeLoading} = useData();
+  
+  const getAuthData = async(data) => {
+    if (data.error) {
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.error});
+      return;
+    }
+    if (!data) {
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.message})
+      return;
+    }
+    if (data.status == "400") {
+      dispatch({type: "SERVER_ERROR", familyError: true, errorMessage:data.status.message})
+      return;
+    }
+    if(data.status == "ok"){
+      await ctxHome.getAllFamilyMembers(data.data.family,data.status);
+      // navigateHandler('/');
+    }
+  }
+
+  useEffect(() => {
+    if ((ctxAuth.id !== '' || localStorage.getItem("id") !=='') && !homeState.familyError) {
+      sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    },
+    getAuthData);
+    }
+  }, [homeState, sendData])
+
+  useEffect(()=>{
+    if(typeof ctxHome.family === 'object'){
+      ctxHome.family = Object.values(ctxHome.family)
+    }
+    if(ctxHome.family.length > 0){
+      let ch = ctxHome.family.map(f => f.age > 4 ? f.survey_status : 'completed');
+      if (allEqual(ch))
+        setShowResults(true)
+      if (ch.includes('in_progress')) 
+        setTitle('Finish The Survey')
+      else
+        setTitle("Start The Survey")
+    }
+    else
+    setTitle("Start The Survey")
+
+  },[ctxHome])
+
 	return (
     <React.Fragment>
       {ctxAuth.notification !== "" && 
@@ -61,19 +121,19 @@ function Intro() {
                 <div>
                   <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('login')}}/>
                 </div>
-                <div>
-                  <Button classes="btn btn-primary mb-3" title="Finish Your Survey" buttonClickHandler={() => {buttonHandler('login')}}/>
-                </div>
               </>
             }
             {ctxAuth.email !== '' &&
               <>
                 <div>
-                  <Button classes="btn btn-primary mb-3" title="Start The Survey" buttonClickHandler={() => {buttonHandler('home')}}/>
-                </div>              
-                <div>
-                  <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
+                  <Button classes="btn btn-primary mb-3" title={title} buttonClickHandler={() => {buttonHandler('home')}}/>
                 </div>
+                {showResults && 
+                  <div>
+                    <Button classes="btn btn-primary mb-3" title="Survey Results" buttonClickHandler={() => {buttonHandler('/result')}}/>
+                  </div>
+                }              
+                
                 <div>
                   <Button classes="btn btn-primary" title="View Recomendations" buttonClickHandler={() => {buttonHandler('/recomendation')}}/>
                 </div>

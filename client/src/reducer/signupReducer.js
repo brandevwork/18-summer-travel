@@ -20,9 +20,12 @@ const signupReducer = (state, action) => {
       errorMessage: errors
     }
   }
+  let allFieldsMissing = false
+  let checkMiss = false
   if (action.type == 'SUBMIT') {
     if (action.firstname.trim() === "") {
-      errors.push("First name cannot be empty");
+      checkMiss=true 
+      // errors.push("First name cannot be empty");
     }
     if (action.firstname.trim() !== "") {
       if(!regex.test(action.firstname.trim())){
@@ -30,7 +33,8 @@ const signupReducer = (state, action) => {
       }
     }
     if (action.lastname.trim() === "") {
-      errors.push("Last name cannot be empty");
+      checkMiss=true
+      // errors.push("Last name cannot be empty");
     }
     if (action.lastname.trim() !== "") {
       if(!regex.test(action.lastname.trim())){
@@ -38,31 +42,43 @@ const signupReducer = (state, action) => {
       }
     }
     if (action.email.trim() === "") {
-      errors.push("Email cannot be empty");
+      checkMiss=true
+      // errors.push("Email cannot be empty");
     }
     if (action.password.trim() === "") {
-      errors.push("Password cannot be empty");
+      checkMiss=true
+      // errors.push("Password cannot be empty");
     }
-    if (action.password.trim().length < 6) {
-      errors.push("Password length cannot be less than 6 chracters");
+    if(action.password.trim() !== "") {
+      if (action.password.trim().length < 6) {
+        errors.push("Password length cannot be less than 6 chracters");
+      }
     }
     if (action.address.trim() === "") {
-      errors.push("Address cannot be empty");
+      checkMiss=true
+      // errors.push("Address cannot be empty");
     }
     // if (action.street.trim() === "") {
     //   errors.push("Street cannot be empty");
     // }
     if (action.city.trim() === "") {
-      errors.push("City cannot be empty");
+      checkMiss=true
+      // errors.push("City cannot be empty");
     }
     if (action.state.trim() === "") {
-      errors.push("State cannot be empty");
+      checkMiss=true
+      // errors.push("State cannot be empty");
     }
     if (action.country.trim() === "") {
-      errors.push("Country cannot be empty");
+      checkMiss=true
+      // errors.push("Country cannot be empty");
     }
     if (action.zip.trim() === "") {
-      errors.push("Zip cannot be empty");
+      checkMiss=true
+      // errors.push("Zip cannot be empty");
+    }
+    if(checkMiss) {
+      // errors.push("Kindly fill All missing fields")
     }
     if(errors.length > 0) {
       return {

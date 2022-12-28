@@ -115,7 +115,7 @@ function PickAge({familyMemberState, nextClickHandler})	{
 	return (
 		<React.Fragment>
 	    <div className="back-page">
-	      <Back title="Back" buttonClickHandler={() => nextClickHandler('before_age')}/>
+	      <Back title="Back" buttonClickHandler={() => nextClickHandler('afterKid')}/>
 	    </div>
 	    <div className="center-content mx-auto welcome-intro">
 	      <div className="content-grid">

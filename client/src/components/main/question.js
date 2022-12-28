@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({questionIndex, question_image, question_text, question_id, choices, submitHandler})	{
+function Question({questionIndex, heading ,question_image, question_text, question_id, choices, submitHandler})	{
 
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -64,7 +64,6 @@ function Question({questionIndex, question_image, question_text, question_id, ch
 		e.preventDefault()
 		navigate("/")
 	}
-
 	return (
 		<React.Fragment>
 			<div className="back-page p-4">
@@ -92,6 +91,7 @@ function Question({questionIndex, question_image, question_text, question_id, ch
 						</div>
 					</div>
 					<div className="activity-img">
+					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":"green", "fontSize":"45px"}}>{heading}</div>
 						<img src={question_image} className="img-fluid" alt="" />
 					</div>
 				</div>

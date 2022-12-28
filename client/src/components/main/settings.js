@@ -76,7 +76,7 @@ function Settings(props)	{
     if(familyMemberId > 0)
       ctxHome.updateMemberStatus(familyMemberId);
     if(ctxHome.family.length > 0) {
-      let currStatus = ctxHome.family.map(m=>m.is_active)
+      let currStatus = ctxHome.family.map(m=>m.age > 4 ? m.is_active : false)
       setCheckedState(currStatus)
       return  
     }
@@ -107,7 +107,9 @@ function Settings(props)	{
     } 
   }
 
-  const checkClickHandler = async(e, position, family_id) => {
+  const checkClickHandler = async(e, position, family_id, age) => {
+      if(age < 4)
+        return
       setFamilyMemberId(family_id)
       sendDataActive(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${family_id}`, {
         method: 'PATCH',
@@ -160,7 +162,7 @@ function Settings(props)	{
                 </div>
                 <div>
                   <label className="switch">
-                    <input type="checkbox" checked />
+                    <input type="checkbox"  />
                     <span className="slider round"></span>
                   </label>
                 </div>
@@ -174,7 +176,7 @@ function Settings(props)	{
                 </div>
                 <div>
                   <label className="switch">
-                    <input type="checkbox" checked />
+                    <input type="checkbox"  />
                     <span className="slider round"></span>
                   </label>
                 </div>
@@ -194,7 +196,7 @@ function Settings(props)	{
                 </div>
                 <div>
                   <label className="switch">
-                    <input type="checkbox" checked />
+                    <input type="checkbox"  />
                     <span className="slider round"></span>
                   </label>
                 </div>
@@ -232,9 +234,9 @@ function Settings(props)	{
                   </div>
         
                   <div className="ms-3">
-                    <label className="switch">
-                      <input type="checkbox" onClick={(e) => checkClickHandler(e, index, member.id)} checked={checkedState[index]} />
-                      <span className="slider round"></span>
+                    <label className="switch" >
+                      <input type="checkbox" onClick={(e) => checkClickHandler(e, index, member.id, member.age)} checked={member.age< 4 ? false :checkedState[index]} />
+                      <span className="slider round " style={{"background": member.age < 4 ? "#d5d559" : "" }}></span>
                     </label>
                   </div>
                 </div>)

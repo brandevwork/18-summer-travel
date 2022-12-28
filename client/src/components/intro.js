@@ -63,7 +63,7 @@ function Intro() {
       let ch = ctxHome.family.map(f => f.age > 4 ? f.survey_status : 'completed');
       if (allEqual(ch))
         setShowResults(true)
-      if (ch.includes('in_progress')) 
+      if (ch.includes('in_progress') || ch.includes('pending')) 
         setTitle('Finish The Survey')
       else
         setTitle("Start The Survey")

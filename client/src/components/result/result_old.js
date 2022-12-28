@@ -13,7 +13,7 @@ import ReactToPrint from 'react-to-print';
 
 let colors = ['bar-zinc', 'bar-purple', 'bar-green', 'bar-orange', 'bar-red', 'bar-blue', 'bar-yellow']
 
-function Result() {
+function Result()	{
   const printRef = useRef(null);
   const navigate = useNavigate();
   const ctxUser = useContext(AuthContext);
@@ -88,7 +88,7 @@ function Result() {
       return false
   }
 
-  return (
+	return (
     <React.Fragment>
     {resultLoading && <Modal>Please wait! Results are being fetched ...</Modal>}
       {ctxHome.notification.length > 0 && 
@@ -150,6 +150,9 @@ function Result() {
                     <div className={`bar ${colors[ind%7]}`}></div>
                   )
                 }
+                {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                  <div className={`bar ${colors[ind%7]}`}></div>
+                )}
                 </div>
               </div>
               <div className="table-grid">
@@ -160,15 +163,11 @@ function Result() {
                     <div>{ress.name} ({ress.age})</div>
                   )
                 }
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <section>
-                  <h4 className="font-bold">{es}</h4>
-                </section>
+                {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                  <div>{ft.name}({ft.age})</div>
+                )}
                 </div>
-                {acticityQuestions[es].map((ques,indChild) =>
+                {acticityQuestions[es].map(ques =>
                   <div className="table-row">
                   {
                     Object.keys(ctxHome.results).length &&
@@ -179,16 +178,31 @@ function Result() {
                         </div>
                       </div>
                     )
-                  }  
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                    <a href="">{ques.choice_text}</a>
+                  }
+                  {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                  <div>
+                        <div className="form-check">
+                          <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />
+                        </div>
+                      </div>
+                  )}  
                   </div>
                 )}
               </div>
               </>
+            )}
+          </div>
+
+          <div className="rightsidebar">
+            {Object.keys(acticityQuestions).length > 0 && Object.keys(acticityQuestions).map((key) => 
+              <section>
+                <h4 className="font-bold">{key}</h4>
+                <ul>
+                {(acticityQuestions[key]).map(childKey => 
+                  <li><a href="">{childKey.choice_text}</a></li>
+                )}
+                </ul>
+              </section>
             )}
           </div>
           <div style={{ display: "none" }}>
@@ -197,7 +211,7 @@ function Result() {
         </div>
       </div>
     </React.Fragment>
-  )
+	)
 }
 
 export default Result;

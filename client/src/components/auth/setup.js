@@ -6,9 +6,9 @@ import AuthContext from "../../store/authContext";
 function Setup({familyMemberState: {family :{first_name, last_name, email, id, token, notification}}})	{
 	const ctxAuth = useContext(AuthContext);
 	const navigate = useNavigate();
-	const navigateHandler = (e) => {
-		// navigate(e);
-    ctxAuth.signup({"name": first_name+" "+last_name, "email": email, "id": id, "token": token, "notification":""});
+	const navigateHandler = async(e) => {
+    await ctxAuth.signup({"name": first_name+" "+last_name, "email": email, "id": id, "token": token, "notification":""});
+		navigate("/home");
 
 	}
 	return (
@@ -31,7 +31,7 @@ function Setup({familyMemberState: {family :{first_name, last_name, email, id, t
               You will now be able to return to where you left off in the survey!
             </h2>
             <div className="mt-4">
-              <Button classes="btn btn-primary" title="Continue" buttonClickHandler={() => navigateHandler('/')}/>
+              <Button classes="btn btn-primary" title="Continue" buttonClickHandler={(e) => navigateHandler(e)}/>
             </div>
           </div>
           <div>

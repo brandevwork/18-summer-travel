@@ -16,7 +16,9 @@ function useData()	{
         let data = JSON.parse(text)
         applyData(data,response.headers);
       }catch(err){
-        ctxUser.logout(text)
+        let reg = /^/;
+        if(!reg.test(text))
+          ctxUser.logout(text)
         applyData({"error":text});
       }
     } catch (error) {

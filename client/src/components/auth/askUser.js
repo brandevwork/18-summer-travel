@@ -18,7 +18,7 @@ function AskUser({nextClickHandler})	{
               Sound good? Let's go!
             </h2>
             <div className="mt-4">
-              <Button classes="btn btn-primary" title="Next" buttonClickHandler={() => nextClickHandler('askUserFirstname')}/>
+              <Button classes="btn btn-primary" title="Let's Go" buttonClickHandler={() => nextClickHandler('askUserFirstname')}/>
             </div>
           </div>
           <div>

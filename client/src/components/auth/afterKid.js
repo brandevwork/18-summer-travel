@@ -6,7 +6,7 @@ function AfterKid({familyMemberState: {family_member, first_name}, nextClickHand
 	return (
 		<React.Fragment>
       <div className="back-page">
-        <Back title="Back" buttonClickHandler={() => nextClickHandler('pickKid')}/>
+        <Back title="Back" buttonClickHandler={() => nextClickHandler('before_age')}/>
       </div>
       <div className="center-content mx-auto welcome-intro">
         <div className="content-grid">
@@ -15,7 +15,7 @@ function AfterKid({familyMemberState: {family_member, first_name}, nextClickHand
               {`Okay, ${first_name}, let's get the names  and ages of your family members.`}
             </h2>
             <div className="mt-4">
-              <Button classes="btn btn-primary" title="Next" buttonClickHandler={() => nextClickHandler('before_age')}/>
+              <Button classes="btn btn-primary" title="Next" buttonClickHandler={() => nextClickHandler('pickAge')}/>
             </div>
           </div>
           <div>

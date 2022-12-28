@@ -12,7 +12,7 @@ function PickKid({nextClickHandler}) {
 
 	const nextHandler = (e) => {
 		if(familyMember !== 0)
-			nextClickHandler('afterKid',{"family_member": familyMember})
+			nextClickHandler('before_age',{"family_member": familyMember})
 	}
 
 	return (

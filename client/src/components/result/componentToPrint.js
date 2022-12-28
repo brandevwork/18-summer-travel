@@ -24,6 +24,9 @@ class ComponentToPrint extends Component	{
   render() {
     let acticityQuestions = this.props.acticityQuestions
     let ctxHomeResults = this.props.ctxHomeResults
+    let ctxHomeFamily = this.props.ctxHomeFamily
+    if(typeof ctxHomeFamily === 'object')
+      ctxHomeFamily = Object.values(ctxHomeFamily)
   	return (
       <React.Fragment>
         <div className="center-content mx-auto">
@@ -40,6 +43,9 @@ class ComponentToPrint extends Component	{
                       <td className={`bar ${colors[ind%7]}`}></td>
                     )
                   }
+                  {ctxHomeFamily.filter(f => f.age < 4).map(ft => 
+                    <td className={`bar ${colors[ind%7]}`}></td>
+                  )}
                   </tr>
                 </div>
                 <div className="table-grid">
@@ -51,6 +57,9 @@ class ComponentToPrint extends Component	{
                     )
                   }
                   <td>{es}</td>
+                  {ctxHomeFamily.filter(f => f.age < 4).map(ft => 
+                    <td>{ft.name}({ft.age})</td>
+                  )}
                   </tr>
                   {acticityQuestions[es].map(ques =>
                     <tr className="table-row">
@@ -64,7 +73,14 @@ class ComponentToPrint extends Component	{
                         </td>
                       )
                     }
-                    <td>{ques.choice_text}</td>  
+                    {ctxHomeFamily.filter(f => f.age < 4).map(ft => 
+                    <td>
+                          <div className="form-check">
+                            <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />
+                          </div>
+                        </td>
+                    )}  
+                    <td style={{"float":"right"}}>{ques.choice_text}</td>  
                     </tr>
                   )}
                 </div>

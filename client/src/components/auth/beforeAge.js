@@ -12,12 +12,12 @@ function BeforeAge({nextClickHandler, familyMemberState: {family_member}})	{
 	    <div className="center-content mx-auto welcome-intro">
 	      <div className="content-grid">
 	        <div className="d-flex justify-content-center flex-column">
-	          <h2>
-	            {`Its the ${numWords(family_member)} of you!`}
-	          </h2>
-	          <h2 className="mt-4">
-	            That will be a lot of fun!
-	          </h2>
+	            {family_member == 1 && <h2>Just the {numWords(family_member)} of you! That will be a lot of fun!</h2>}
+	            {family_member == 2 && <h2>Just the {numWords(family_member)} of you! That will be a lot of fun!</h2>}
+	            {family_member == 3 && <h2>So the three of you! That will be a great time! </h2>}
+	            {family_member == 4 && <h2>So the four of you! A great-sized group!</h2>}
+	            {family_member == 5 && <h2>A family of five! A great-sized group!</h2>}
+	            {family_member == 6 && <h2>A family of six! That is a party where ever you go! </h2>}
 	          <div className="mt-4">
 	            <Button classes="btn btn-primary" title="Next" buttonClickHandler={() => nextClickHandler('afterKid')}/>
 	          </div>

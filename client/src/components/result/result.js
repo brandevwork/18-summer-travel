@@ -160,7 +160,9 @@ function Result() {
                     <div>{ress.name} ({ress.age})</div>
                   )
                 }
-                <div></div>
+                {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                  <div>{ft.name}({ft.age})</div>
+                )}
                 <div></div>
                 <div></div>
                 <div></div>
@@ -179,8 +181,14 @@ function Result() {
                         </div>
                       </div>
                     )
-                  }  
-                  <div></div>
+                  } 
+                  {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                  <div>
+                        <div className="form-check">
+                          <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />
+                        </div>
+                      </div>
+                  )}
                   <div></div>
                   <div></div>
                   <div></div>

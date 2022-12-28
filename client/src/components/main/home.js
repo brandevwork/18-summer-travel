@@ -111,7 +111,7 @@ function Home()	{
 	            <div className="status-wrapper mb-4">
 	              <h2 className="font-23 d-flex justify-content-center font-bold">Status</h2>
 	              {ctxHome.family.length > 0 &&
-									ctxHome.family.map(member =>
+									ctxHome.family.filter(f=>f.is_active).map(member =>
 			                	{
 			                		if (member.survey_status == 'pending' && member.age > 4) {
 														return (<div className="d-flex align-items-center mb-2">
@@ -144,7 +144,7 @@ function Home()	{
 						              if (member.age <= 4)
 			                			return (<div className="d-flex align-items-center mb-2">
 							                <div>
-							                	<button onClick={decideForResults} className="btn btn-default btn-sm me-2">
+							                	<button  className="btn btn-default btn-sm me-2">
 							                		Too Young
 							                	</button>
 							                </div>

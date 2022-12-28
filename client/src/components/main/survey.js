@@ -7,6 +7,8 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Question from "./question";
 import QuestionKids from "./questionKids";
+import Category from "./category";
+import FinishSurvey from "./finishSurvey";
 
 function Survey()	{
 
@@ -15,7 +17,10 @@ function Survey()	{
 	const ctxHome = useContext(HomeContext);
 	const navigate = useNavigate();
 
+	const [lastQuestion, setLastQuestion] = useState(false)
+	const [questionPicture, setQuestionPicture] = useState(null)
 	const [currAge, setCurrAge] = useState(0)
+	const [currName, setCurrName] = useState('')
 	
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [questionIndexTemp, setQuestionIndexTemp] = useState(0);
@@ -86,6 +91,7 @@ function Survey()	{
   	if(ctxHome.family.length > 0) {
 			let currFamily = ctxHome.family.filter(f => f.id == id);
 			setCurrAge(currFamily[0].age);
+			setCurrName(currFamily[0].name);
 		}
   },[ctxHome.family])
 
@@ -102,8 +108,10 @@ function Survey()	{
     	ctxHome.setNotifications(homeState.errorMessage)
     	navigate("/home")
     }
-    if(Object.keys(ctxHome.survey).length > 0 && ctxHome.currFamilyMemberId == id)
+    if(Object.keys(ctxHome.survey).length > 0 && ctxHome.currFamilyMemberId == id){
+    	setQuestionPicture(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
     	return;
+    }
     if(!homeState.familyError && !homeState.surveyError && !homeState.questionSavedError ) {
       if (ctxUser.id !== '' && ctxHome.family.length > 0) {
       	sendDataSurvey(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members/${id}`, {
@@ -134,6 +142,8 @@ function Survey()	{
 	}
 
   const submitHandler = async(family_id, question_id, choices, questionIndex, fromWhere="Next") => {
+  	console.log(questionPicture)
+  	console.log("questionPicture")
   	console.log(questionIndex)
   	console.log("questionIndex")
   	console.log(question_id)
@@ -141,6 +151,8 @@ function Survey()	{
   	console.log("question_id")
   	// await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
   	await setQuestionIndex(questionIndex)
+  	if (fromWhere == 'Category') {setQuestionPicture("category")}
+  	if (fromWhere == 'Finish') {setLastQuestion(false)}
   	if (fromWhere == 'Next' || fromWhere == 'last_question') {
 			await sendDataSurveySaved(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
 		    method: 'POST',
@@ -151,7 +163,8 @@ function Survey()	{
 			  },
 			}, questionSaved);
 			if(fromWhere == 'last_question')
-  			await finishSurvey()
+  			// await finishSurvey()
+  			setLastQuestion(true)
   	}
   }
 
@@ -170,13 +183,22 @@ function Survey()	{
 		{
 			currAge > 14  ?
 				ctxHome.survey.length > 0 &&
-					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
-						<Question question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+					ctxHome.survey.slice(questionIndex,questionIndex+1).map((question, ind) =>
+						questionPicture !== null && questionPicture !== questionIndex && !(lastQuestion) ?
+						 <Question heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						:
+						!(lastQuestion) ?
+							<Category heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
+						:
+							<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)
 			:
 			ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
+						!lastQuestion ?
 						<QuestionKids questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						:
+						<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)
 		}
 		</React.Fragment>

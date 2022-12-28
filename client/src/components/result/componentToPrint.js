@@ -56,7 +56,9 @@ class ComponentToPrint extends Component	{
                       <td>>{ress.name} ({ress.age})</td>
                     )
                   }
+                  <td></td><td></td>
                   <td>{es}</td>
+
                   {ctxHomeFamily.filter(f => f.age < 4).map(ft => 
                     <td>{ft.name}({ft.age})</td>
                   )}
@@ -79,7 +81,9 @@ class ComponentToPrint extends Component	{
                             <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />
                           </div>
                         </td>
-                    )}  
+                    )}
+                  <td></td>
+                  <td></td>  
                     <td style={{"float":"right"}}>{ques.choice_text}</td>  
                     </tr>
                   )}

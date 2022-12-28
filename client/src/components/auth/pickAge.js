@@ -24,6 +24,12 @@ function PickAge({familyMemberState, nextClickHandler})	{
 	const yearErrRef = useRef([])
 	const nameErrRef = useRef([])
 
+  const crossHandler = (event, ref) => {
+	  if (event.target.className === 'cross-icon') {
+	    ref.value=""
+	  }
+  }
+
 	let memberData={}
 	let totalMembers = familyMemberState.family_member
 	const renderNameAndYear = () => {
@@ -32,14 +38,14 @@ function PickAge({familyMemberState, nextClickHandler})	{
 			content.push(
 				<li className="mb-3 ps-2">
           <div className="list-grid">
-            <div className="cross-field">
+            <div className="cross-field" onClick={(e) => crossHandler(e, nameRef.current[i+1])}>
               <Input ref={el => nameRef.current[i+1] = el}  input={{"key":Math.random() , "type":"text", "placeholder":"Name",
-			      "className":"form-control input-lg text-center "}}/><span style={{"color":"red"}} ref={el => nameErrRef.current[i+1] = el}></span>
+			      "className":"form-control "}}/><span style={{"color":"red"}} ref={el => nameErrRef.current[i+1] = el}></span>
               <div className="cross-icon"></div>
             </div>
-            <div className="cross-field">
+            <div className="cross-field" onClick={(e) => crossHandler(e, yearRef.current[i+1])}>
               <Input ref={el => yearRef.current[i+1] = el} input={{"key":Math.random() ,"type":"text", "placeholder":"Year",
-			      "className":"form-control input-lg text-center"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[i+1] = el}></span>
+			      "className":"form-control"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[i+1] = el}></span>
               <div className="cross-icon"></div>
             </div>
           </div>
@@ -121,9 +127,9 @@ function PickAge({familyMemberState, nextClickHandler})	{
 	            <ol>
 	              <li className="mb-3 ps-2">
  	                <div className="list-grid">
- 	                  <div><Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
+ 	                  <div ><Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
 		      							"className":"form-control"}}/><span className="position-absolute font-11">This is you!</span><span style={{"color":"red"}} ref={el => nameErrRef.current[0] = el}></span></div>
- 	                  <div className="cross-field">
+ 	                  <div className="cross-field" onClick={(e) => crossHandler(e, yearRef.current[0])}>
  	                   <Input ref={el => yearRef.current[0] = el}  input={{"type":"text", "placeholder":"Year",
  	    									"className":"form-control"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[0] = el}></span>
  	                  </div>

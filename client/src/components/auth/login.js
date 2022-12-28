@@ -79,8 +79,13 @@ function Login() {
 		e.preventDefault()
 		navigate("/signup")
 	}
-	
 
+  const crossHandler = (event, ref) => {
+    if (event.target.className === 'cross-icon') {
+      ref.current.value=""
+    }
+  }	
+	
 	return (
 		<React.Fragment>
 	    <div className="back-page">
@@ -103,12 +108,12 @@ function Login() {
 	              Please login to return to your family survey.
 	            </h2>
 	            <div className="login-wrapper d-flex flex-column mt-2">
-	              <div className="cross-field mb-3">
+	              <div className="cross-field mb-3" onClick={(e) => crossHandler(e, emailRef)}>
 	                <Input ref={emailRef} input={{"type":"email", "placeholder":"Email Address", 
 	      						"className":"form-control"}}/>
 	                <div className="cross-icon"></div>
 	              </div>
-	              <div className="cross-field mb-5">
+	              <div className="cross-field mb-5" onClick={(e) => crossHandler(e, passwordRef)}>
 	                <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password",
 	      		 				"className":"form-control"}}/>
 	                <div className="cross-icon"></div>

@@ -9,6 +9,12 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
   cityRef, stateRef, countryRef, passwordRef, zipRef, submitHandler
 }) {
 
+  const crossHandler = (event, ref) => {
+    if (event.target.className === 'cross-icon') {
+      ref.current.value=""
+    }
+  }
+
   return (
     <React.Fragment>
       <div className="back-page p-4">
@@ -33,51 +39,51 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
             </p>
             <form onSubmit={submitHandler}>
               <div className="mb-2 registraion-form">
-                  <div className="cross-field mb-3 email-grid">
+                  <div className="cross-field mb-3 email-grid" onClick={(e) => crossHandler(e, emailRef)}>
                     <Input ref={emailRef} input={{"type":"email", "placeholder":"Email Address",
                       "className":"form-control"}}/>
                     <div className="cross-icon"></div>
                   </div>
                   <div className="mb-3 name-grid">
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, firstnameRef)}>
                       <Input ref={firstnameRef} input={{"type":"text", "placeholder":"First Name",
                         "className":"form-control"}}/>
                       <div className="cross-icon"></div>
                     </div>
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, lastnameRef)}>
                       <Input ref={lastnameRef} input={{"type":"text", "placeholder":"Last Name",
                         "className":"form-control"}}/>
                       <div className="cross-icon"></div>
                     </div>
                   </div>
-                  <div className="cross-field mb-3 address-grid">
+                  <div className="cross-field mb-3 address-grid" onClick={(e) => crossHandler(e, addressRef)}>
                     <Input ref={addressRef} input={{"type":"text", "placeholder":"Street Address",
                       "className":"form-control"}}/>
                     <div className="cross-icon"></div>
                   </div>
                   <div className="mb-3 location-grid">
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, cityRef)}>
                       <Input ref={cityRef} input={{"type":"text", "placeholder":"City",
                         "className":"form-control"}}/>
                       <div className="cross-icon"></div>
                     </div>
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, stateRef)}>
                       <Input ref={stateRef} input={{"type":"text", "placeholder":"State/Province",
                         "className":"form-control"}}/>
                       <div className="cross-icon"></div>
                     </div>
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, countryRef)}>
                       <Input ref={countryRef} input={{"type":"text", "placeholder":"Country",
                         "className":"form-control"}}/>
                       <div className="cross-icon"></div>
                     </div>
                   </div>
                   <div className="info-grid">
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, passwordRef)}>
                       <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password", "className":"form-control"}}/>
                       <div className="cross-icon"></div>
                     </div>
-                    <div className="cross-field">
+                    <div className="cross-field" onClick={(e) => crossHandler(e, zipRef)}>
                       <Input ref={zipRef} input={{"type":"text", "placeholder":"Zip/ Postal Code",
                         "className":"form-control"}}/> 
                       <div className="cross-icon"></div>

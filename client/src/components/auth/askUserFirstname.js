@@ -28,6 +28,12 @@ function AskUserFirstName({familyMemberState: {first_name}, nextClickHandler})	{
 			firstnameRef.current.value = first_name
 	},[first_name])
 
+  const crossHandler = (event) => {
+    if (event.target.className === 'cross-icon') {
+      firstnameRef.current.value=""
+    }
+  }
+
 	return (
 		<React.Fragment>
       <div className="back-page">
@@ -43,10 +49,10 @@ function AskUserFirstName({familyMemberState: {first_name}, nextClickHandler})	{
               What is your first name, please?
             </h2>
             <div>
-              <div className="mt-4 mb-5 cross-field">
+              <div className="mt-4 mb-5 cross-field" onClick={crossHandler}>
               	<Input ref={firstnameRef} input={{"type":"text", "placeholder":"First Name", 
 									"className":"form-control", "aria-describedby" :"helpId"}}/><span style={{"color":"red"}} ref={errRef}></span>
-                <div className="cross-icon"></div>
+                <div className="cross-icon" ></div>
               </div>
             </div>
             <div>

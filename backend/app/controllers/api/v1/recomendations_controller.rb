@@ -10,10 +10,11 @@ class  Api::V1::RecomendationsController < BaseController
   end
 
   def recomendation
-    family_members = current_family.family_members.where('age > ?', 4)
+    family_members = current_family.family_members
+    valid_members = family_members.where('age > 4')
     min_age = family_members.pluck(:age).min
     return  render json: { message: 'Recommendations are only given for kids of age less than 18', success: false, status: 204} if min_age > 18
-    if family_members.completed.length == family_members.size
+    if valid_members.completed.length == valid_members.size
       recomendation_hash = {}
       family_members.each do |family_member|
         family_member.response_choices.each do |response_choice|

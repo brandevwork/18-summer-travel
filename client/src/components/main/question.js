@@ -91,7 +91,7 @@ function Question({questionIndex, heading ,question_image, question_text, questi
 						</div>
 					</div>
 					<div className="activity-img">
-					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":"green", "fontSize":"45px"}}>{heading}</div>
+					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":"#FFA500", "fontSize":"35px", "marginBottom":'10px'}}>{heading === null ? heading : heading.toUpperCase() }</div>
 						<img src={question_image} className="img-fluid" alt="" />
 					</div>
 				</div>

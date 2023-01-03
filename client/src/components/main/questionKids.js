@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function QuestionKids({questionIndex, question_text, question_id, choices, submitHandler})	{
+function QuestionKids({questionIndex, currName, question_text, question_id, choices, submitHandler})	{
 
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -87,7 +87,7 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
     return capitalized;
 	}
 	const replaceName= (text) => {
-		text = text.replace("{name}", capitalizeFirstLetter(localStorage.getItem('name')));
+		text = text.replace("{name}", capitalizeFirstLetter(currName));
 		return text
 	}
 	

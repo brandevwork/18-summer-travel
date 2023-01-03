@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({questionIndex, questionPictureColor, heading ,question_image, question_text, question_id, choices, submitHandler})	{
+function Question({questionIndex, questionPictureColor, currName, heading ,question_image, question_text, question_id, choices, submitHandler})	{
 	const colorBackgrounds = ["#FFA500", "#92C46D", "#ED6641", "#F5D801", "#356EFD", "#F19D38", "#EA502D", "#92C46D", "#59C6F1","#EA502D", "#356EFD"]
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -70,7 +70,7 @@ function Question({questionIndex, questionPictureColor, heading ,question_image,
     return capitalized;
 	}
 	const replaceName= (text) => {
-		text = text.replace("{name}", capitalizeFirstLetter(localStorage.getItem('name')));
+		text = text.replace("{name}", capitalizeFirstLetter(currName));
 		return text
 	}
 	return (

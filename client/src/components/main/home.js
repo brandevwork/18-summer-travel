@@ -52,7 +52,7 @@ function Home()	{
     return () => {
     	// ctxHome.finishSurvey({});
     }
-  }, [homeState, sendData, ctxHome.survey])
+  }, [homeState, sendData])
 
   useEffect(() => {
   	ctxHome.setNotifications([])

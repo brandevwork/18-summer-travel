@@ -4,7 +4,7 @@ const HomeContext = React.createContext({
 	survey:{},
 	family:{},
 	results:{},
-	recomendations:[],
+	recomendations:{},
 	notification:[],
 	currFamilyMemberId:0,
 	getAllFamilyMembers: (obj) => {},
@@ -21,7 +21,7 @@ export default HomeContext;
 
 export const HomeContextProvider = (props) => {
 
-	const [familyDataState, setFamilyDataState] = useState({family:{},results:{},recomendations:[],currFamilyMemberId:0, survey:{}, notification:[]});
+	const [familyDataState, setFamilyDataState] = useState({family:{},results:{},recomendations:{},currFamilyMemberId:0, survey:{}, notification:[]});
 	
 	const home = {
 		 	family:familyDataState.family,
@@ -33,7 +33,7 @@ export const HomeContextProvider = (props) => {
 
 	    getAllFamilyMembers: (obj,notification) => {
 	      setFamilyDataState(prevState => {
-	      	return {...prevState,results:{...prevState.results},recomendations:{...prevState.recomendations}, family: obj}
+	      	return {survey:{...prevState.survey}, results:{...prevState.results},recomendations:{...prevState.recomendations}, family: obj, currFamilyMemberId:0, notification: []}
 	      });
 	      // setFamilyDataState({family:obj, notification})
 	    },
@@ -108,7 +108,7 @@ export const HomeContextProvider = (props) => {
 	      });
 	    },
 	    clearContext: () => {
-	    	setFamilyDataState({survey:{}, family:{},results:{},recomendations:[], currFamilyMemberId:0 ,notification: []});
+	    	setFamilyDataState({survey:{}, family:{},results:{},recomendations:{}, currFamilyMemberId:0 ,notification: []});
 	    }
    
 	}

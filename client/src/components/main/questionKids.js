@@ -82,6 +82,15 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
 		navigate("/home")
 	}
 
+	const  capitalizeFirstLetter = (str) => {
+    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    return capitalized;
+	}
+	const replaceName= (text) => {
+		text = text.replace("{name}", capitalizeFirstLetter(localStorage.getItem('name')));
+		return text
+	}
+	
 	return (
 
 		<React.Fragment>
@@ -94,7 +103,7 @@ function QuestionKids({questionIndex, question_text, question_id, choices, submi
             <div className="slide-heading">
               <div className="pe-4 mt-5">
                 <h2>
-                  {question_text}
+                  {replaceName(question_text)}
                 </h2>
                 <p className="font-23">
                   Check all the things you like to do!

@@ -64,7 +64,13 @@ function Question({questionIndex, questionPictureColor, heading ,question_image,
 		e.preventDefault()
 		navigate("/")
 	}
-	const boldify= (text) => {
+
+	const  capitalizeFirstLetter = (str) => {
+    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    return capitalized;
+	}
+	const replaceName= (text) => {
+		text = text.replace("{name}", capitalizeFirstLetter(localStorage.getItem('name')));
 		return text
 	}
 	return (
@@ -76,7 +82,7 @@ function Question({questionIndex, questionPictureColor, heading ,question_image,
 				<div className="content-grid">
 					<div className="d-flex justify-content-center flex-column">
 						<h2>
-							{boldify(question_text)}
+							{replaceName(question_text)}
 						</h2>
 						<p className="font-23">
 							Check all the things you like to do!

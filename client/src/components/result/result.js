@@ -144,6 +144,7 @@ function Result() {
               <>
               <div className="table-grid">
                 <div className="table-row">
+                <div className="result-wrap">
                 {
                   Object.keys(ctxHome.results).length &&
                   Array.from(ctxHome.results).map((ress) => 
@@ -151,9 +152,11 @@ function Result() {
                   )
                 }
                 </div>
+                </div>
               </div>
               <div className="table-grid">
                 <div className="table-row">
+                <div className="result-wrap">
                 {
                   Object.keys(ctxHome.results).length &&
                   Array.from(ctxHome.results).map(ress => 
@@ -164,37 +167,32 @@ function Result() {
                   ctxHome.family.filter(f => f.age < 4).map(ft => 
                   <div>{ft.name}({ft.age})</div>
                 )}
-                <div></div>
-                <div></div>
-                <div></div>
-                <section>
+                </div>
+                <div className="rightbarhead">
                   <h4 className="font-bold">{es}</h4>
-                </section>
+                </div>
                 </div>
                 {acticityQuestions[es].map((ques,indChild) =>
                   <div className="table-row">
+                  <div className="result-wrap">
                   {
                     Object.keys(ctxHome.results).length &&
                     Array.from(ctxHome.results).map((ress) => 
-                      <div>
                         <div className="form-check">
                           <input type="checkbox" className="form-check-input m-0" checked={calculateCheck(ques, ress.choices)} id="check1" name="option1" value="something" />
                         </div>
-                      </div>
                     )
                   } 
                   {ctxHome.family.length > 0 &&
-                    ctxHome.family.filter(f => f.age < 4).map(ft => 
-                  <div>
+                    ctxHome.family.filter(f => f.age < 4).map(ft =>
                         <div className="form-check">
                           <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />
                         </div>
-                      </div>
                   )}
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                    <a href="">{ques.choice_text}</a>
+                  </div>
+                    <div className="rightsidelink"> 
+                      <a href="">{ques.choice_text}</a>
+                    </div>
                   </div>
                 )}
               </div>

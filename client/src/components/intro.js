@@ -8,7 +8,7 @@ import homeReducer from "../reducer/homeReducer";
 
 
 function Intro() {
-  const allEqual = arr => arr.every( v => v === arr[0] )
+  const allEqual = arr => arr.every( v => v === 'completed' )
   const[title, setTitle] = useState('Start The Survey');
   const[showResults, setShowResults] = useState(false);
   const ctxAuth = useContext(AuthContext);

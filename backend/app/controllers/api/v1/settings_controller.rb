@@ -1,18 +1,18 @@
 class Api::V1::SettingsController < BaseController
   include Api::V1
 
-  swagger_controller :settings, "Settings"
+  swagger_controller :settings, 'Settings'
 
   swagger_api :family do
-    summary "Fetches a family and its all family members on settings page"
+    summary 'Fetches a family and its all family members on settings page'
     response :unauthorized
-    response :not_acceptable, "The request you made is not acceptable"
+    response :not_acceptable, 'The request you made is not acceptable'
   end
 
   swagger_api :reset_family_survey do
-    summary "Reset the survey response of all the family members of the family that is login"
+    summary 'Reset the survey response of all the family members of the family that is login'
     response :unauthorized
-    response :not_acceptable, "The request you made is not acceptable"
+    response :not_acceptable, 'The request you made is not acceptable'
   end
 
   def family
@@ -26,10 +26,10 @@ class Api::V1::SettingsController < BaseController
         familymember.response_choices.destroy_all if familymember.response_choices.present?
         familymember.update(survey_status: 0)
       end
-      render json: { message: "Survey has been reset successfully", status: :ok, success: true }
+      current_family.update(survey_start: nil, survey_end: nil)
+      render json: { message: 'Survey has been reset successfully', status: :ok, success: true }
     else
-      render json: { message: "Unable to reset survey", status: 400, success: false }
+      render json: { message: 'Unable to reset survey', status: 400, success: false }
     end
   end
-
 end

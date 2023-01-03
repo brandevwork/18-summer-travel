@@ -1,6 +1,6 @@
 [
   {
-    "question": "What do you like to do when on vacation?",
+    "question": "What do you like to do when on vacation, {name}?",
     "choices": [
       "Go to a spa:get a massage",
       "Enjoy the sun:Work on your suntan",
@@ -12,7 +12,7 @@
     "category_id": 1
   },
   {
-    "question": "What about these things?",
+    "question": "{name}, what about these things?",
     "choices": [
       "Visit theme park",
       "Go to a water park",
@@ -33,7 +33,7 @@
     "category_id": 1
   },
   {
-    "question": "What type environment do you like to visit when you go on vacation",
+    "question": "Great job {name}! Let's keep going! What type environment do you like to visit when you go on vacation",
     "choices": [
       "City Destinations (Rome, Paris, Chicago, etc)",
       "The Beach",
@@ -46,7 +46,7 @@
     "category_id": 2
   },
   {
-    "question": "What type of sporting activities do you like to do, if any?",
+    "question": "Now {name}, what type of sporting activities do you like to do, if any?",
     "choices": [
       "Golfing",
       "Hiking",
@@ -57,7 +57,7 @@
     "category_id": 3
   },
   {
-    "question": "Which of these cities or areas in Europe do you want to visit?",
+    "question": "Which of these cities or areas in Europe do you want to visit, {name}?",
     "heading": "Europe",
     "choices": [
       "Vienna, Austria",
@@ -100,7 +100,7 @@
     "category_id": 6
   },
   {
-    "question": "What places in South America interest you?",
+    "question": "What places in South America interest you, {name}?",
     "heading": "South America",
     "choices": [
       "Rio de Janeiro, Brazil",
@@ -148,7 +148,7 @@
     "category_id": 10
   },
   {
-    "question": "Are you interested in these cities in Mexico?",
+    "question": "Are you interested in these cities in Mexico, {name}?",
     "heading": "Mexico",
     "choices": [
       "Cabo",
@@ -167,7 +167,7 @@
     "category_id": 12
   },
   {
-    "question": "would you like to visit Canada?",
+    "question": "{name}, would you like to visit Canada?",
     "heading": "Canada",
     "choices": [
       "Montreal (Eastern Canada)",

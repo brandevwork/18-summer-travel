@@ -187,7 +187,7 @@ function Survey()	{
 				ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map((question, ind) =>
 						questionPicture !== null && questionPicture !== questionIndex && !(lastQuestion) ?
-						 <Question questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						 <Question currName={currName} questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						!(lastQuestion) ?
 							<Category heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
@@ -198,7 +198,7 @@ function Survey()	{
 			ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
 						!lastQuestion ?
-						<QuestionKids questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						<QuestionKids currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)

@@ -12,7 +12,8 @@ function Wrapper({customClassName, children})	{
 
   const logoutHandler = async() => {
     await ctxHome.clearContext()
-    ctxAuth.logout()
+    await ctxAuth.logout()
+    navigate("/")
   }
 
 	return (

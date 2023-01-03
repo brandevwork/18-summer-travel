@@ -942,9 +942,10 @@ input {
         }
       }
       .result-wrap{
-        display: flex;
-        justify-content: space-evenly;
         width: 100%;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-gap: 20px;
       }
     }
     .rightsidebar {

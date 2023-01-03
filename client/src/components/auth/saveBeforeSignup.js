@@ -18,7 +18,7 @@ function SaveBeforeSignup({nextClickHandler, familyMemberState: {first_name}})	{
               Okay... before we go on. Let's save your work. Also, by saving - this allows you to stop and finish at a later time.
             </h2>
             <div className="mt-4">
-              <Button classes="btn btn-primary" title="Let's Save Our Work" buttonClickHandler={() => nextClickHandler('signupSection')}/>
+              <Button classes="btn btn-primary" title="Let's Save Our Work" buttonClickHandler={() => nextClickHandler('signupSection', {"save": 'yes'})}/>
             </div>
           </div>
           <div>

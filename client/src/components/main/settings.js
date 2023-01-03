@@ -10,6 +10,8 @@ import Modal from "../UI/modal";
 
 
 function Settings(props)	{
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
   const ctxUser = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
   const initialHomeState = { familyError: false, resetError: false, activeError: false, errorMessage: []};
@@ -50,7 +52,9 @@ function Settings(props)	{
     if (data.status == "400") {
       dispatch({type: "SERVER_ERROR", resetError: true, errorMessage:data.status.message})
     }
-    if(data.status == "200"){
+    if(data.status == "ok"){
+      setStartDate('Not Started Yet')
+      setEndDate('Not Started Yet')
       await ctxHome.finishSurvey();
       // navigateHandler('/');
     }
@@ -92,6 +96,25 @@ function Settings(props)	{
       // navigateHandler('/main');
     }
   }, [homeState, sendData, ctxHome.family])
+
+  const updateStartEnd = async(data) => {
+    setStartDate(data.survey_start !== null ? data.survey_start_date : 'Not Started Yet')
+    setEndDate(data.survey_end !== null ? data.survey_end_date : 'Not Started Yet')
+  }
+
+  useEffect(()=> {
+    if (ctxUser.id !== '' && !homeState.familyError) {
+      sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/settings/family`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    },
+    updateStartEnd);
+      // navigateHandler('/main');
+    }
+  },[])
 
   const resetSurveyHandler = (e) => {
     let value = e.target.checked
@@ -245,11 +268,11 @@ function Settings(props)	{
               <div className="survey-date-wrapper my-2">
                 <div className="d-flex align-items-center gap-2">
                   <div>Survey Started:</div>
-                  <div>June 23, 2022</div>
+                  <div>{startDate}</div>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <div>Survey Finished:</div>
-                  <div>September 25, 2022</div>
+                  <div>{endDate}</div>
                 </div>                
                 <div className="text-center mt-2" >
                   *Children under 4 years old are <br/> automatically excluded from the survey.

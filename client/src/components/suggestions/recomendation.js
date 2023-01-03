@@ -159,7 +159,7 @@ function Recomendation()	{
                       <div className="dgrid">
                         <div className="year">{2023 + ind}</div>
                         <div className="tile">
-                              {rs.choice_text}
+                          {rs.choice_text}
                         </div>
                          <div class="names d-flex justify-content-evenly px-2 py-4 text-center">
                          {Object.keys(ctxHome.family).length > 0 &&

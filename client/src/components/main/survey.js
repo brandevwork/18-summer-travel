@@ -19,6 +19,7 @@ function Survey()	{
 
 	const [lastQuestion, setLastQuestion] = useState(false)
 	const [questionPicture, setQuestionPicture] = useState(null)
+	const [questionPictureColor, setQuestionPictureColor] = useState(0)
 	const [currAge, setCurrAge] = useState(0)
 	const [currName, setCurrName] = useState('')
 	
@@ -110,6 +111,7 @@ function Survey()	{
     }
     if(Object.keys(ctxHome.survey).length > 0 && ctxHome.currFamilyMemberId == id){
     	setQuestionPicture(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
+    	setQuestionPictureColor(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
     	return;
     }
     if(!homeState.familyError && !homeState.surveyError && !homeState.questionSavedError ) {
@@ -185,7 +187,7 @@ function Survey()	{
 				ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map((question, ind) =>
 						questionPicture !== null && questionPicture !== questionIndex && !(lastQuestion) ?
-						 <Question heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						 <Question questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						!(lastQuestion) ?
 							<Category heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	

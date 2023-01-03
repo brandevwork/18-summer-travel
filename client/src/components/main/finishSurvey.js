@@ -32,6 +32,11 @@ function FinishSurvey({currName, questionIndex, heading ,question_image, questio
           	<Button title="Go" classes="btn btn-primary me-5" buttonClickHandler={finishSurvey} />
           </div>
         </div>
+        <div className="activity-img">
+          <div>
+            <img src={require("../../assets/images/finished.png")} className="img-fluid" alt="" />
+          </div>
+        </div>
       </div>
     </div>
     </React.Fragment>

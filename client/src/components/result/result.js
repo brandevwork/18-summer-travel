@@ -160,7 +160,8 @@ function Result() {
                     <div>{ress.name} ({ress.age})</div>
                   )
                 }
-                {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                {ctxHome.family.length > 0 &&
+                  ctxHome.family.filter(f => f.age < 4).map(ft => 
                   <div>{ft.name}({ft.age})</div>
                 )}
                 <div></div>
@@ -182,7 +183,8 @@ function Result() {
                       </div>
                     )
                   } 
-                  {ctxHome.family.filter(f => f.age < 4).map(ft => 
+                  {ctxHome.family.length > 0 &&
+                    ctxHome.family.filter(f => f.age < 4).map(ft => 
                   <div>
                         <div className="form-check">
                           <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />

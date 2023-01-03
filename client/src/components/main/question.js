@@ -10,8 +10,8 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({questionIndex, heading ,question_image, question_text, question_id, choices, submitHandler})	{
-
+function Question({questionIndex, questionPictureColor, heading ,question_image, question_text, question_id, choices, submitHandler})	{
+	const colorBackgrounds = ["#FFA500", "#92C46D", "#ED6641", "#F5D801", "#356EFD", "#F19D38", "#EA502D", "#92C46D", "#59C6F1","#EA502D", "#356EFD"]
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
   );
@@ -64,6 +64,15 @@ function Question({questionIndex, heading ,question_image, question_text, questi
 		e.preventDefault()
 		navigate("/")
 	}
+
+	const  capitalizeFirstLetter = (str) => {
+    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    return capitalized;
+	}
+	const replaceName= (text) => {
+		text = text.replace("{name}", capitalizeFirstLetter(localStorage.getItem('name')));
+		return text
+	}
 	return (
 		<React.Fragment>
 			<div className="back-page p-4">
@@ -73,7 +82,7 @@ function Question({questionIndex, heading ,question_image, question_text, questi
 				<div className="content-grid">
 					<div className="d-flex justify-content-center flex-column">
 						<h2>
-							{question_text}
+							{replaceName(question_text)}
 						</h2>
 						<p className="font-23">
 							Check all the things you like to do!
@@ -91,7 +100,7 @@ function Question({questionIndex, heading ,question_image, question_text, questi
 						</div>
 					</div>
 					<div className="activity-img">
-					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":"#FFA500", "fontSize":"35px", "marginBottom":'10px'}}>{heading === null ? heading : heading.toUpperCase() }</div>
+					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":colorBackgrounds[questionIndex-parseInt(questionPictureColor)], "fontSize":"35px", "marginBottom":'10px'}}>{heading === null ? heading : heading.toUpperCase() }</div>
 						<img src={question_image} className="img-fluid" alt="" />
 					</div>
 				</div>

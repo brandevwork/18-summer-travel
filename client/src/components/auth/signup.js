@@ -25,8 +25,8 @@ function SignUp(props)  {
   const [fromSubmit, setFromSubmit] = useState(false)
   let regex = /^[a-zA-Z ]*$/;
   const ctxAuth = useContext(AuthContext);
-  const [renderState, setRenderState] = useState(ctxAuth.familyMemberState.family_members ? 'signupSection':'welcome');
-  const [familyMemberState, setFamilyMemberState] = useState(ctxAuth.familyMemberState);
+  const [renderState, setRenderState] = useState(ctxAuth.familyMemberState.save ? 'signupSection':'welcome');
+  const [familyMemberState, setFamilyMemberState] = useState(ctxAuth.familyMemberState.save ? ctxAuth.familyMemberState : {});
   
   const firstnameRef = useRef();
   const lastnameRef = useRef();

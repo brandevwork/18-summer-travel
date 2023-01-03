@@ -64,27 +64,30 @@ function Recomendation()	{
   useEffect(() => {
     if(typeof ctxHome.recomendations === 'object')
       ctxHome.recomendations = Object.values(ctxHome.recomendations)
-    if(ctxHome.recomendations.length > 0 && Array.from(ctxHome.family).length > 0){
+    if(ctxHome.recomendations.length > 0){
       return
     }
-    if (ctxUser.id !== '' && !homeState.recomendationError && !(Array.from(ctxHome.recomendations).length > 0)) {
-      sendDataFamily(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-    },
-    getAuthDataFamily)
+    if (ctxUser.id !== '' && !homeState.recomendationError) {
+      if (ctxUser.id !== '' && ctxHome.family.length > 0) {
+        sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/recomendation`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        },
+        getAuthData)
+      } else {
+        sendDataFamily(`${process.env.REACT_APP_SERVER_URL}api/v1/family_members`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        },
+        getAuthDataFamily)
+      }
 
-    sendData(`${process.env.REACT_APP_SERVER_URL}api/v1/recomendation`, {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-    },
-    getAuthData)
 
     }
   }, [homeState, sendData, ctxHome.recomendations])  
@@ -147,11 +150,11 @@ function Recomendation()	{
             </div>
           </div>
           
-                {ctxHome.recomendations.length > 0 &&
+                {Object.values(ctxHome.recomendations).length > 0 &&
                 <div className="tiles-wrapper mb-4">
                   <span className="dot-first"></span>
                   <div className="tiles-grid shade1">
-                {ctxHome.recomendations.map((rs,ind) =>
+                {Object.values(ctxHome.recomendations).map((rs,ind) =>
                   <>{ind%3 ==0 ? <span className="dot-first"></span> : ""} 
                       <div className="dgrid">
                         <div className="year">{2023 + ind}</div>
@@ -160,8 +163,11 @@ function Recomendation()	{
                         </div>
                          <div class="names d-flex justify-content-evenly px-2 py-4 text-center">
                          {Object.keys(ctxHome.family).length > 0 &&
-                            Object.keys(ctxHome.family).filter(fil => ctxHome.family[fil].age < 18).map(key => 
+                            Object.keys(ctxHome.family).filter(fil => ctxHome.family[fil].age < 18).map(key =>
+                              parseInt(ctxHome.family[key].age) + ind <= 18 ?  
                               <div class="d-flex flex-column">{ctxHome.family[key].name} <span>({parseInt(ctxHome.family[key].age) +ind})</span></div>
+                              :
+                              ''
                             )
                           }
                         </div>

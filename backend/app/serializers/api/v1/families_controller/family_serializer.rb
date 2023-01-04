@@ -5,11 +5,11 @@ module Api::V1
     has_many :family_members
 
     def survey_start_date
-      object.survey_start.strftime('%B %e, %Y')
+      object.survey_start.strftime('%B %e, %Y') unless object.survey_start.nil?
     end
 
     def survey_end_date
-      object.survey_end.strftime('%B %e, %Y')
+      object.survey_end.strftime('%B %e, %Y') unless object.survey_end.nil?
     end
   end
 end

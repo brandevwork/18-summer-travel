@@ -151,6 +151,10 @@ function Result() {
                     <div className={`bar ${colors[ind%7]}`}></div>
                   )
                 }
+                 {ctxHome.family.length > 0 &&
+                  ctxHome.family.filter(f => f.age < 4).map(ft => 
+                   <div className={`bar ${colors[ind%7]}`}></div>
+                )}
                 </div>
                 </div>
               </div>
@@ -186,7 +190,7 @@ function Result() {
                   {ctxHome.family.length > 0 &&
                     ctxHome.family.filter(f => f.age < 4).map(ft =>
                         <div className="form-check">
-                          <input type="checkbox" className="form-check-input m-0" checked="false" disabled="true" id="check1" name="option1" value="something" />
+                          <input style={{'background':'#BDBDBD'}} type="checkbox" className="form-check-input m-0" checked={false} disabled="true" id="check1" name="option1" value="something" disabled={true}/>
                         </div>
                   )}
                   </div>

@@ -70,8 +70,19 @@ function Question({questionIndex, questionPictureColor, currName, heading ,quest
     return capitalized;
 	}
 	const replaceName= (text) => {
+		let startIndex = null;
+		let endIndex = null;
 		text = text.replace("{name}", capitalizeFirstLetter(currName));
-		return text
+		if(heading !== null) {
+			if (text.indexOf(heading) !== -1) {
+				 startIndex = text.indexOf(heading)
+				 endIndex = startIndex + heading.length - 1
+			}
+		}
+		if(startIndex && endIndex !== null)
+			return <h2>{text.slice(0,startIndex)}<b>{text.slice(startIndex,endIndex+1)}</b>{text.slice(endIndex+1, text.length-1)}</h2>
+		else
+			return <h2>{text}</h2>
 	}
 	return (
 		<React.Fragment>
@@ -81,9 +92,7 @@ function Question({questionIndex, questionPictureColor, currName, heading ,quest
 			<div className="center-content mx-auto">
 				<div className="content-grid">
 					<div className="d-flex justify-content-center flex-column">
-						<h2>
 							{replaceName(question_text)}
-						</h2>
 						<p className="font-23">
 							Check all the things you like to do!
 						</p>

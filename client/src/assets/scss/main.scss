@@ -909,7 +909,7 @@ input {
       }
       .table-row {
         display: grid;
-        grid-template-columns: 1fr 30%;
+        grid-template-columns: 1fr 35%;
         grid-gap: 5px;
         place-items: center;
         .bar {
@@ -985,16 +985,16 @@ input {
       &::after {
         content: '';
         background: url("../images/result-cat.png") no-repeat center top;
-        width: 193;
+        width: 193px;
         height: 212px;
         background-size: cover;
         position: absolute;
-        bottom: 21%;
+        bottom: 4%;
         left: -12.1%;
         right: 0;
       }
       .result-header {
-        grid-template-columns: 57% 41%;
+        grid-template-columns: 55% 43%;
       }
       .result-grid {
         grid-template-columns: 1fr;

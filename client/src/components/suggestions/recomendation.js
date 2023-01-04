@@ -138,7 +138,7 @@ function Recomendation()	{
           <div className="top-section mb-3">
             <div className="d-flex justify-content-between align-items-center">
               <div>
-                <img  src={require('../../assets/images/recom-cat.svg').default} className="me-1" alt="" />
+                <img  src={require('../../assets/images/recom-cat.svg').default} className="me-1 img-fluid" alt="" />
               </div>
               <div>
                 <h2 className="m-0">Jones Family - 18 Summers</h2>

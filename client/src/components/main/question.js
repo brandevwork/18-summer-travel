@@ -109,7 +109,7 @@ function Question({questionIndex, questionPictureColor, currName, heading ,quest
 						</div>
 					</div>
 					<div className="activity-img">
-					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":colorBackgrounds[questionIndex-parseInt(questionPictureColor)], "fontSize":"35px", "marginBottom":'10px'}}>{heading === null ? heading : heading.toUpperCase() }</div>
+					<div style={{"color" : "#ffffff","textAlign":"center",  "backgroundColor":colorBackgrounds[questionIndex-parseInt(questionPictureColor)], "fontSize":"26px", "marginBottom":'10px'}}>{heading === null ? heading : heading.toUpperCase() }</div>
 						<img src={question_image} className="img-fluid" alt="" />
 					</div>
 				</div>

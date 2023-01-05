@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_05_105854) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_111126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_105854) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "destinations", force: :cascade do |t|
+    t.string "name"
+    t.integer "four_to_eight", default: 0
+    t.integer "nine_to_thirteen", default: 0
+    t.bigint "country_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_destinations_on_country_id"
   end
 
   create_table "families", force: :cascade do |t|
@@ -86,24 +96,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_105854) do
     t.index ["family_id"], name: "index_family_members_on_family_id"
   end
 
-  create_table "question_categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string "text"
     t.string "heading"
     t.string "subheading"
     t.string "boldtext"
-    t.bigint "question_category_id", null: false
+    t.integer "question_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["question_category_id"], name: "index_questions_on_question_category_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "questions", "question_categories"
+  add_foreign_key "destinations", "countries"
 end

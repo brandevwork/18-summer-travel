@@ -13,11 +13,11 @@ function Wrapper({customClassName, children})	{
   const navigate = useNavigate();
 
   const getAuthData = async(data) => {
-    if(data.status == "200"){
+    // if(data.status == "200"){
       await ctxHome.clearContext()
       await ctxAuth.logout()
       navigate("/")
-    }
+    // }
   }
 
   const logoutHandler = async() => {

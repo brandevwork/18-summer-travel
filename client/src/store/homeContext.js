@@ -80,7 +80,7 @@ export const HomeContextProvider = (props) => {
 
 	    finishSurvey: (obj) => {	    	
 	    	setFamilyDataState(prevState => {
-	      	return {family:{...prevState.family}, survey: {},results:{...prevState.results},recomendations:{...prevState.recomendations}, currFamilyMemberId:0, notification: []}
+	      	return {family:{...prevState.family}, survey: {},results:{},recomendations:{}, currFamilyMemberId:0, notification: []}
 	      });
 	    },
 

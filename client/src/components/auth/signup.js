@@ -179,7 +179,6 @@ function SignUp(props)  {
 
   return (
   	<React.Fragment>
-      {authLoading && <Modal>Please wait! Family members are being fetched ...</Modal>}
     	{renderState === 'welcome' && <Welcome nextClickHandler={nextClickHandler}/>}
     	{renderState === 'askUser' && <AskUser nextClickHandler={nextClickHandler}/>}
     	{renderState === 'askUserFirstname' && <AskUserFirstName familyMemberState={familyMemberState}  nextClickHandler={nextClickHandler}/>}
@@ -203,6 +202,7 @@ function SignUp(props)  {
     		submitHandler={submitHandler}
         nextClickHandler={nextClickHandler}
         authState = {authState}
+        authLoading = {authLoading}
   		/>}
     	{renderState === 'setup' && <Setup familyMemberState={familyMemberState} nextClickHandler={nextClickHandler}/>}
     </React.Fragment>

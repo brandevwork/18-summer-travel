@@ -189,7 +189,7 @@ function Survey()	{
 						 <Question homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						!(lastQuestion) ?
-							<Category heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
+							<Category homeLoadingSurveySaved={homeLoadingSurveySaved} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
 						:
 							<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)

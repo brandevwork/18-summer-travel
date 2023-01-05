@@ -9,9 +9,9 @@
 }
 
 .modal {
-  position: fixed;
-  top: 5vh;
-  left: 5%;
+/*  position: fixed;*/
+/*  top: 5vh;*/
+/*  left: 5%;*/
   width: 90%;
   background-color: white;
   padding: 1rem;
@@ -21,12 +21,18 @@
   animation: slide-down 300ms ease-out forwards;
   max-height: calc(100vh - 50px);
   overflow-y: auto;
+
+    position: absolute;
+    left: 50%;
+    top: 50vh;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 @media (min-width: 768px) {
   .modal {
-    width: 40rem;
-    left: calc(50% - 20rem);
+    width:15rem;
+    left: calc(50% - 7.5rem);
   }
 }
 

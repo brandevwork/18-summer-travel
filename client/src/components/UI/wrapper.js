@@ -3,22 +3,39 @@ import { NavLink, useNavigate} from 'react-router-dom';
 import AuthContext from "../../store/authContext";
 import HomeContext from "../../store/homeContext";
 import HomeBtn from "./homeBtn";
+import useData from "../../hooks/useData";
+import Modal from "./modal";
 
 function Wrapper({customClassName, children})	{
-
+  const {fetchDataHandler: sendDataLogout, loading: logoutLoading} = useData();
   const ctxAuth = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
   const navigate = useNavigate();
 
+  const getAuthData = async(data) => {
+    if(data.status == "200"){
+      await ctxHome.clearContext()
+      await ctxAuth.logout()
+      navigate("/")
+    }
+  }
+
   const logoutHandler = async() => {
-    await ctxHome.clearContext()
-    await ctxAuth.logout()
-    navigate("/")
+    sendDataLogout(`${process.env.REACT_APP_SERVER_URL}families/sign_out`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    },
+    getAuthData);
+   
   }
 
 	return (
 		<div className="main-wrapper">
       <div className={`welcome-screens ${customClassName}`}>
+      {logoutLoading && <Modal logout="yes">Logging out ...</Modal>}
 				{children}
 				<div className="footer-links mt-5 px-3">
           <div className="d-flex align-items-center">

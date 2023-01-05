@@ -51,7 +51,7 @@ export const AuthContextProvider = (props) => {
 				localStorage.setItem("jti", obj.jti);
 				localStorage.setItem("token", obj.token);
 	    },
-	    logout: async(notify="Logged Out") => {
+	    logout: async(notify="") => {
 	      setauthDataState({email:"", name:"", jti:"",token: "", id:"",familyMemberState:{}, notification: notify});
 	      localStorage.removeItem("email");
 	      localStorage.removeItem("name");

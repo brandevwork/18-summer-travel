@@ -27,7 +27,6 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
             ))}
         </ul>
       }
-      {authLoading && <Modal>Please Wait ...</Modal>}
       <div className="center-content mx-auto">
         <div className="content-grid content-grid-registration">
           <div className="d-flex justify-content-center flex-column">
@@ -91,7 +90,7 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
                   </div>
               </div>
               <div className="mt-4">
-                <button type="submit" name="" id="" className="btn btn-primary">Create Account</button>
+                <button type="submit" name="" id="" disabled={authLoading ? true : false} className="btn btn-primary">{authLoading ? `Submitting...` : `Create Account`}</button>
               </div>
             </form>
           </div>

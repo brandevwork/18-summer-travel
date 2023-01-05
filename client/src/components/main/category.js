@@ -3,7 +3,7 @@ import Back from '../UI/back';
 import Button from "../UI/button";
 import { NavLink, useNavigate, useLocation, useParams } from "react-router-dom";
 
-function Category({questionIndex, heading ,question_image, question_text, question_id, choices, submitHandler})  {
+function Category({homeLoadingSurveySaved, questionIndex, heading ,question_image, question_text, question_id, choices, submitHandler})  {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function Category({questionIndex, heading ,question_image, question_text, questi
             Yay! For the last set of questions. I,m going to ask what cities around the world you want to visit.
           </h2>
           <div className="mt-4">
-            <Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, [],  parseInt(questionIndex), "Category")}/>
+            <Button classes="btn btn-primary me-5" disabled={homeLoadingSurveySaved ? true : false} title={homeLoadingSurveySaved ? `Submitting...` : `Next`} buttonClickHandler={() => submitHandler(id, question_id, [],  parseInt(questionIndex), "Category")}/>
           </div>
         </div>
         <div>

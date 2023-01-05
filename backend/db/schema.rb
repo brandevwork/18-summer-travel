@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_074933) do
     t.string "text"
     t.string "heading"
     t.string "subheading"
+    t.string "boldtext"
     t.bigint "question_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

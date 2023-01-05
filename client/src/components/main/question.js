@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({questionIndex, questionPictureColor, currName, heading ,question_image, question_text, question_id, choices, submitHandler})	{
+function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, currName, heading ,question_image, question_text, question_id, choices, submitHandler})	{
 	const colorBackgrounds = ["#FFA500", "#92C46D", "#ED6641", "#F5D801", "#356EFD", "#F19D38", "#EA502D", "#92C46D", "#59C6F1","#EA502D", "#356EFD"]
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -105,7 +105,7 @@ function Question({questionIndex, questionPictureColor, currName, heading ,quest
 							)}
 						</div>
 						<div className="mt-4">
-							<Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? parseInt(questionIndex) : parseInt(questionIndex)+1, parseInt(questionIndex) == ctxHome.survey.length - 1 ? "last_question" : "Next")}/>							
+							<Button classes="btn btn-primary me-5" disabled={homeLoadingSurveySaved ? true : false} title={homeLoadingSurveySaved ? `Submitting...` : `Next`} buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? parseInt(questionIndex) : parseInt(questionIndex)+1, parseInt(questionIndex) == ctxHome.survey.length - 1 ? "last_question" : "Next")}/>							
 						</div>
 					</div>
 					<div className="activity-img">

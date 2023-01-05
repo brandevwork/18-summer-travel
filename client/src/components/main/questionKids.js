@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function QuestionKids({questionIndex, currName, question_text, question_id, choices, submitHandler})	{
+function QuestionKids({homeLoadingSurveySaved, questionIndex, currName, question_text, question_id, choices, submitHandler})	{
 
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -143,7 +143,7 @@ function QuestionKids({questionIndex, currName, question_text, question_id, choi
               </button>
             </div>
             <div className="mt-4 d-flex justify-content-center">
-              <Button classes="btn btn-primary me-5" title="Next" buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? parseInt(questionIndex) : parseInt(questionIndex)+1, parseInt(questionIndex) == ctxHome.survey.length - 1 ? "last_question" : "Next")}/>
+              <Button classes="btn btn-primary me-5" disabled={homeLoadingSurveySaved ? true : false} title={homeLoadingSurveySaved ? `Submitting...` : `Next`} buttonClickHandler={() => submitHandler(id, question_id, choicesAnswers, parseInt(questionIndex) == ctxHome.survey.length - 1 ? parseInt(questionIndex) : parseInt(questionIndex)+1, parseInt(questionIndex) == ctxHome.survey.length - 1 ? "last_question" : "Next")}/>
             </div>
           </div>
         </div>

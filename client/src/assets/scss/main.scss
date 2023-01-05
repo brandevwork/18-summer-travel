@@ -214,6 +214,10 @@ h3 {
   color: $red;
 }
 
+.btn:disabled{
+  background-color: #EA502D;
+}
+
 .btn-primary {
   background-color: $red;
   border-color: $blue;

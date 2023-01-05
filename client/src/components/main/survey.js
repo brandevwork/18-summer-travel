@@ -181,13 +181,12 @@ function Survey()	{
     }
 		{homeLoadingMember && <Modal>Please wait! Member is initializing ...</Modal>}
 		{homeLoadingSurvey && <Modal>Please wait! Survey Data is being fetched ...</Modal>}
-		{homeLoadingSurveySaved && <Modal>Please wait! Survey Data is being saved ...</Modal>}
 		{
 			currAge > 14  ?
 				ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map((question, ind) =>
 						questionPicture !== null && questionPicture !== questionIndex && !(lastQuestion) ?
-						 <Question currName={currName} questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						 <Question homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						!(lastQuestion) ?
 							<Category heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
@@ -198,7 +197,7 @@ function Survey()	{
 			ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
 						!lastQuestion ?
-						<QuestionKids currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						<QuestionKids homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)

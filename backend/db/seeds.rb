@@ -1,12 +1,8 @@
 require 'json'
 questions = JSON.parse(File.read('questions.json'))
-categories = %w[Activity Destination]
-categories.each do |category|
-  QuestionCategory.find_or_create_by(name: category)
-end
 
 questions.each_with_index do |question, q_index|
-  q = Question.find_or_create_by(text: question['question'], question_category_id: question['question_category_id'])
+  q = Question.find_or_create_by(text: question['question'], question_type: question['question_type'])
   q.image.attach(io: File.open("app/assets/images/choice_images/q#{q_index + 1}.png"), filename: "q#{q_index + 1}.png")
   q.update(heading: question['heading']) unless question['heading'].nil?
   q.update(subheading: question['subheading']) unless question['subheading'].nil?

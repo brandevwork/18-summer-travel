@@ -1,4 +1,4 @@
 class Question < ApplicationRecord
-  belongs_to :question_category
+  enum question_type: %i[activities destinations]
   has_one_attached :image
 end

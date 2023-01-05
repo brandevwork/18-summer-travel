@@ -5,7 +5,7 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
       t.string :heading
       t.string :subheading
       t.string :boldtext
-      t.references :question_category, null: false, foreign_key: true
+      t.integer :question_type
 
       t.timestamps
     end

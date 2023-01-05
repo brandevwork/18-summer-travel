@@ -1,0 +1,94 @@
+[
+  {
+    "question": "What do you like to do when on vacation, {name}?",
+    "question_category_id": 1,
+    "subheading": "Check all the things you like to do!"
+  },
+  {
+    "question": "{name}, what about these things?",
+    "question_category_id": 1,
+    "subheading": "Check all the things you like to do!"
+  },
+  {
+    "question": "Which of these things do you like to do?",
+    "question_category_id": 1
+  },
+  {
+    "question": "Great job {name}! Let's keep going! What type environment do you like to visit when you go on vacation",
+    "question_category_id": 1,
+    "subheading": "Click all the things you like!"
+  },
+  {
+    "question": "Now {name}, what type of sporting activities do you like to do, if any?",
+    "question_category_id": 1,
+    "subheading": "Check all the things you like, or skip this if none are interesting you."
+  },
+  {
+    "question": "Which of these cities or areas in Europe do you want to visit, {name}?",
+    "heading": "Europe",
+    "question_category_id": 2,
+    "subheading": "Scroll and click all the things you like!",
+    "boldtext": "Europe"
+  },
+  {
+    "question": "How about these cities in the United Kingdom, the UK and Ireland",
+    "heading": "United Kingdom & Ireland",
+    "question_category_id": 2,
+    "subheading": "Click all those that interest you to visit.",
+    "boldtext": "United Kingdom, the UK and Ireland"
+  },
+  {
+    "question": "What about visiting Africa?",
+    "heading": "Africa",
+    "question_category_id": 2,
+    "boldtext": "Africa"
+  },
+  {
+    "question": "What places in South America interest you, {name}?",
+    "heading": "South America",
+    "question_category_id": 2,
+    "boldtext": "South America"
+  },
+  {
+    "question": "How about Central America?",
+    "heading": "Central America",
+    "question_category_id": 2,
+    "boldtext": "Central America"
+  },
+  {
+    "question": "Interested in visiting Oceania? This is the area including Australia and New Zealand",
+    "heading": "Australia & Oceania",
+    "question_category_id": 2,
+    "boldtext": "Oceania,New Zealand"
+  },
+  {
+    "question": "Which of these cities in the United States do you wish to visit for vacations?",
+    "heading": "United States",
+    "question_category_id": 2,
+    "subheading": "Scroll and make your choice.",
+    "boldtext": "United States"
+  },
+  {
+    "question": "Are you interested in these cities in Mexico, {name}?",
+    "heading": "Mexico",
+    "question_category_id": 2
+  },
+  {
+    "question": "Are you interested in Caribbean destinations? Including perhaps a Caribbean Cruise?",
+    "heading": "Caribbean",
+    "question_category_id": 2,
+    "boldtext": "Caribbean"
+  },
+  {
+    "question": "{name}, would you like to visit Canada?",
+    "heading": "Canada",
+    "question_category_id": 2,
+    "boldtext": "Canada"
+  },
+  {
+    "question": "Interesting in visiting Bermuda?",
+    "heading": "Bermuda",
+    "question_category_id": 2,
+    "boldtext": "Bermuda"
+  }
+]

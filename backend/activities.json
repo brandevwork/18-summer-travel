@@ -1,0 +1,133 @@
+[
+  {
+    "name": "Spa",
+    "label": "Go to a spa:get a massage",
+    "image_name": "a1"
+  },
+  {
+    "name": "Work on Suntan",
+    "label": "Enjoy the sun:Work on your suntan",
+    "image_name": "a2"
+  },
+  {
+    "name": "Shopping",
+    "label": "Go shopping",
+    "image_name": "a3"
+  },
+  {
+    "name": "Winery",
+    "label": "Visit a winery",
+    "image_name": "a4"
+  },
+  {
+    "name": "Classes(cooking)",
+    "label": "Take cooking classes",
+    "image_name": "a5"
+  },
+  {
+    "name": "Night Life",
+    "label": "Experience the city night life",
+    "image_name": "a6"
+  },
+  {
+    "name": "Theme Park",
+    "label": "Visit theme park",
+    "image_name": "a7"
+  },
+  {
+    "name": "Water Park",
+    "label": "Go to a water park",
+    "image_name": "a8"
+  },
+  {
+    "name": "Zoo/Aquarium",
+    "label": "Visit a zoo or aquarium",
+    "image_name": "a9"
+  },
+  {
+    "name": "Walking Exploring",
+    "label": "Go walking and exploring",
+    "image_name": "a10"
+  },
+  {
+    "name": "Art",
+    "label": "Seeing art and cool sculptures",
+    "image_name": "a11"
+  },
+  {
+    "name": "Museums",
+    "label": "Visiting interesting museum",
+    "image_name": "a12"
+  },
+  {
+    "name": "Culture History",
+    "label": "Learning about local culture and history",
+    "image_name": "a13"
+  },
+  {
+    "name": "Guided Tours",
+    "label": "Have a tour guide show us around",
+    "image_name": "a14"
+  },
+  {
+    "name": "Events Festivals",
+    "label": "Experience local festivals, events and parades",
+    "image_name": "a15"
+  },
+  {
+    "name": "City Vacations",
+    "label": "City Destinations (Rome, Paris, Chicago, etc)",
+    "image_name": "a16"
+  },
+  {
+    "name": "Beach",
+    "label": "The Beach",
+    "image_name": "a17"
+  },
+  {
+    "name": "Country",
+    "label": "Countryside and Farmland",
+    "image_name": "a18"
+  },
+  {
+    "name": "National Park",
+    "label": "National Parks",
+    "image_name": "a19"
+  },
+  {
+    "name": "Tourist Location",
+    "label": "Tourist Destinations (Big Ben, Eiffel Tower, etc.)",
+    "image_name": "a20"
+  },
+  {
+    "name": "Road Trips",
+    "label": "Road Trips",
+    "image_name": "a21"
+  },
+  {
+    "name": "Nature Not Parks",
+    "label": "Be in nature",
+    "image_name": "a22"
+  },
+  {
+    "name": "Golf",
+    "label": "Golfing"
+  },
+  {
+    "name": "Hiking",
+    "label": "Hiking"
+  },
+  {
+    "name": "Biking",
+    "label": "Biking"
+  },
+  {
+    "name": "Water Sports",
+    "label": "Water Sports (Swimming, Snorkeling)"
+  },
+  {
+    "name": "Mountain Ski",
+    "label": "Mountain Skiing"
+  }
+
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "question_id": 1,
+    "activity_ids":[
+      1, 2, 3, 4, 5, 6
+    ]
+  },
+  {
+    "question_id": 2,
+    "activity_ids":[
+      7, 8, 9, 10
+    ]
+  },
+  {
+    "question_id": 3,
+    "activity_ids":[
+      11, 12, 13, 14, 15
+    ]
+  },
+  {
+    "question_id": 4,
+    "activity_ids":[
+      16, 17, 18, 19, 20, 21, 22
+    ]
+  },
+  {
+    "question_id": 5,
+    "activity_ids":[
+      23, 24, 25, 26, 27
+    ]
+  }
+]

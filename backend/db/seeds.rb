@@ -2,6 +2,8 @@ require 'json'
 questions = JSON.parse(File.read('questions.json'))
 countries = JSON.parse(File.read('countries.json'))
 activities = JSON.parse(File.read('activities.json'))
+question_activities = JSON.parse(File.read('question_activities.json'))
+question_destinations = JSON.parse(File.read('question_destinations.json'))
 
 questions.each_with_index do |question, q_index|
   q = Question.find_or_create_by(text: question['question'], question_type: question['question_type'])
@@ -25,12 +27,14 @@ activities.each_with_index do |activity, a_index|
   a.activity_image.attach(io: File.open("app/assets/images/choice_images/a#{a_index + 1}.jpg"), filename: "a#{a_index + 1}.jpg") unless activity['image_name'].nil?
 end
 
-# questions.each_with_index do |question, q_index|
-#   q = Question.find_or_create_by(question_text: question['question'], survey_id: survey.id)
-#   q.question_image.attach(io: File.open("app/assets/images/choice_images/q#{q_index + 1}.png"), filename: "q#{q_index + 1}.png")
-#   q.update(heading: question['heading']) unless question['heading'].nil?
-#   question['choices'].each_with_index do |choice, c_index|
-#     choice = Choice.find_or_create_by(choice_text: choice, question_id: q.id, category_id: question['category_id'])
-#     choice.image.attach(io: File.open("app/assets/images/choice_images/q#{q_index + 1}_c#{c_index + 1}.jpg"), filename: "q#{q_index + 1}_c#{c_index + 1}.jpg") if q_index < 4
-#   end
-# end
+question_destinations.each do |question_destination|
+  question_destination['destination_ids'].each do |destination_id|
+    QuestionDestination.find_or_create_by(question_id: question_destination['question_id'], destination_id: destination_id)
+  end
+end
+
+question_activities.each do |question_activity|
+  question_activity['activity_ids'].each do |activity_id|
+    QuestionActivity.find_or_create_by(question_id: question_activity['question_id'], activity_id: activity_id)
+  end
+end

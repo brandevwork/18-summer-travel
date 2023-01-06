@@ -1,5 +1,7 @@
 require 'json'
 questions = JSON.parse(File.read('questions.json'))
+countries = JSON.parse(File.read('countries.json'))
+activities = JSON.parse(File.read('activities.json'))
 
 questions.each_with_index do |question, q_index|
   q = Question.find_or_create_by(text: question['question'], question_type: question['question_type'])
@@ -9,8 +11,6 @@ questions.each_with_index do |question, q_index|
   q.update(boldtext: question['boldtext']) unless question['boldtext'].nil?
 end
 
-countries = JSON.parse(File.read('countries.json'))
-
 countries.each do |country|
   c = Country.find_or_create_by(continent: country['continent'], name: country['name'])
   country['destinations'].each do |destination|
@@ -18,6 +18,11 @@ countries.each do |country|
     d.update(four_to_eight: destination['four_to_eight']) unless destination['four_to_eight'].nil?
     d.update(nine_to_thirteen: destination['nine_to_thirteen']) unless destination['nine_to_thirteen'].nil?
   end
+end
+
+activities.each_with_index do |activity, a_index|
+  a = Activity.find_or_create_by(name: activity['name'], label: activity['label'])
+  a.activity_image.attach(io: File.open("app/assets/images/choice_images/a#{a_index + 1}.jpg"), filename: "a#{a_index + 1}.jpg") unless activity['image_name'].nil?
 end
 
 # questions.each_with_index do |question, q_index|

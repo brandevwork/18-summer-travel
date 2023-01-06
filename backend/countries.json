@@ -369,11 +369,11 @@
   {
     "continent": "South America",
     "name": "Peru",
-    "destinations": {
+    "destinations": [{
       "name": "Machu Picchu",
       "four_to_eight": -2,
       "label": "Machu Picchu, Peru (Inca Ruins)"
-    }
+    }]
   },
   {
     "continent": "Central America",

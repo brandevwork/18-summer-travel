@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_05_111126) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_080529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_111126) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "continent"
     t.string "name"
@@ -54,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_111126) do
     t.integer "four_to_eight", default: 0
     t.integer "nine_to_thirteen", default: 0
     t.bigint "country_id", null: false
+    t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_destinations_on_country_id"

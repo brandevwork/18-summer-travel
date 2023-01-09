@@ -4,6 +4,7 @@ countries = JSON.parse(File.read('countries.json'))
 activities = JSON.parse(File.read('activities.json'))
 question_activities = JSON.parse(File.read('question_activities.json'))
 question_destinations = JSON.parse(File.read('question_destinations.json'))
+destination_activities = JSON.parse(File.read('destination_activities.json'))
 
 questions.each_with_index do |question, q_index|
   q = Question.find_or_create_by(text: question['question'], question_type: question['question_type'])
@@ -36,5 +37,11 @@ end
 question_activities.each do |question_activity|
   question_activity['activity_ids'].each do |activity_id|
     QuestionActivity.find_or_create_by(question_id: question_activity['question_id'], activity_id: activity_id)
+  end
+end
+
+destination_activities.each do |destination_activity|
+  destination_activity['available_destination_ids'].each do |available_destination_id|
+    DestinationActivity.find_or_create_by(activity_id: destination_activity['activity_id'], destination_id: available_destination_id)
   end
 end

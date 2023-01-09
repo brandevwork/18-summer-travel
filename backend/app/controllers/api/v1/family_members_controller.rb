@@ -21,9 +21,9 @@ class  Api::V1::FamilyMembersController < BaseController
   end
 
   swagger_api :update do
-    summary "Updates the is_active status of given id family member"
-    param :path, :id, :integer, :required, "FamilyMember Id"
-    response :ok, "Success", :Survey
+    summary 'Updates the is_active status of given id family member'
+    param :path, :id, :integer, :required, 'FamilyMember Id'
+    response :ok, 'Success', :Survey
     response :unauthorized
     response :not_acceptable
     response :not_found
@@ -36,16 +36,16 @@ class  Api::V1::FamilyMembersController < BaseController
 
   def show
     if @family_member.is_active? && !@family_member.completed?
-      questions = Survey.first.questions
+      questions = Question.all.order(id: :asc)
       questions = @family_member.age < 14 ? questions.limit(4) : questions
-      response_choices = @family_member.response_choices
-      if response_choices.present?
-        questions = Question.where.not(id: response_choices.pluck(:question_id))
-        questions = questions.limit(4 - response_choices.select(:question_id).distinct.count) if @family_member.age < 14
+      member_preferences = @family_member.member_preferences
+      if member_preferences.present?
+        questions = Question.where.not(id: member_preferences.pluck(:question_id))
+        questions = questions.limit(4 - member_preferences.select(:question_id).distinct.count) if @family_member.age < 14
       end
       render json: questions, each_serializer: QuestionsSerializer, meta: { status: :ok, code: 200, success: true }
     else
-      render json: { error: (@family_member.completed?) ? 'Family Member survey is already completed' : 'Family Member status is not active', success: false }
+      render json: { error: @family_member.completed? ? 'Family Member survey is already completed' : 'Family Member status is not active', success: false }
     end
   end
 
@@ -62,7 +62,8 @@ class  Api::V1::FamilyMembersController < BaseController
 
   def get_family_member
     @family_member = FamilyMember.find_by(id: params[:id])
-    return render json: { error: "Family Member not found", status: 404, success: false } if @family_member.nil?
-    render json: { error: "You are unauthorized", status: 401, success: false } unless @family_member.family_id.eql?(current_family.id)
+    return render json: { error: 'Family Member not found', status: 404, success: false } if @family_member.nil?
+
+    render json: { error: 'You are unauthorized', status: 401, success: false } unless @family_member.family_id.eql?(current_family.id)
   end
 end

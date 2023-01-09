@@ -4,7 +4,7 @@ class FamilyMember < ApplicationRecord
   after_update :set_survey_dates
 
   belongs_to :family
-  has_many :response_choices, dependent: :destroy
+  has_many :member_preferences, dependent: :destroy
   has_many :choices, through: :response_choices
 
   validates :name, :birth_year, presence: true

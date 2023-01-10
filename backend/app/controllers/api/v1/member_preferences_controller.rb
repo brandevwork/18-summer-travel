@@ -17,12 +17,12 @@ class Api::V1::MemberPreferencesController < BaseController
 
   def create
     if params['family_member_id'].present? && params['question_id'].present?
+      question_type = Question.find_by(id: params['question_id']).question_type.capitalize
       if !params['preference_ids'].present? || params['preference_ids'].empty?
-        ResponseChoice.find_or_create_by(family_member_id: params['family_member_id'], question_id: params['question_id'])
+        MemberPreference.find_or_create_by(family_member_id: params['family_member_id'], question_id: params['question_id'], preferenceable_type: question_type)
       else
-        question_type = Question.find_by(id: params['question_id']).question_type.capitalize
         params['preference_ids'].each do |key, val|
-          MemberPreference.find_or_create_by(family_member_id: params['family_member_id'], preferenceable_id: val, question_id: params['question_id'], family_id: params['family_id'], preferenceable_type: question_type)
+          MemberPreference.find_or_create_by!(family_member_id: params['family_member_id'], preferenceable_id: val, question_id: params['question_id'], family_id: params['family_id'], preferenceable_type: question_type)
         end
       end
       save_params = {

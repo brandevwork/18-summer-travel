@@ -1,4 +1,5 @@
 class  Api::V1::RecomendationsController < BaseController
+  before_action :check_valid_members, only: [:recomendation]
 
   swagger_controller :recomendations, 'Recomendations'
 
@@ -10,33 +11,39 @@ class  Api::V1::RecomendationsController < BaseController
   end
 
   def recomendation
-    family_members = current_family.family_members
-    valid_members = family_members.where('age > 4')
-    min_age = family_members.pluck(:age).min
-    return  render json: { message: 'Recommendations are only given for kids of age less than 18', success: false, status: 204} if min_age > 18
-    if valid_members.completed.length == valid_members.size
-      recomendation_hash = {}
-      family_members.each do |family_member|
-        family_member.response_choices.each do |response_choice|
-          unless response_choice.choice_id.nil?
-            if recomendation_hash["#{response_choice.choice_id}"].present?
-              recomendation_hash["#{response_choice.choice_id}"] = recomendation_hash["#{response_choice.choice_id}"] + 1
-            else
-              recomendation_hash.store("#{response_choice.choice_id}", 1)
-            end
+    recomendation_hash = {}
+    @family_members.each do |family_member|
+      family_member.member_preferences.each do |member_preference|
+        next if member_preference.preferenceable_id.nil?
+
+        if member_preference.preferenceable_type.eql?('Activity')
+          member_preference.preferenceable.destination_activities.each do |available_destination|
+            add_hash(available_destination.destination.label, recomendation_hash)
           end
+        else
+          add_hash(member_preference.preferenceable.label, recomendation_hash)
         end
       end
-      sorted_hash = recomendation_hash.sort_by { |_key, value| value }.reverse
-      choice_ids = sorted_hash.map {|sorted_hash| sorted_hash.first }.take(18 - min_age)
-      choices = []
-      choice_ids.each do |choice_id|
-        record = Choice.find_by(id: choice_id)
-        choices << record
-      end
-      render json: { data: choices, success: true, status: 200 }
-    else
-      render json: { message: 'Survey is not completed by the whole famliy', success: false, status: 204 }
     end
+    render json: { data: recomendation_hash.sort_by { |_, v| -v }.to_h, success: true, status: 200 }
+  end
+
+  private
+
+  def add_hash(label, reco_hash)
+    if reco_hash[label].present?
+      reco_hash[label] = reco_hash[label] + 1
+    else
+      reco_hash.store(label, 1)
+    end
+  end
+
+  def check_valid_members
+    @family_members = current_family.family_members
+    @valid_members = @family_members.where('age > 4')
+    return render json: { message: 'Survey is not completed by the whole famliy', success: false, status: 204 } unless @valid_members.completed.length == @valid_members.size
+
+    @min_age = @family_members.pluck(:age).min
+    return render json: { message: 'Recommendations are only given for kids of age less than 18', success: false, status: 204} if @min_age > 18
   end
 end

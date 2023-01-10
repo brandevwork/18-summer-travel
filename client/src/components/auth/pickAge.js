@@ -127,8 +127,12 @@ function PickAge({familyMemberState, nextClickHandler})	{
 	            <ol>
 	              <li className="mb-3 ps-2">
  	                <div className="list-grid">
- 	                  <div ><Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
+ 	                  <div style={{'display':'none'}}><Input ref={el => nameRef.current[0] = el}  input={{"type":"text", "value": [familyMemberState.first_name], "placeholder":"Name",
 		      							"className":"form-control"}}/><span className="position-absolute font-11">This is you!</span><span style={{"color":"red"}} ref={el => nameErrRef.current[0] = el}></span></div>
+ 	                  <div>
+ 	                  {familyMemberState.first_name}
+ 	                  <span style={{'float':'right'}} className="pl-2 font-11">This is you!</span>
+ 	                  </div>
  	                  <div className="cross-field" onClick={(e) => crossHandler(e, yearRef.current[0])}>
  	                   <Input ref={el => yearRef.current[0] = el}  input={{"type":"text", "placeholder":"Year",
  	    									"className":"form-control"}}/><span style={{"color":"red"}} ref={el => yearErrRef.current[0] = el}></span>

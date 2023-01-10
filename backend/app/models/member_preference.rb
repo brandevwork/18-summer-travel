@@ -1,6 +1,6 @@
 class MemberPreference < ApplicationRecord
   belongs_to :family_member
-  belongs_to :preferenceable, polymorphic: true
+  belongs_to :preferenceable, polymorphic: true, optional: true
   after_create :family_member_status
 
   private

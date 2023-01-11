@@ -25,7 +25,8 @@ class  Api::V1::RecomendationsController < BaseController
         end
       end
     end
-    render json: { data: recomendation_hash.sort_by { |_, v| -v }.to_h, success: true, status: 200 }
+    recomendation_hash = recomendation_hash.sort_by { |_, v| -v }.to_h
+    update_destination_hash(recomendation_hash, @valid_members)
   end
 
   private
@@ -45,5 +46,24 @@ class  Api::V1::RecomendationsController < BaseController
 
     @min_age = @family_members.pluck(:age).min
     return render json: { message: 'Recommendations are only given for kids of age less than 18', success: false, status: 204} if @min_age > 18
+  end
+
+  def update_destination_hash(reco_hash, valid_members)
+    recommendation_hash = {}
+    recommendation_years = (0..(18 - @min_age)).to_a.map { |i| (Time.current.year + i).to_s }
+    recommendation_years.each do |recommendation_year|
+      recommendation_year_ages = valid_members.map { |user| Date.new(recommendation_year.to_i).year - Date.strptime(user.birth_year, "%Y").year }
+      new_hash = {}
+      reco_hash.each do |key, value|
+        next if recommendation_hash.value?(key)
+
+        destination = Destination.find_by(label: key)
+        new_hash.store(key, reco_hash[key])
+        new_hash[key] = new_hash[key] + destination.four_to_eight if recommendation_year_ages.any? { |val| (4..8).include?(val) }
+        new_hash[key] = new_hash[key] + destination.nine_to_thirteen if recommendation_year_ages.any? { |val| (9..13).include?(val) }
+      end
+      recommendation_hash.store(recommendation_year, new_hash.max_by { |key, value| value }.first)
+    end
+    render json: { data: recommendation_hash, success: true, status: 200 }
   end
 end

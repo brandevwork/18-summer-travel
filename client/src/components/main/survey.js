@@ -21,6 +21,7 @@ function Survey()	{
 	const [questionPicture, setQuestionPicture] = useState(null)
 	const [questionPictureColor, setQuestionPictureColor] = useState(0)
 	const [currAge, setCurrAge] = useState(0)
+	const [currFamilyId, setCurrFamilyId] = useState(0)
 	const [currName, setCurrName] = useState('')
 	
 	const [questionIndex, setQuestionIndex] = useState(0);
@@ -93,6 +94,7 @@ function Survey()	{
 			let currFamily = ctxHome.family.filter(f => f.id == id);
 			setCurrAge(currFamily[0].age);
 			setCurrName(currFamily[0].name);
+			setCurrFamilyId(currFamily[0].family_id);
 		}
   },[ctxHome.family])
 
@@ -110,8 +112,11 @@ function Survey()	{
     	navigate("/home")
     }
     if(Object.keys(ctxHome.survey).length > 0 && ctxHome.currFamilyMemberId == id){
-    	setQuestionPicture(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
-    	setQuestionPictureColor(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
+    	// setQuestionPicture(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
+    	// setQuestionPictureColor(ctxHome.survey.findIndex(s => s.choices[0].category == 'Destinations: Europe'))
+
+    	setQuestionPicture(ctxHome.survey.findIndex(s => s.question_type == 'destination'))
+    	setQuestionPictureColor(ctxHome.survey.findIndex(s => s.question_type == 'destination'))
     	return;
     }
     if(!homeState.familyError && !homeState.surveyError && !homeState.questionSavedError ) {
@@ -156,9 +161,9 @@ function Survey()	{
   	if (fromWhere == 'Category') {setQuestionPicture("category")}
   	if (fromWhere == 'Finish') {setLastQuestion(false)}
   	if (fromWhere == 'Next' || fromWhere == 'last_question') {
-			await sendDataSurveySaved(`${process.env.REACT_APP_SERVER_URL}api/v1/response_choices`, {
+			await sendDataSurveySaved(`${process.env.REACT_APP_SERVER_URL}api/v1/member_preferences`, {
 		    method: 'POST',
-		    body: JSON.stringify({"family_member_id": parseInt(family_id), "question_id": parseInt(question_id), "choice_ids": Object.assign({},choices)}),
+		    body: JSON.stringify({"family_id": parseInt(currFamilyId), "family_member_id": parseInt(family_id), "question_id": parseInt(question_id), "preference_ids": Object.assign({},choices)}),
 			  headers: {
 			    "Content-Type": "application/json",
 			    Authorization: localStorage.getItem("token"),
@@ -186,20 +191,20 @@ function Survey()	{
 				ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map((question, ind) =>
 						questionPicture !== null && questionPicture !== questionIndex && !(lastQuestion) ?
-						 <Question homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionPictureColor={questionPictureColor}  heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						 <Question homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionPictureColor={questionPictureColor}  heading={question.heading} subheading={question.subheading} boldtext={question.boldtext} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler} />
 						:
 						!(lastQuestion) ?
-							<Category homeLoadingSurveySaved={homeLoadingSurveySaved} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
+							<Category homeLoadingSurveySaved={homeLoadingSurveySaved} heading={question.heading} subheading={question.subheading} boldtext={question.boldtext} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler}/>	
 						:
-							<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
+							<FinishSurvey currName={currName} heading={question.heading} subheading={question.subheading} boldtext={question.boldtext} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)
 			:
 			ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
 						!lastQuestion ?
-						<QuestionKids homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler} />
+						<QuestionKids homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler} />
 						:
-						<FinishSurvey currName={currName} heading={question.heading} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.question_text} choices={question.choices}  submitHandler={submitHandler}/>	
+						<FinishSurvey currName={currName} heading={question.heading} subheading={question.subheading} boldtext={question.boldtext} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)
 		}
 		</React.Fragment>

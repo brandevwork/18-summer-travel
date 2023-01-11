@@ -59,14 +59,16 @@ function Result() {
       ch = ch.flat(1)
       ch = ch.filter((value, index, self) =>
         index === self.findIndex((t) => (
-          t.id === value.id
+          t.choice === value.choice
         ))
       )
       let res = ch.reduce(function (r, a) {
-          r[a.category] = r[a.category] || [];
-          r[a.category].push(a);
+          r[a.choice_type] = r[a.choice_type] || [];
+          r[a.choice_type].push(a);
           return r;
       }, Object.create(null));
+      console.log(res)
+      console.log("res")
       setActicityQuestions(res)
     }
     if (ctxUser.id !== '' && !homeState.resultError && !(ctxHome.results.length > 0)) {
@@ -81,7 +83,7 @@ function Result() {
   }, [homeState, sendData, ctxHome.results, acticityQuestions])
 
   const calculateCheck = (ques, allChoices) => {
-    const found = allChoices.findIndex(sd => sd.id == ques.id)
+    const found = allChoices.findIndex(sd => sd.choice == ques.choice)
     if(found > -1)
       return true
     else
@@ -190,12 +192,12 @@ function Result() {
                   {ctxHome.family.length > 0 &&
                     ctxHome.family.filter(f => f.age < 4).map(ft =>
                         <div className="form-check">
-                          <input style={{'background':'#BDBDBD'}} type="checkbox" className="form-check-input m-0" checked={false} disabled="true" id="check1" name="option1" value="something" disabled={true}/>
+                          <input style={{'background':'#BDBDBD'}} type="checkbox" className="form-check-input m-0" checked={false} disabled={true} id="check1" name="option1" value="something" disabled={true}/>
                         </div>
                   )}
                   </div>
                     <div className="rightsidelink"> 
-                      <a href="">{ques.choice_text}</a>
+                      <a href="">{ques.choice}</a>
                     </div>
                   </div>
                 )}

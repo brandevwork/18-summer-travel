@@ -10,7 +10,7 @@ import Modal from "../UI/modal";
 import homeReducer from "../../reducer/homeReducer";
 import Button from "../UI/button";
 
-function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, currName, heading ,question_image, question_text, question_id, choices, submitHandler})	{
+function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, currName, heading ,subheading, boldtext, question_image, question_text, question_id, choices, submitHandler})	{
 	const colorBackgrounds = ["#FFA500", "#92C46D", "#ED6641", "#F5D801", "#356EFD", "#F19D38", "#EA502D", "#92C46D", "#59C6F1","#EA502D", "#356EFD"]
 	const [checkedState, setCheckedState] = useState(
     new Array(choices.length).fill(false)
@@ -73,16 +73,37 @@ function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, 
 		let startIndex = null;
 		let endIndex = null;
 		text = text.replace("{name}", capitalizeFirstLetter(currName));
-		if(heading !== null) {
-			if (text.indexOf(heading) !== -1) {
-				 startIndex = text.indexOf(heading)
-				 endIndex = startIndex + heading.length - 1
+		if(boldtext !== null) {
+			// if(boldtext.includes(",")) {
+			// 	let boldStrArr = boldtext.split(",")
+			// 	let cmpText=text
+			// 	for(var i = 0 ;i <boldStrArr.length; i++) {
+			// 		if (cmpText.indexOf(boldStrArr[i]) !== -1) {
+			// 			startIndex = cmpText.indexOf(boldStrArr[i])
+			// 	 		endIndex = startIndex + boldStrArr[i].length - 1
+			// 	 		cmpText = cmpText.slice(0,startIndex)+'<b>'+cmpText.slice(startIndex,endIndex+1)+'</b>'+cmpText.slice(endIndex+1, cmpText.length-1)
+			// 		}
+			// 	}
+			// 	return <h2>{cmpText}</h2>
+
+			// }
+			if (text.indexOf(boldtext) !== -1) {
+			 	startIndex = text.indexOf(boldtext)
+			 	endIndex = startIndex + boldtext.length - 1
+				if(startIndex && endIndex !== null) {
+					return <h2>{text.slice(0,startIndex)}<b>{text.slice(startIndex,endIndex+1)}</b>{text.slice(endIndex+1, text.length-1)}</h2>
+				}
+				else {
+					return <h2>{text}</h2>
+				}
+			}
+			else {
+				return <h2>{text}</h2>
 			}
 		}
-		if(startIndex && endIndex !== null)
-			return <h2>{text.slice(0,startIndex)}<b>{text.slice(startIndex,endIndex+1)}</b>{text.slice(endIndex+1, text.length-1)}</h2>
-		else
+		else{
 			return <h2>{text}</h2>
+		} 
 	}
 	return (
 		<React.Fragment>
@@ -94,13 +115,13 @@ function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, 
 					<div className="d-flex justify-content-center flex-column">
 							{replaceName(question_text)}
 						<p className="font-23">
-							Check all the things you like to do!
+							{subheading}
 						</p>
 						<div>
 							{choices.map((choice, index) =>
 								<div className="form-check mb-2">
 									<input className="form-check-input" ref={el => choiceRef.current[choice.id] = el} checked={checkedState[index]}  id={choice.id} type="checkbox" onClick={(e) => checkClickHandler(e, index)}/>
-									<label className="form-check-label font-24" for="check1">{choice.choice_text}</label>
+									<label className="form-check-label font-24" for="check1">{choice.name}</label>
 								</div>
 							)}
 						</div>

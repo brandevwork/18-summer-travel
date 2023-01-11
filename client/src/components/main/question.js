@@ -121,7 +121,7 @@ function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, 
 							{choices.map((choice, index) =>
 								<div className="form-check mb-2">
 									<input className="form-check-input" ref={el => choiceRef.current[choice.id] = el} checked={checkedState[index]}  id={choice.id} type="checkbox" onClick={(e) => checkClickHandler(e, index)}/>
-									<label className="form-check-label font-24" for="check1">{choice.name}</label>
+									<label className="form-check-label font-24" for="check1">{choice.label}</label>
 								</div>
 							)}
 						</div>

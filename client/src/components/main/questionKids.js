@@ -127,7 +127,7 @@ function QuestionKids({homeLoadingSurveySaved, questionIndex, currName, question
                           <input ref={el => choiceRef.current[choice.id] = el} type="checkbox" onClick={(e) => checkClickHandler(e, parseInt(index)+parseInt(start))} className="form-check-input" id={choice.id}  name="option1" value="something" checked={checkedState[index+start]} />
                           <label className="form-check-label font-24" for="check1"></label>
                         </div>
-                        <h5 className="card-title">{choice.name}</h5>
+                        <h5 className="card-title">{choice.label}</h5>
                       </div>
                     </div>
                   </div>

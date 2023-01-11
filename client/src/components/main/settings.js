@@ -72,6 +72,7 @@ function Settings(props)	{
       dispatch({type: "SERVER_ERROR", activeError: true, errorMessage:data.status.message})
     }
     if(data.status == "ok"){
+      setFamilyMemberId(0)
       // navigateHandler('/');
     }
   }

@@ -21,8 +21,8 @@ class Api::V1::MemberPreferencesController < BaseController
       if !params['preference_ids'].present? || params['preference_ids'].empty?
         MemberPreference.find_or_create_by(family_member_id: params['family_member_id'], question_id: params['question_id'], preferenceable_type: question_type)
       else
-        params['preference_ids'].each do |key, val|
-          MemberPreference.find_or_create_by!(family_member_id: params['family_member_id'], preferenceable_id: val, question_id: params['question_id'], family_id: params['family_id'], preferenceable_type: question_type)
+        params['preference_ids'].each do |key, value|
+          MemberPreference.find_or_create_by!(family_member_id: params['family_member_id'], preferenceable_id: value, question_id: params['question_id'], family_id: params['family_id'], preferenceable_type: question_type)
         end
       end
       save_params = {

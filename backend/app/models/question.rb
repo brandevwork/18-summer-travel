@@ -1,5 +1,8 @@
 class Question < ApplicationRecord
-  belongs_to :survey
-  has_many :choices, dependent: :destroy
-  has_one_attached :question_image
+  enum question_type: %i[activity destination]
+  has_one_attached :image
+  has_many :question_activities
+  has_many :activities, through: :question_activities
+  has_many :question_destinations
+  has_many :destinations, through: :question_destinations
 end

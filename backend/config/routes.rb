@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :families
       resources :family_members
-      resources :response_choices, only: [:create]
+      resources :member_preferences, only: [:create]
       get 'settings/family', to: 'settings#family'
       delete 'settings/reset_survey', to: 'settings#reset_family_survey'
       get '/results', to: 'survey_results#result'

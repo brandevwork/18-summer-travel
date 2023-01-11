@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_084319) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_080529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,12 +42,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_084319) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "choices", force: :cascade do |t|
-    t.string "choice_text"
-    t.bigint "question_id", null: false
+  create_table "activities", force: :cascade do |t|
+    t.string "name"
+    t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_choices_on_question_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "continent"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "destinations", force: :cascade do |t|
+    t.string "name"
+    t.integer "four_to_eight", default: 0
+    t.integer "nine_to_thirteen", default: 0
+    t.bigint "country_id", null: false
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_destinations_on_country_id"
   end
 
   create_table "families", force: :cascade do |t|
@@ -62,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_084319) do
     t.string "state"
     t.string "country"
     t.string "jti", null: false
+    t.date "survey_start"
+    t.date "survey_end"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -86,40 +105,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_084319) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "question_text"
-    t.bigint "survey_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["survey_id"], name: "index_questions_on_survey_id"
-  end
-
-  create_table "response_choices", force: :cascade do |t|
-    t.bigint "response_id", null: false
-    t.bigint "choice_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["choice_id"], name: "index_response_choices_on_choice_id"
-    t.index ["response_id"], name: "index_response_choices_on_response_id"
-  end
-
-  create_table "responses", force: :cascade do |t|
-    t.bigint "family_member_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["family_member_id"], name: "index_responses_on_family_member_id"
-  end
-
-  create_table "surveys", force: :cascade do |t|
-    t.string "survey_name"
-    t.integer "survey_type"
+    t.string "text"
+    t.string "heading"
+    t.string "subheading"
+    t.string "boldtext"
+    t.integer "question_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "choices", "questions"
-  add_foreign_key "response_choices", "choices"
-  add_foreign_key "response_choices", "responses"
-  add_foreign_key "responses", "family_members"
+  add_foreign_key "destinations", "countries"
 end

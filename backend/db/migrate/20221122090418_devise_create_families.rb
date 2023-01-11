@@ -15,6 +15,8 @@ class DeviseCreateFamilies < ActiveRecord::Migration[7.0]
       t.string :state
       t.string :country
       t.string :jti,                                  null: false
+      t.date :survey_start
+      t.date :survey_end
 
       ## Recoverable
       t.string   :reset_password_token

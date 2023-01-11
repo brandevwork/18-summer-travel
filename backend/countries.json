@@ -1,0 +1,399 @@
+[
+  {
+    "continent": "Africa",
+    "name": "Morocco",
+    "destinations": [{
+      "name": "Marrakesh",
+      "four_to_eight": -2,
+      "label": "Marrakesh, Morocco"
+    }]
+  },
+  {
+    "continent": "Africa",
+    "name": "Egypt",
+    "destinations": [{
+      "name": "Cairo",
+      "four_to_eight": -2,
+      "label": "Cairo, Egypt, (The Pyramids)"
+    }]
+  },
+  {
+    "continent": "Africa",
+    "name": "South Africa",
+    "destinations": [{
+      "name": "Cape Town / Safari",
+      "four_to_eight": -2,
+      "label": "Cape Town, South Africa"
+    }]
+  },
+  {
+    "continent": "Asia",
+    "name": "China",
+    "destinations": [{
+      "name": "Shanghai",
+      "four_to_eight": -2,
+      "nine_to_thirteen": -1,
+      "label": "Shanghai, China"
+    }]
+  },
+  {
+    "continent": "Asia",
+    "name": "Japan",
+    "destinations": [{
+      "name": "Tokyo",
+      "four_to_eight": -2,
+      "nine_to_thirteen": -1,
+      "label": "Tokyo, Japan"
+    }]
+  },
+  {
+    "continent": "Europe",
+    "name": "Austria",
+    "destinations": [
+    {
+      "name": "Vienna",
+      "four_to_eight": -2,
+      "nine_to_thirteen": -1,
+      "label": "Vienna, Austria"
+    }
+  ]
+  },
+  {
+    "continent": "Europe",
+    "name": "France",
+    "destinations": [
+    {
+      "name": "Paris of France",
+      "label": "Paris, France"
+    },
+    {
+      "name": "South of France",
+      "label": "South of France"
+    }
+  ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Germany",
+    "destinations": [
+    {
+      "name": "Hamburg",
+      "label": "Hamburg, Germany"
+    },
+    {
+      "name": "Berlin",
+      "label": "Berlin, Germany",
+      "four_to_eight": -2
+    },
+    {
+      "name": "Munich",
+      "label": "Munich, Germany",
+      "four_to_eight": -2
+    }
+  ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Greece",
+    "destinations": [
+    {
+      "name": "Athens",
+      "label": "Athens, Greece"
+    }
+  ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Italy",
+    "destinations": [
+    {
+      "name": "Florence",
+      "four_to_eight": -2,
+      "label": "Florence, Italy"
+    },
+    {
+      "name": "Rome",
+      "label": "Rome, Italy"
+    },
+    {
+      "name": "Venice",
+      "label": "Venice, Italy"
+    }
+  ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Netherlands",
+    "destinations": [
+      {
+        "name": "Amsterdam",
+        "label": "Amsterdam, Netherlands"
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Switzerland",
+    "destinations": [
+      {
+        "name": "The Alps",
+        "label": "The Alps, Switzerland"
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Spain",
+    "destinations": [
+      {
+        "name": "Barcelona",
+        "label": "Barcelona, Spain",
+        "nine_to_thirteen": -1,
+        "four_to_eight": -2
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Iceland",
+    "destinations": [
+      {
+        "name": "Reykjavik",
+        "label": "Reykjavik, Iceland"
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Cruise",
+    "destinations": [
+      {
+        "name": "River Cruise-Europe",
+        "label": "Multi-City River Cruise",
+        "four_to_eight": -2
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Ireland",
+    "destinations": [
+      {
+        "name": "Dublin",
+        "label": "Dublin, Ireland"
+      },
+      {
+        "name": "Irish Countryside",
+        "label": "Irish Countryside, Ireland"
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "Scotland",
+    "destinations": [
+      {
+        "name": "Edinburgh",
+        "label": "Edinburgh, Scotland"
+      }
+    ]
+  },
+  {
+    "continent": "Europe",
+    "name": "England",
+    "destinations": [
+      {
+        "name": "London",
+        "label": "London, England"
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "name": "Caribbean",
+    "destinations": [
+      {
+        "name": "Barbados",
+        "label": "Barbados",
+        "four_to_eight": -2
+      },
+      {
+        "name": "Caribbean",
+        "label": "Caribbean"
+      },
+      {
+        "name": "Caribbean Cruise",
+        "label": "Caribbean Cruise (on Cruise Ship)"
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "name": "Canada",
+    "destinations": [
+      {
+        "name": "Toronto",
+        "label": "Toronto, (Eastern Canada)",
+        "four_to_eight": -2
+      },
+      {
+        "name": "Montreal",
+        "label": "Montreal, (Eastern Canada)",
+        "four_to_eight": -2
+      },
+      {
+        "name": "Vancouver",
+        "label": "Vancouver, (Western Canada)",
+        "four_to_eight": -2
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "name": "Mexico",
+    "destinations": [
+      {
+        "name": "Cabo",
+        "label": "Cabo"
+      },
+      {
+        "name": "Cancun",
+        "label": "Cancun"
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "name": "Bermuda",
+    "destinations": [
+      {
+        "name": "Hamilton",
+        "label": "Hamilton, Bermuda"
+      }
+    ]
+  },
+  {
+    "continent": "North America",
+    "name": "USA",
+    "destinations": [
+      {
+        "name": "Boston, MA",
+        "label": "Boston, MA"
+      },
+      {
+        "name": "New York, NY",
+        "label": "New York, NY"
+      },
+      {
+        "name": "Washington, DC",
+        "label": "Washington, DC"
+      },
+      {
+        "name": "Orlando, FL",
+        "label": "Orlando, FL"
+      },
+      {
+        "name": "Sarasota, FL",
+        "label": "Sarasota, Fl"
+      },
+      {
+        "name": "Key West, FL",
+        "label": "Key West, FL",
+        "four_to_eight": -2
+      },
+      {
+        "name": "Chicago, IL",
+        "label": "Chicago, IL",
+        "four_to_eight": -2
+      },
+      {
+        "name": "Colorado Springs, CO",
+        "label": "Colorado Springs, CO"
+      },
+      {
+        "name": "Grand Canyon",
+        "label": "Grand Canyon"
+      },
+      {
+        "name": "Hawaii",
+        "label": "Hawaii"
+      },
+      {
+        "name": "Los Angeles, CA",
+        "four_to_eight": -2,
+        "label": "Los Angeles, CA"
+      },
+      {
+        "name": "Napa, CA",
+        "four_to_eight": -2,
+        "label": "Napa, CA"
+      },
+      {
+        "name": "San Francisco, CA",
+        "label": "San Francisco, CA"
+      },
+      {
+        "name": "National Parks",
+        "label": "National Parks"
+      },
+      {
+        "name": "Alaska",
+        "label": "Alaska"
+      },
+      {
+        "name": "Alaskan Cruise",
+        "label": "Alaska Cruise"
+      }
+    ]
+  },
+  {
+    "continent": "South America",
+    "name": "Brazil",
+    "destinations": [
+      {
+        "name": "Rio de Janeiro",
+        "label": "Rio de Janeiro, Brazil",
+        "four_to_eight": -2,
+        "nine_to_thirteen": -1
+      }
+    ]
+  },
+  {
+    "continent": "South America",
+    "name": "Ecuador",
+    "destinations": [{
+      "name": "Galapagos Islands",
+      "label": "Galapagos Islands, Ecuador"
+    }]
+  },
+  {
+    "continent": "South America",
+    "name": "Peru",
+    "destinations": [{
+      "name": "Machu Picchu",
+      "four_to_eight": -2,
+      "label": "Machu Picchu, Peru (Inca Ruins)"
+    }]
+  },
+  {
+    "continent": "Central America",
+    "name": "Costa Rica",
+    "destinations" : [
+      {
+        "name": "Rain Forest",
+        "label": "Costa Rica, (Rain forest)"
+      }
+    ]
+  },
+  {
+    "continent": "Oceana",
+    "name": "Australia",
+    "destinations": [
+      {
+        "name": "Sydney",
+        "label": "Sydney, Australia",
+        "four_to_eight": -2
+      }
+    ]
+  }
+]

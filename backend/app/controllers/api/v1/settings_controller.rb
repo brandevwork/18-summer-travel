@@ -23,7 +23,7 @@ class Api::V1::SettingsController < BaseController
     familymembers = current_family.family_members
     if familymembers.present?
       familymembers.each do |familymember|
-        familymember.response_choices.destroy_all if familymember.response_choices.present?
+        familymember.member_preferences.destroy_all if familymember.member_preferences.present?
         familymember.update(survey_status: 0)
       end
       current_family.update(survey_start: nil, survey_end: nil)

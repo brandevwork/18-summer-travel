@@ -1,12 +1,12 @@
 module Api::V1
   class MemberPreferenceController::MemberPreferenceSerializer < ActiveModel::Serializer
-    attributes :choice_type, :choice
+    attributes :choice_type, :choice, :question_id
 
     def choice_type
       return if object.preferenceable_id.nil?
 
       if object.preferenceable_type.eql?('Destination')
-        "#{object.preferenceable_type}: #{object.preferenceable.country.name}"
+        "#{object.preferenceable_type}: #{Question.find_by(id: object.question_id).heading}"
       else
         object.preferenceable_type
       end

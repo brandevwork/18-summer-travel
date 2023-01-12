@@ -57,14 +57,17 @@ function Result() {
     if (ctxHome.results.length > 0) {
       let ch = ctxHome.results.map(r => r.choices.map(c => c))
       ch = ch.flat(1)
+      ch = ch.sort((a, b) => a.question_id - b.question_id);
       ch = ch.filter((value, index, self) =>
         index === self.findIndex((t) => (
           t.choice === value.choice
         ))
       )
       let res = ch.reduce(function (r, a) {
+        if(a.choice_type!==null) {
           r[a.choice_type] = r[a.choice_type] || [];
           r[a.choice_type].push(a);
+        }
           return r;
       }, Object.create(null));
       console.log(res)

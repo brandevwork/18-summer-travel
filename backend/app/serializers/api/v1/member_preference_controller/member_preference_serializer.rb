@@ -1,6 +1,6 @@
 module Api::V1
   class MemberPreferenceController::MemberPreferenceSerializer < ActiveModel::Serializer
-    attributes :choice_type, :choice
+    attributes :choice_type, :choice, :question_id
 
     def choice_type
       return if object.preferenceable_id.nil?

@@ -3,7 +3,13 @@ module Api::V1
     attributes :choice_type, :choice
 
     def choice_type
-      object.preferenceable_type unless object.preferenceable_type.nil?
+      return if object.preferenceable_type.nil?
+
+      if object.preferenceable_type.eql?('Destination')
+        "#{object.preferenceable_type}: #{object.preferenceable.country.name}"
+      else
+        object.preferenceable_type
+      end
     end
 
     def choice

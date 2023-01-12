@@ -50,8 +50,8 @@ function Result() {
   }
 
   useEffect(() => {
-    if(typeof ctxHome.family === 'object')
-      ctxHome.family = Object.values(ctxHome.family)
+    // if(typeof ctxHome.family === 'object')
+    //   ctxHome.family = Object.values(ctxHome.family)
     if(Object.keys(acticityQuestions).length > 0)
       return
     if (ctxHome.results.length > 0) {
@@ -153,8 +153,8 @@ function Result() {
                     <div className={`bar ${colors[ind%7]}`}></div>
                   )
                 }
-                 {ctxHome.family.length > 0 &&
-                  ctxHome.family.filter(f => f.age < 4).map(ft => 
+                 {Object.values(ctxHome.family).length > 0 &&
+                  Object.values(ctxHome.family).filter(f => f.age < 4).map(ft => 
                    <div className={`bar ${colors[ind%7]}`}></div>
                 )}
                 </div>
@@ -169,8 +169,8 @@ function Result() {
                     <div>{ress.name} ({ress.age})</div>
                   )
                 }
-                {ctxHome.family.length > 0 &&
-                  ctxHome.family.filter(f => f.age < 4).map(ft => 
+                {Object.values(ctxHome.family).length > 0 &&
+                  Object.values(ctxHome.family).filter(f => f.age < 4).map(ft => 
                   <div>{ft.name}({ft.age})</div>
                 )}
                 </div>
@@ -189,10 +189,10 @@ function Result() {
                         </div>
                     )
                   } 
-                  {ctxHome.family.length > 0 &&
-                    ctxHome.family.filter(f => f.age < 4).map(ft =>
+                  {Object.values(ctxHome.family).length > 0 &&
+                    Object.values(ctxHome.family).filter(f => f.age < 4).map(ft =>
                         <div className="form-check">
-                          <input style={{'background':'#BDBDBD'}} type="checkbox" className="form-check-input m-0" checked={false} disabled={true} id="check1" name="option1" value="something" disabled={true}/>
+                          <input style={{'background':'#BDBDBD'}} type="checkbox" className="form-check-input m-0" checked={false} disabled={true} id="check1" name="option1" value="something" />
                         </div>
                   )}
                   </div>

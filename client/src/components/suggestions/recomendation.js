@@ -154,12 +154,14 @@ function Recomendation()	{
                 <div className="tiles-wrapper mb-4">
                   <span className="dot-first"></span>
                   <div className="tiles-grid shade1">
-                {Object.values(ctxHome.recomendations).map((rs,ind) =>
+                {Object.values(ctxHome.recomendations).map((value,ind) =>
                   <>{ind%3 ==0 ? <span className="dot-first"></span> : ""} 
                       <div className="dgrid">
                         <div className="year">{2023 + ind}</div>
                         <div className="tile">
-                          {rs.choice_text}
+                          {value[0]}
+                          <br/>
+                          {value[1]}
                         </div>
                          <div class="names d-flex justify-content-evenly px-2 py-4 text-center">
                          {Object.keys(ctxHome.family).length > 0 &&

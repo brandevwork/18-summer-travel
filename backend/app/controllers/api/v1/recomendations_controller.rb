@@ -54,15 +54,27 @@ class  Api::V1::RecomendationsController < BaseController
     recommendation_years.each do |recommendation_year|
       recommendation_year_ages = valid_members.map { |user| Date.new(recommendation_year.to_i).year - Date.strptime(user.birth_year, "%Y").year }
       yearwise_recomendations = {}
-      member_recommendations.each do |key, value|
-        next if final_recomendations.value?(key)
+      yearwise_recomendations_usa = {}
+      member_recommendations.each_key do |key|
+        is_present = false
+        final_recomendations.each_value do |fvalue|
+          is_present = true if fvalue.include?(key)
+          next if is_present
+        end
+        next if is_present
 
         destination = Destination.find_by(label: key)
-        yearwise_recomendations.store(key, member_recommendations[key])
-        yearwise_recomendations[key] = yearwise_recomendations[key] + destination.four_to_eight if recommendation_year_ages.any? { |val| (4..8).include?(val) }
-        yearwise_recomendations[key] = yearwise_recomendations[key] + destination.nine_to_thirteen if recommendation_year_ages.any? { |val| (9..13).include?(val) }
+        if destination.is_usa?
+          yearwise_recomendations_usa.store(key, member_recommendations[key])
+          yearwise_recomendations_usa[key] = yearwise_recomendations_usa[key] + destination.four_to_eight if recommendation_year_ages.any? { |val| (4..8).include?(val) }
+          yearwise_recomendations_usa[key] = yearwise_recomendations_usa[key] + destination.nine_to_thirteen if recommendation_year_ages.any? { |val| (9..13).include?(val) }
+        else
+          yearwise_recomendations.store(key, member_recommendations[key])
+          yearwise_recomendations[key] = yearwise_recomendations[key] + destination.four_to_eight if recommendation_year_ages.any? { |val| (4..8).include?(val) }
+          yearwise_recomendations[key] = yearwise_recomendations[key] + destination.nine_to_thirteen if recommendation_year_ages.any? { |val| (9..13).include?(val) }
+        end
       end
-      final_recomendations.store(recommendation_year, yearwise_recomendations.max_by { |key, value| value }.first)
+      final_recomendations.store(recommendation_year, [yearwise_recomendations_usa.max_by { |key, value| value }.first, yearwise_recomendations.max_by { |key, value| value }.first])
     end
     render json: { data: final_recomendations, success: true, status: 200 }
   end

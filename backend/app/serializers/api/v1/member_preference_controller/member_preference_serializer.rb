@@ -6,7 +6,7 @@ module Api::V1
       return if object.preferenceable_id.nil?
 
       if object.preferenceable_type.eql?('Destination')
-        "#{object.preferenceable_type}: #{object.preferenceable.country.name}"
+        "#{object.preferenceable_type}: #{Question.find(object.question_id).heading}"
       else
         object.preferenceable_type
       end

@@ -56,12 +56,7 @@ class  Api::V1::RecomendationsController < BaseController
       yearwise_recomendations = {}
       yearwise_recomendations_usa = {}
       member_recommendations.each_key do |key|
-        is_present = false
-        final_recomendations.each_value do |fvalue|
-          is_present = true if fvalue.include?(key)
-          next if is_present
-        end
-        next if is_present
+        next if check_present_destinations(final_recomendations, key)
 
         destination = Destination.find_by(label: key)
         if destination.is_usa?
@@ -74,8 +69,19 @@ class  Api::V1::RecomendationsController < BaseController
           yearwise_recomendations[key] = yearwise_recomendations[key] + destination.nine_to_thirteen if recommendation_year_ages.any? { |val| (9..13).include?(val) }
         end
       end
-      final_recomendations.store(recommendation_year, [yearwise_recomendations_usa.max_by { |key, value| value }.first, yearwise_recomendations.max_by { |key, value| value }.first])
+      final_recomendations.store(recommendation_year, [(yearwise_recomendations_usa.size.positive? ?
+        yearwise_recomendations_usa.max_by { |key, value| value }.first : 'USA destination is not available'),
+                                                       yearwise_recomendations.max_by { |key, value| value }.first])
     end
     render json: { data: final_recomendations, success: true, status: 200 }
+  end
+
+  def check_present_destinations(final_recomendations, key)
+    is_present = false
+    final_recomendations.each_value do |fvalue|
+      is_present = true if fvalue.include?(key)
+      next if is_present
+    end
+    is_present
   end
 end

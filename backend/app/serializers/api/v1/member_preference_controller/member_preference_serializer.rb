@@ -3,8 +3,6 @@ module Api::V1
     attributes :choice_type, :choice, :question_id
 
     def choice_type
-      return if object.preferenceable_id.nil?
-
       if object.preferenceable_type.eql?('Destination')
         "#{object.preferenceable_type}: #{Question.find_by(id: object.question_id).heading}"
       else

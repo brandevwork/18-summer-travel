@@ -81,7 +81,6 @@ function Survey()	{
   	if(data.status == "200"){
   		let resData = {"family_member_id": id, "question_id":data.data.question_id, "choice_ids":data.data.choice_ids}
   		await ctxHome.saveSurvey(resData);
-    	// navigateHandler('/');
   	}
   }
 
@@ -157,7 +156,6 @@ function Survey()	{
   	console.log(Object.assign({},choices))
   	console.log("question_id")
   	// await setQuestionData({"family_member_id": family_id, "question_id":question_id, "choice_ids":choices})
-  	await setQuestionIndex(questionIndex)
   	if (fromWhere == 'Category') {setQuestionPicture("category")}
   	if (fromWhere == 'Finish') {setLastQuestion(false)}
   	if (fromWhere == 'Next' || fromWhere == 'last_question') {
@@ -173,6 +171,7 @@ function Survey()	{
   			// await finishSurvey()
   			setLastQuestion(true)
   	}
+  	await setQuestionIndex(questionIndex)
   }
 
 	return (

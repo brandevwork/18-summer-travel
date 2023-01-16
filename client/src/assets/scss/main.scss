@@ -232,6 +232,8 @@ h3 {
   }
 }
 
+.scroll-height { max-height:350px; overflow:auto; }
+
 .main-wrapper {
   max-width: 1133px;
   width: 100%;
@@ -1052,7 +1054,7 @@ input {
             text-align: center;
             position: relative;
             z-index: 1;
-            font-size: 18px;
+            font-size: 14px;
           }
           &.shade1 {
             .tile {

@@ -117,7 +117,7 @@ function Question({homeLoadingSurveySaved, questionIndex, questionPictureColor, 
 						<p className="font-23">
 							{subheading}
 						</p>
-						<div>
+						<div className="scroll-height">
 							{choices.map((choice, index) =>
 								<div className="form-check mb-2">
 									<input className="form-check-input" ref={el => choiceRef.current[choice.id] = el} checked={checkedState[index]}  id={choice.id} type="checkbox" onClick={(e) => checkClickHandler(e, index)}/>

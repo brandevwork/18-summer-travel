@@ -11,7 +11,7 @@ function PickKid({nextClickHandler}) {
 	}
 
 	const nextHandler = (e) => {
-		if(familyMember !== 0)
+		if(parseInt(familyMember) !== 0)
 			nextClickHandler('before_age',{"family_member": familyMember})
 	}
 
@@ -32,7 +32,7 @@ function PickKid({nextClickHandler}) {
 					      </Dropdown.Toggle>
 
 					      <Dropdown.Menu>
-					        <Dropdown.Item eventKey="0">Pick One</Dropdown.Item>
+					        
 					        <Dropdown.Item eventKey="2">2</Dropdown.Item>
 					        <Dropdown.Item eventKey="3">3</Dropdown.Item>
 					        <Dropdown.Item eventKey="4">4</Dropdown.Item>

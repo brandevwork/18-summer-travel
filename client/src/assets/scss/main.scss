@@ -731,7 +731,7 @@ input {
       }
       .card {
         width: 170px;
-        margin: 0 12px;
+        /*margin: 0 12px;*/
         background: transparent;
         border: 0;
         .img-wrapper {
@@ -779,7 +779,7 @@ input {
   .carousel-control-prev,
   .carousel-control-next {
     opacity: 1;
-    top: 54%;
+    top: 50%;
     transform: translateY(-100%);
     width: 5%;
   }

@@ -75,7 +75,7 @@ class  Api::V1::RecomendationsController < BaseController
         yearwise_recomendations_usa.max_by { |key, value| value }.first : 'USA destination is not available'),
                                                        yearwise_recomendations.max_by { |key, value| value }.first])
     end
-    FamilyRecommendation.create(family_id: current_family.id, recommendations: final_recomendations)
+    FamilyRecommendation.find_or_create_by(family_id: current_family.id, recommendations: final_recomendations)
     render json: { data: final_recomendations, success: true, status: 200 }
   end
 

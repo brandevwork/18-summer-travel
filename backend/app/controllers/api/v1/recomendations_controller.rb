@@ -44,6 +44,8 @@ class  Api::V1::RecomendationsController < BaseController
     @valid_members = @family_members.where('age > 4')
     return render json: { message: 'Survey is not completed by the whole famliy', success: false, status: 204 } unless @valid_members.completed.length == @valid_members.size
 
+    return render json: { data: current_family.family_recommendation.recommendations, success: true, status: 200 } if current_family.family_recommendation.present?
+
     @min_age = @family_members.pluck(:age).min
     return render json: { message: 'Recommendations are only given for kids of age less than 18', success: false, status: 204} if @min_age > 18
   end
@@ -73,6 +75,7 @@ class  Api::V1::RecomendationsController < BaseController
         yearwise_recomendations_usa.max_by { |key, value| value }.first : 'USA destination is not available'),
                                                        yearwise_recomendations.max_by { |key, value| value }.first])
     end
+    FamilyRecommendation.create(family_id: current_family.id, recommendations: final_recomendations)
     render json: { data: final_recomendations, success: true, status: 200 }
   end
 

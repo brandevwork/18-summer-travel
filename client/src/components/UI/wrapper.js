@@ -6,7 +6,7 @@ import HomeBtn from "./homeBtn";
 import useData from "../../hooks/useData";
 import Modal from "./modal";
 
-function Wrapper({customClassName, children})	{
+function Wrapper({customClassName, children, pageName='initial'})	{
   const {fetchDataHandler: sendDataLogout, loading: logoutLoading} = useData();
   const ctxAuth = useContext(AuthContext);
   const ctxHome = useContext(HomeContext);
@@ -39,25 +39,34 @@ function Wrapper({customClassName, children})	{
 				{children}
 				<div className="footer-links mt-5 px-3">
           <div className="d-flex align-items-center">
-            <HomeBtn title="Home" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/>
+            {pageName !== 'intro' && <HomeBtn title="Home" buttonClickHandler={(e) => {e.preventDefault();navigate("/")}}/> }
             <NavLink to="/" className="d-flex align-items-center me-4">
               <div className="d-flex">
                 <img src={require('../../assets/images/info-icon.svg').default} className="img-fluid me-1" alt="" />
               </div>
               Instructions
             </NavLink>
-            {ctxAuth.email !== '' &&
+            {pageName === 'intro' && 
+            <NavLink to="/" className="d-flex align-items-center me-4">
+              <div className="d-flex">
+                <img src={require('../../assets/images/about-icon.svg').default} className="img-fluid me-1" alt="" />
+              </div>
+              About
+            </NavLink>
+            }
+            <NavLink to="/" className="d-flex align-items-center me-4">
+              <div class="d-flex">
+                <img src={require("../../assets/images/privacy.png")} class="img-fluid me-1" alt="" />
+              </div>
+              Privacy
+            </NavLink>
+            {(ctxAuth.email !== '' && pageName !== 'survey') &&
               <NavLink onClick={logoutHandler} className="d-flex align-items-center ms-3">
                 Logout
               </NavLink>
             }
-            {ctxAuth.email === '' &&
-              <NavLink to="/login" className="d-flex align-items-center ms-3">
-                Login
-              </NavLink>
-            }
           </div>
-          {ctxAuth.email !== '' &&
+          {(ctxAuth.email !== '' && pageName !== 'survey') &&
             <NavLink to="/settings" className="d-flex align-items-center ms-3">
                 Settings
             </NavLink>

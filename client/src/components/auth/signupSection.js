@@ -43,6 +43,10 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
                       "className":"form-control"}}/>
                     <div className="cross-icon"></div>
                   </div>
+                  <div className="cross-field mb-3 email-grid" onClick={(e) => crossHandler(e, passwordRef)}>
+                    <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password", "className":"form-control"}}/>
+                    <div className="cross-icon"></div>
+                  </div>
                   <div className="mb-3 name-grid">
                     <div className="cross-field" onClick={(e) => crossHandler(e, firstnameRef)}>
                       <Input ref={firstnameRef} input={{"type":"text", "placeholder":"First Name",
@@ -78,10 +82,6 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
                     </div>
                   </div>
                   <div className="info-grid">
-                    <div className="cross-field" onClick={(e) => crossHandler(e, passwordRef)}>
-                      <Input ref={passwordRef} input={{"type":"password", "placeholder":"Strong Password", "className":"form-control"}}/>
-                      <div className="cross-icon"></div>
-                    </div>
                     <div className="cross-field" onClick={(e) => crossHandler(e, zipRef)}>
                       <Input ref={zipRef} input={{"type":"text", "placeholder":"Zip/ Postal Code",
                         "className":"form-control"}}/> 

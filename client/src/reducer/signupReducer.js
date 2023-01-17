@@ -16,6 +16,7 @@ const signupReducer = (state, action) => {
         state: action.state,
         country: action.country,
         zip: action.zip,
+        privacy: action.privacy,
       error: action.error,
       errorMessage: errors
     }
@@ -23,6 +24,9 @@ const signupReducer = (state, action) => {
   let allFieldsMissing = false
   let checkMiss = false
   if (action.type == 'SUBMIT') {
+    if (!action.privacy) {
+      errors.push("Please agree to our terms of privacy policy");
+    }
     if (action.firstname.trim() === "") {
       checkMiss=true 
       // errors.push("First name cannot be empty");
@@ -92,6 +96,7 @@ const signupReducer = (state, action) => {
         state: action.state,
         country: action.country,
         zip: action.zip,
+        privacy: action.privacy,
         error: true,
         errorMessage: errors
       }
@@ -108,6 +113,7 @@ const signupReducer = (state, action) => {
         state: action.state,
         country: action.country,
         zip: action.zip,
+        privacy: action.privacy,
         error: false,
         errorMessage: errors
       }
@@ -125,6 +131,7 @@ const signupReducer = (state, action) => {
       state: "",
       country: "",
       zip: "",
+      privacy: false,
       error: false,
       errorMessage:[]
     }

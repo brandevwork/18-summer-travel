@@ -201,7 +201,7 @@ function Survey()	{
 			ctxHome.survey.length > 0 &&
 					ctxHome.survey.slice(questionIndex,questionIndex+1).map(question =>
 						!lastQuestion ?
-						<QuestionKids homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler} />
+						<QuestionKids homeLoadingSurveySaved={homeLoadingSurveySaved} currName={currName} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices.filter(c => c.name !== 'Winery' && c.name !== 'Night Life')}  submitHandler={submitHandler} />
 						:
 						<FinishSurvey currName={currName} heading={question.heading} subheading={question.subheading} boldtext={question.boldtext} question_image={question.question_image} questionIndex={questionIndex} question_id={question.id} question_text={question.text} choices={question.choices}  submitHandler={submitHandler}/>	
 					)

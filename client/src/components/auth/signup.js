@@ -37,9 +37,10 @@ function SignUp(props)  {
   const stateRef = useRef();
   const countryRef = useRef();
   const zipRef = useRef();
+  const privacyRef = useRef(false);
 
   
-  const initialAuthState = {name: "", email: "", password:"", address:"", city:"", state:"", country:"", zip:"", error: false, errorMessage: [""]};
+  const initialAuthState = {name: "", email: "", password:"", address:"", city:"", state:"", country:"", zip:"", privacy:false, error: false, errorMessage: [""]};
   const [authState, dispatch] = useReducer(signupReducer, initialAuthState);
 
   const {fetchDataHandler: sendData, loading: authLoading} = useData();
@@ -56,7 +57,7 @@ function SignUp(props)  {
     	password: passwordRef.current.value, 
     	address: addressRef.current.value,
     	city: cityRef.current.value, state: stateRef.current.value, 
-    	country: countryRef.current.value, zip: zipRef.current.value});
+    	country: countryRef.current.value, zip: zipRef.current.value, privacy: privacyRef.current.checked});
   }
 
   const getAuthData = async(data, headers) => {
@@ -67,11 +68,11 @@ function SignUp(props)  {
     if (!data.data) {
       dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
     }
-    if(data.status.code == "400") {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message})
+    if(data.code == "400") {
+      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message})
     }
-    if(data.status.code == "200"){
-      // await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.status.message});
+    if(data.code == "200"){
+      // await ctxAuth.signup({"name": firstnameRef.current.value+" "+lastnameRef.current.value, "email": data.data.email, "notification":data.message});
       // navigateHandler('/');
       await localStorage.setItem("jti", data.data.jti);
       await localStorage.setItem("id", data.data.id);
@@ -84,7 +85,7 @@ function SignUp(props)  {
       })
 
     } else {
-      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.status.message});
+      dispatch({type: "SERVER_ERROR", error: true, errorMessage:data.message});
       return;
     }
   }
@@ -144,7 +145,7 @@ function SignUp(props)  {
         else
           zipRef.current.style.border = "0.5px solid #C6C6C8";
       }
-      if (!authState.error && authState.email !== '' && authState.password !== '') {
+      if (!authState.error && authState.email !== '' && authState.password !== '' && authState.firstname !== '' && authState.lastname !== '') {
         sendData(`${process.env.REACT_APP_SERVER_URL}families`, {
         method: 'POST',
         body: JSON.stringify({"family":{
@@ -199,6 +200,7 @@ function SignUp(props)  {
     		stateRef={stateRef}
     		countryRef={countryRef}
     		zipRef={zipRef}
+        privacyRef={privacyRef}
     		submitHandler={submitHandler}
         nextClickHandler={nextClickHandler}
         authState = {authState}

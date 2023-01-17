@@ -6,13 +6,17 @@ import Button from '../UI/button';
 import Back from '../UI/back';
 
 function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firstnameRef, lastnameRef, addressRef,
-  cityRef, stateRef, countryRef, passwordRef, zipRef, submitHandler
+  cityRef, stateRef, countryRef, passwordRef, zipRef, privacyRef, submitHandler
 }) {
 
   const crossHandler = (event, ref) => {
     if (event.target.className === 'cross-icon') {
       ref.current.value=""
     }
+  }
+
+  const privacyRefCheckHandler = (e) => {
+   
   }
 
   return (
@@ -87,6 +91,11 @@ function SignUpSection({nextClickHandler, authState, authLoading, emailRef, firs
                         "className":"form-control"}}/> 
                       <div className="cross-icon"></div>
                     </div>
+                  </div>
+                  <div className="mb-3 mt-3">
+                      <input className="form-check-input" ref={privacyRef}  type="checkbox" onChange={e => privacyRefCheckHandler(e)}/>
+              
+                    In creating my account I agree to the <NavLink >Privacy Policy</NavLink> of this site
                   </div>
               </div>
               <div className="mt-4">

@@ -27,7 +27,7 @@ class Api::V1::SettingsController < BaseController
         familymember.update(survey_status: 0)
       end
       current_family.update(survey_start: nil, survey_end: nil)
-      current_family.family_recommendation.destroy
+      current_family.family_recommendation.destroy if current_family.family_recommendation.present?
       render json: { message: 'Survey has been reset successfully', status: :ok, success: true }
     else
       render json: { message: 'Unable to reset survey', status: 400, success: false }
